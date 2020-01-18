@@ -26,7 +26,10 @@ SECRET_KEY = 'qp^*o@tu&75n6c$q6gjh+(^9_1-_k5vnau%103qv3em2a6!ral'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['charityfunding.herokuapp.com']
+ALLOWED_HOSTS = [
+    'https://charityfunding.herokuapp.com/ ',
+    '127.0.0.1'
+]
 
 
 # Application definition
@@ -38,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'accounts',
 ]
 
 MIDDLEWARE = [
