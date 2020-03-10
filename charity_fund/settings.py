@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import dj_database_url
 import os
+from charity_fund.env import SECRET_KEY_STR, DATABASE_URL
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,7 +22,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'qp^*o@tu&75n6c$q6gjh+(^9_1-_k5vnau%103qv3em2a6!ral'
+# SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = SECRET_KEY_STR
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -67,6 +69,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -85,8 +88,12 @@ WSGI_APPLICATION = 'charity_fund.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+# }
+
 DATABASES = {
-    'default': dj_database_url.parse("postgres://mkfloxazknwxqk:8d14b4283e34c40f1d628f4c55f964988f54bd39067a418e899eab5c4138f63f@ec2-46-137-188-105.eu-west-1.compute.amazonaws.com:5432/d1l8efgkcu0k60")
+    'default': dj_database_url.parse(DATABASE_URL)
 }
 
 # Password validation
@@ -115,9 +122,11 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
+DATE_INPUT_FORMATS = ['%d-%m-%Y']
+
 USE_I18N = True
 
-USE_L10N = True
+USE_L10N = False
 
 USE_TZ = True
 
@@ -126,5 +135,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"

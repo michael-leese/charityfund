@@ -1,7 +1,8 @@
 from django import forms
-from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
+from django.utils import timezone
+from accounts.models import User, Org
+from django.contrib.auth.forms import UserCreationForm
 
 
 #Login Form
@@ -12,16 +13,13 @@ class UserLoginForm(forms.Form):
 #User Registration Form
 class UserRegistrationForm(UserCreationForm):
     username = forms.CharField(label='Username', required=True)
-    organisation = forms.CharField(label='Organisation', required=False)
-    firstname = forms.CharField(label='First Name', required=True)
-    lastname = forms.CharField(label='Last Name', required=True)
     email = forms.EmailField(label='Email', required=True)
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput)
 
     class Meta:
         model = User
-        fields = ['username', 'organisation', 'firstname', 'lastname', 'email', 'password1', 'password2']
+        fields = ['username', 'email', 'password1', 'password2']
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
@@ -40,3 +38,10 @@ class UserRegistrationForm(UserCreationForm):
         if password1 != password2:
             raise ValidationError("Passwords do not match!")
         return password2
+
+#Org Registration Form
+class OrgRegistrationForm(forms.ModelForm):
+    class Meta:
+        model = Org
+        fields = ['organisation', 'org_type', 'bio']
+

@@ -1,3 +1,25 @@
 from django.db import models
+from django.contrib.auth.models import User as AuthUser
+from django.utils import timezone
 
-# Create your models here.
+
+class User(AuthUser):
+    class Meta:
+        proxy = True
+
+class Org(models.Model):
+    REG_CHARITY = 'Registered Charity'
+    COM_PRO = 'Community Project'
+    ORG_TYPE_CHOICES = (
+        (REG_CHARITY, 'Registered Charity'),
+        (COM_PRO, 'Community Project')
+    )
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    organisation = models.CharField(max_length=200)
+    org_type = models.CharField(max_length=7, choices=ORG_TYPE_CHOICES, default=REG_CHARITY)
+    bio = models.TextField()
+    created_date = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.organisation

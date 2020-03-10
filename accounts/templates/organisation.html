@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block page_title %}Organisation{% endblock %}
+
+{% block page_header %}Organisation Registration Page{% endblock %}
+
+{% block page_contents %}
+<p>Creat your charitable/community organisation here.</p>
+
+    <form method="POST" action="{% url 'registerorg' %}">
+        {% csrf_token %}
+        <br>
+        {{ register_form.as_p }}
+        <br>
+        <br>
+        <button type="submit">Register</button>
+    </form>
+
+{% endblock %}
