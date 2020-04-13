@@ -1,3 +1,4 @@
 from django.contrib import admin
+from appeals.models import Appeal
 
-# Register your models here.
+admin.site.register(Appeal)

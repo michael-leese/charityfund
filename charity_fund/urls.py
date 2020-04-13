@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^accounts/login/$', login, name="login"),
     url(r'^accounts/register/$', register_user, name="register"),
     url(r'^accounts/register_org/$', register_org, name="registerorg"),
+    url(r'^appeals/', include('appeals.urls')),
 ]

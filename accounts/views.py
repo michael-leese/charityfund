@@ -8,6 +8,13 @@ from accounts.forms import UserLoginForm, UserRegistrationForm, OrgRegistrationF
 
 #Return the index page
 def index(request):
+    if request.user.is_authenticated:
+        org = Org.objects.filter(user=request.user)
+        if org:
+            hasOrg = True
+        else:
+            hasOrg = False
+        return render(request, "index.html", {'hasOrg': hasOrg})
     return render(request, "index.html")
 
 #User logout and redirect
@@ -43,6 +50,7 @@ def register_user(request):
 
     if request.method == "POST":
         register_form = UserRegistrationForm(request.POST)
+        
         if register_form.is_valid():
             register_form.save()
             user = auth.authenticate(username=request.POST['username'],
@@ -50,7 +58,9 @@ def register_user(request):
             if user:
                 auth.login(user=user, request=request)
                 messages.success(request, "You have successfully registered")
-                return redirect(reverse('index'))
+                hasOrg = False
+                
+                return render(request, 'index.html', {"hasOrg": hasOrg})
             else:
                 messages.error(request, "Unable to register at this time.")
     else:
@@ -61,14 +71,18 @@ def register_user(request):
 @login_required
 def register_org(request):
     if request.method == "POST":
+        print("POST org form...")
+        print(request.user.username)
         register_form = OrgRegistrationForm(request.POST)
         if register_form.is_valid():
+            print("VALID org form...")
             org = register_form.save(commit=False)
             org.user = request.user
             org.created_date = timezone.now()
             org.save()
             messages.success(request, "You have successfully registered an organisation")
-            return redirect('index')
+            hasOrg = True
+            return render(request, 'index.html', {'hasOrg': hasOrg})
         else:
             messages.error(request, "Unable to register at this time.")
     else:

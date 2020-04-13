@@ -15,11 +15,13 @@ class Org(models.Model):
         (COM_PRO, 'Community Project')
     )
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     organisation = models.CharField(max_length=200)
-    org_type = models.CharField(max_length=7, choices=ORG_TYPE_CHOICES, default=REG_CHARITY)
+    org_type = models.CharField(max_length=25, choices=ORG_TYPE_CHOICES, default=REG_CHARITY)
     bio = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.organisation
+
+
