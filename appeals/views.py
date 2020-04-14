@@ -52,13 +52,13 @@ def show_all_appeals(request):
 
 def single_appeal(request):
     """
-    Gets the single appeal
+    Gets the single appeal clicked on by a user
     """
     org = Org.objects.filter(user=request.user)
-    all_appeals = Appeal.objects.filter(created_date__lte=timezone.now()).order_by('-money_target')
+    appeal = Appeal.objects.get(id=request.GET.get('id'))
     if org:
         hasOrg = True
-        return render(request, 'index.html', {'hasOrg': hasOrg}) 
+        return render(request, 'single_appeal.html', {'appeal': appeal, 'hasOrg': hasOrg}) 
     else:
         hasOrg = False
-        return render(request, 'index.html', {'hasOrg': hasOrg}) 
+        return render(request, 'single_appeal.html', {'appeal': appeal, 'hasOrg': hasOrg}) 
