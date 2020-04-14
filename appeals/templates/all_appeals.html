@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block page_title %}All Appeals{% endblock %}
+
+{% block page_header %}All our Appeals{% endblock %}
+
+{% block page_contents %}
+
+<p>Please view our appeals and donate to one that you identify the most with, you will be helping a small charity or
+    community project. We help them save money on marketing campaigns, ensuring that all the money raised goes to the 
+    important things that charities/community projects really need to spend their moeny on.</p>
+    {% if user.is_authenticated %}
+        {% if hasOrg %}
+            <p>If you would like to create your own appeal, please <a href="{% url 'createappeal' %}">create appeal here</a>.</p>
+        {% else %}
+            <p>To create an appeal you must have a registered charity or community project.</p>
+            <p>If you havent registered an charity or community project, please <a href="{% url 'registerorg' %}">register here</a>.</p>
+        {% endif %}
+    {% else %}
+        <p>To donate you must be a registered user.</p>
+        <p>If you havent registered already, please <a href="{% url 'register' %}">register here</a> to donate.</p>
+    {% endif %}
+<p>Thank you for your generosity.</p>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 col-lg-6">
+            <h1>features</h1>
+            {% for appeal in all_appeals %}
+            <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                <div class="card card-style">
+                  <div class="card-body">
+                    <h3>{{appeal.title}} for {{ appeal.org }}</h3>  
+                    <h5>Target: £{{ appeal.money_target }} by {{ appeal.target_date }}</h5>
+                    <p>{{ appeal.text }}</p>
+                    <p>Started on: {{ appeal.created_date }}.</p>
+                    <h5>Total Raised: £{{ appeal.money_raised }}.</h5>
+                  </div>
+                  <div class="card-footer">
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'singleappeal' %}?id={{ appeal.id }}" class="btn btn-info">VIEW</a>
+                    {% else %}
+                    <a href="{% url 'register' %}" class="btn btn-info">VIEW</a>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
