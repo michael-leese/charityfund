@@ -8,10 +8,8 @@ Click==7.0
 dj-database-url==0.5.0
 Django==1.11.24
 django-forms-bootstrap==3.1.0
+django-mathfilters==1.0.0
 dnspython==1.16.0
-Flask==1.1.1
-Flask-PyMongo==2.3.0
-Flask-WTF==0.14.2
 heroku==0.1.4
 idna==2.8
 itsdangerous==1.1.0
@@ -27,4 +25,3 @@ six==1.12.0
 sqlparse==0.3.0
 urllib3==1.25.6
 Werkzeug==0.16.0
-WTForms==2.2.1

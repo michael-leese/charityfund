@@ -56,9 +56,17 @@ def single_appeal(request):
     """
     org = Org.objects.filter(user=request.user)
     appeal = Appeal.objects.get(id=request.GET.get('id'))
+    calcPercent = progress_perc(appeal.money_raised, appeal.money_target)
     if org:
         hasOrg = True
-        return render(request, 'single_appeal.html', {'appeal': appeal, 'hasOrg': hasOrg}) 
+        return render(request, 'single_appeal.html', {'appeal': appeal, 'hasOrg': hasOrg, 'calcPercent': calcPercent}) 
     else:
         hasOrg = False
-        return render(request, 'single_appeal.html', {'appeal': appeal, 'hasOrg': hasOrg}) 
+        return render(request, 'single_appeal.html', {'appeal': appeal, 'hasOrg': hasOrg, 'calcPercent': calcPercent}) 
+
+
+def progress_perc(raised, target):
+    if raised is None:
+        raised = 0    
+    percentage = int((raised/target)*100)
+    return percentage

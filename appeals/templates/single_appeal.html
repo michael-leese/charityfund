@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load mathfilters %}
 {% block page_title %}{{appeal.title}}{% endblock %}
 
 {% block page_header %}Appeal for {{appeal.org}}{% endblock %}
@@ -10,25 +10,45 @@
 <p>Thank you for your generosity.</p>
 
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-12">
-            <div class="col-offset-1 col-10">
-                <div class="card card-style">
-                  <div class="card-body">
-                    <h3>{{appeal.title}} for {{ appeal.org }}</h3>  
-                    <h5>Target: £{{ appeal.money_target }} by {{ appeal.target_date }}</h5>
-                    <p>{{ appeal.text }}</p>
-                    <p>Started on: {{ appeal.created_date }}.</p>
-                    <h5>Total Raised: £{{ appeal.money_raised }}.</h5>
+  <div class="row">
+    <div class="col-12">
+      <div class="col-offset-1 col-10">
+        <div class="card card-style">
+          <div class="card-body">
+            <div class="col-12">
+              <h3>{{appeal.title}} for {{ appeal.org }}</h3>
+              <h5>Target: £{{ appeal.money_target }} by {{ appeal.target_date| date:"d/m/Y" }}</h5>
+              <p>{{ appeal.text }}</p>
+              <p>Started on: {{ appeal.created_date| date:"d/m/Y" }}</p>
+              <h5>Total Raised: £{{ appeal.money_raised }}</h5>
+            </div>
+            <div class="col-12">
+              <div class="row progress-section">
+                <div class="progress">
+                  {% if calcPercent <= 100 %}
+                  <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"
+                    style="width:{{calcPercent}}%">
+                    <span class="sr-only"> {{calcPercent}}% complete</span>
                   </div>
-                  <div class="card-footer">
-                    {% if user.is_authenticated %}
-                    <a href="#" class="btn btn-info">DONATE</a>
-                    {% endif %}
+                  <span class="progress-type">% of Total</span>
+                  {% else %}
+                  <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"
+                    style="width:100%">
+                    <span class="sr-only"> {{calcPercent}}% complete</span>
                   </div>
+                  <span class="progress-type">Amazing {{calcPercent|sub:100}}% more raised </span>
+                  {% endif %}
                 </div>
               </div>
+            </div>
+            <div class="card-footer">
+              {% if user.is_authenticated %}
+              <a href="#" class="btn btn-info">DONATE</a>
+              {% endif %}
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-{% endblock %}
+  </div>
+  {% endblock %}

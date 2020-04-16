@@ -10,7 +10,7 @@ class Appeal(models.Model):
     created_date = models.DateTimeField(default=timezone.now)
     target_date = models.DateTimeField(default=timezone.now)
     money_target = models.IntegerField(null=True, blank=True)
-    money_raised = models.IntegerField(null=True, blank=True)
+    money_raised = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title
