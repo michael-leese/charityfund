@@ -66,6 +66,9 @@ def single_appeal(request):
 
 
 def progress_perc(raised, target):
+    """
+    Calculates the percentage of the total
+    """
     if raised is None:
         raised = 0    
     percentage = int((raised/target)*100)

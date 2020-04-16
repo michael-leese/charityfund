@@ -8,6 +8,9 @@ from accounts.forms import UserLoginForm, UserRegistrationForm, OrgRegistrationF
 
 #Return the index page
 def index(request):
+    """
+    Returns the index page
+    """
     if request.user.is_authenticated:
         org = Org.objects.filter(user=request.user)
         if org:
@@ -20,12 +23,18 @@ def index(request):
 #User logout and redirect
 @login_required
 def logout(request):
+    """
+    Logout function
+    """
     auth.logout(request)
     messages.success(request, "You have successfully logged out!")
     return redirect(reverse('index'))
 
 #Return the login page
 def login(request):
+    """
+    Returns the login page
+    """
     if request.user.is_authenticated:
         return redirect(reverse('index'))
     if request.method == "POST":
@@ -45,6 +54,9 @@ def login(request):
 
 #return the registration page
 def register_user(request):
+    """
+    Register a user
+    """
     if request.user.is_authenticated:
         return redirect(reverse('index'))
 
@@ -58,8 +70,7 @@ def register_user(request):
             if user:
                 auth.login(user=user, request=request)
                 messages.success(request, "You have successfully registered")
-                hasOrg = False
-                
+                hasOrg = False         
                 return render(request, 'index.html', {"hasOrg": hasOrg})
             else:
                 messages.error(request, "Unable to register at this time.")
@@ -70,6 +81,9 @@ def register_user(request):
 #return the registration page
 @login_required
 def register_org(request):
+    """
+    Register an organisation
+    """
     if request.method == "POST":
         print("POST org form...")
         print(request.user.username)
@@ -90,6 +104,9 @@ def register_org(request):
         return render(request, 'organisation.html', {"register_form": register_form})
 
 def about(request):
+    """
+    Returns the about page to the user regardless of login status
+    """
     if request.user.is_authenticated:
         org = Org.objects.filter(user=request.user)
         if org:
