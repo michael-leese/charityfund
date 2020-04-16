@@ -88,3 +88,16 @@ def register_org(request):
     else:
         register_form = OrgRegistrationForm()
         return render(request, 'organisation.html', {"register_form": register_form})
+
+def about(request):
+    if request.user.is_authenticated:
+        org = Org.objects.filter(user=request.user)
+        if org:
+            hasOrg = True
+            return render(request, 'about.html', {'hasOrg': hasOrg}) 
+        else:
+            hasOrg = False
+            return render(request, 'about.html', {'hasOrg': hasOrg})
+    else:
+        hasOrg = False
+        return render(request, 'about.html', {'hasOrg': hasOrg})

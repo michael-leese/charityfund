@@ -36,7 +36,7 @@
             <li><a href="{% url 'register' %}">Register</a></li>            
         {% endif %}
             <li><a href="{% url 'showallappeals' %}">View Appeals</a></li>
-            <li><a href="#">About</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
         </ul>
         {% if messages %}
     <div>
@@ -56,7 +56,7 @@
         <hr>
     <footer>
         <div class="container">
-            <p>CharityFund &copy;2020</p>
+            <p>&copy;2020 CharityFund</p>
         </div>
     </footer>
 </body>
