@@ -32,10 +32,10 @@
                 <div class="progress">
                   {% if calcPercent <= 100 %}
                   <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="90" aria-valuemin="0"
-                    aria-valuemax="100" style="width:{{calcPercent}}%">
+                    aria-valuemax="100" style="background-image: linear-gradient(to right, rgb(255, 0, 0) {{calcPercent}}%, rgb(233, 236, 239) {{calcPercent|add:1}}%);">
                     <span class="sr-only"> {{calcPercent}}% complete</span>
                   </div>
-                  <span class="progress-type">% of Total</span>
+                  <span class="progress-type">{{calcPercent}}% Raised</span>
                   {% else %}
                   <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="90" aria-valuemin="0"
                     aria-valuemax="100" style="width:100%">

@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse, redirect, reverse, get_object_or_404
+from django.shortcuts import render, HttpResponse, redirect, reverse, get_object_or_404, HttpResponseRedirect
 from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
@@ -38,8 +38,10 @@ def login(request):
     Returns the login page
     """
     active = "active"
+    previous = request.GET.get('next', '/')
     if request.user.is_authenticated:
         return redirect(reverse('index'))
+
     if request.method == "POST":
         login_form = UserLoginForm(request.POST)
         if login_form.is_valid():
@@ -48,12 +50,16 @@ def login(request):
             if user:
                 auth.login(user=user, request=request)
                 messages.success(request, "You have successfully logged in!")
-                return redirect(reverse('index'))
+                if previous is None:
+                    return redirect(reverse('index'))
+                elif previous is not None:
+                    return HttpResponseRedirect(previous)
             else:
                 login_form.add_error(None, "Your username or password is incorrect!")
     else:
         login_form = UserLoginForm()
-    return render(request, "login.html", {"login_form": login_form, 'active4': active})
+        return render(request, "login.html", {"login_form": login_form, 'active4': active})
+
 
 #return the registration page
 def register_user(request):

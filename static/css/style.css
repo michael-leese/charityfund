@@ -12,15 +12,17 @@
 }
 
 .progress-bar {
-    background-color: rgb(255, 0, 0);
+    width: 100%;
+    border-radius: 5px;
 }
 
 .progress-type {
     position: absolute;
     left: 0px;
-    font-weight: 400;
+    font-weight: 700;
     padding: 3px 5px 2px 5px;
     color: rgb(0, 170, 245);
+    border-radius: 5px;
 }
 
 .progress-section {
