@@ -6,9 +6,11 @@ from .widgets import BootstrapDateTimePickerInput
 
 #Appeal creation Form
 class AppealForm(forms.ModelForm):
-
+    '''
+    Appeals form with customised datepicker
+    '''
     target_date = forms.DateTimeField(input_formats=['%d/%m/%Y'], widget=BootstrapDateTimePickerInput())
 
     class Meta:
         model = Appeal
-        fields = ['title', 'text', 'target_date', 'money_target']
+        fields = ['title', 'text', 'tags', 'target_date', 'money_target']

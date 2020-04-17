@@ -26,4 +26,5 @@ urlpatterns = [
     url(r'^accounts/register/$', register_user, name="register"),
     url(r'^accounts/register_org/$', register_org, name="registerorg"),
     url(r'^appeals/', include('appeals.urls')),
+    url(r'^search/', include('search.urls')),
 ]

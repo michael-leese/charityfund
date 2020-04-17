@@ -11,14 +11,16 @@ def index(request):
     """
     Returns the index page
     """
+    active = "active"
     if request.user.is_authenticated:
         org = Org.objects.filter(user=request.user)
         if org:
             hasOrg = True
         else:
             hasOrg = False
-        return render(request, "index.html", {'hasOrg': hasOrg})
-    return render(request, "index.html")
+        return render(request, "index.html", {'hasOrg': hasOrg, 'active1': active})
+    else:
+        return render(request, "index.html", {'active1': active})
 
 #User logout and redirect
 @login_required
@@ -35,6 +37,7 @@ def login(request):
     """
     Returns the login page
     """
+    active = "active"
     if request.user.is_authenticated:
         return redirect(reverse('index'))
     if request.method == "POST":
@@ -50,13 +53,14 @@ def login(request):
                 login_form.add_error(None, "Your username or password is incorrect!")
     else:
         login_form = UserLoginForm()
-    return render(request, "login.html", {"login_form": login_form})
+    return render(request, "login.html", {"login_form": login_form, 'active4': active})
 
 #return the registration page
 def register_user(request):
     """
     Register a user
     """
+    active = "active"
     if request.user.is_authenticated:
         return redirect(reverse('index'))
 
@@ -71,12 +75,12 @@ def register_user(request):
                 auth.login(user=user, request=request)
                 messages.success(request, "You have successfully registered")
                 hasOrg = False         
-                return render(request, 'index.html', {"hasOrg": hasOrg})
+                return render(request, 'index.html', {"hasOrg": hasOrg, 'active1': active})
             else:
                 messages.error(request, "Unable to register at this time.")
     else:
         register_form = UserRegistrationForm()
-        return render(request, 'registration.html', {"register_form": register_form})
+        return render(request, 'registration.html', {"register_form": register_form, 'active5': active})
 
 #return the registration page
 @login_required
@@ -84,37 +88,39 @@ def register_org(request):
     """
     Register an organisation
     """
-    if request.method == "POST":
-        print("POST org form...")
-        print(request.user.username)
-        register_form = OrgRegistrationForm(request.POST)
-        if register_form.is_valid():
-            print("VALID org form...")
-            org = register_form.save(commit=False)
-            org.user = request.user
-            org.created_date = timezone.now()
-            org.save()
-            messages.success(request, "You have successfully registered an organisation")
-            hasOrg = True
-            return render(request, 'index.html', {'hasOrg': hasOrg})
+    active = "active"
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            register_form = OrgRegistrationForm(request.POST)
+            if register_form.is_valid():
+                org = register_form.save(commit=False)
+                org.user = request.user
+                org.created_date = timezone.now()
+                org.save()
+                messages.success(request, "You have successfully registered an organisation")
+                hasOrg = True
+                return render(request, 'index.html', {'hasOrg': hasOrg, 'active1': active})
+            else:
+                messages.error(request, "Unable to register at this time.")
         else:
-            messages.error(request, "Unable to register at this time.")
+            register_form = OrgRegistrationForm()
+            return render(request, 'organisation.html', {"register_form": register_form, 'active3': active})
     else:
-        register_form = OrgRegistrationForm()
-        return render(request, 'organisation.html', {"register_form": register_form})
-
+        return redirect(reverse('index'))
+        
 def about(request):
     """
     Returns the about page to the user regardless of login status
     """
+    active = "active"
     if request.user.is_authenticated:
         org = Org.objects.filter(user=request.user)
         if org:
             hasOrg = True
-            return render(request, 'about.html', {'hasOrg': hasOrg}) 
+            return render(request, 'about.html', {'hasOrg': hasOrg, 'active7': active}) 
         else:
             hasOrg = False
-            return render(request, 'about.html', {'hasOrg': hasOrg})
+            return render(request, 'about.html', {'hasOrg': hasOrg, 'active7': active})
     else:
         hasOrg = False
-        return render(request, 'about.html', {'hasOrg': hasOrg})
+        return render(request, 'about.html', {'hasOrg': hasOrg, 'active7': active})

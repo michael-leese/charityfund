@@ -1,63 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Charity Fund - {% block page_title %}{% endblock %}</title>
 
-    <!-- Bootstrap 4 -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Charity Fund - {% block page_title %}{% endblock %}</title>
 
-    <!-- FontAwesome -->
-    <script src="https://kit.fontawesome.com/f94840c9b2.js"></script>
+        <!-- Bootstrap 4 -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+            integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        <!-- Tempus Dominus Bootstrap 4 -->
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/css/tempusdominus-bootstrap-4.min.css"
+            integrity="sha256-XPTBwC3SBoWHSmKasAk01c08M6sIA5gF5+sRxqak2Qs=" crossorigin="anonymous" />
+        <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    </head>
 
-    <!-- Tempus Dominus Bootstrap 4 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/css/tempusdominus-bootstrap-4.min.css" integrity="sha256-XPTBwC3SBoWHSmKasAk01c08M6sIA5gF5+sRxqak2Qs=" crossorigin="anonymous" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/js/tempusdominus-bootstrap-4.min.js" integrity="sha256-z0oKYg6xiLq3yJGsp/LsY9XykbweQlHl42jHv2XTBz4=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
-</head>
-<body>
-    <nav>
-        <ul>
-        {% if user.is_authenticated %}
-            <li><a href="{% url 'logout' %}">Logout</a></li>
-            {% if hasOrg %}
-            <li><a href="{% url 'createappeal' %}">Create Appeal</a></li>
-            {% else %}
-            <li><a href="{% url 'registerorg' %}">Register Org</a></li>
-            {% endif %}
-        {% else %}
-            <li><a href="{% url 'login' %}">Login</a></li>
-            <li><a href="{% url 'register' %}">Register</a></li>            
-        {% endif %}
-            <li><a href="{% url 'showallappeals' %}">View Appeals</a></li>
-            <li><a href="{% url 'about' %}">About</a></li>
-        </ul>
-        {% if messages %}
-    <div>
-        {% for message in messages %}    
-            {{ message }}
-        {% endfor %}
-    </div>
-    {% endif %}
-    </nav>
-    <hr>
-    <div class="container">
-        <h1>{% block page_header %}{% endblock %}</h1>
-
-        {% block page_contents %}
-        {% endblock %}
-    </div>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+                    {% if hasOrg %}
+                    <li class="nav-item {{ active2 }}"><a class="nav-link" href="{% url 'createappeal' %}">Create Appeal</a></li>
+                    {% else %}
+                    <li class="nav-item {{ active3 }}"><a class="nav-link" href="{% url 'registerorg' %}">Register Org</a></li>
+                    {% endif %}
+                    {% else %}
+                    <li class="nav-item {{ active4 }}"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+                    <li class="nav-item {{ active5 }}"><a class="nav-link" href="{% url 'register' %}">Register</a></li>
+                    {% endif %}
+                    <li class="nav-item {{ active6 }}"><a class="nav-link" href="{% url 'showallappeals' %}">View Appeals</a></li>
+                    <li class="nav-item {{ active7 }}"><a class="nav-link" href="{% url 'about' %}">About</a></li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0" action="{% url 'search' %}" method="GET">
+                    <input class="form-control mr-sm-2" type="text" name="search" placeholder="Search Appeals" aria-label="Search" title="Search Appeals">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                  </form>
+            </div>
+        </nav>
         <hr>
-    <footer>
         <div class="container">
-            <p>&copy;2020 CharityFund</p>
+            {% if messages %}
+            <div>
+                {% for message in messages %}
+                <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+            <h1>{% block page_header %}{% endblock %}</h1>
+
+            {% block page_contents %}
+            {% endblock %}
         </div>
-    </footer>
-</body>
+        <hr>
+        <footer>
+            <div class="container">
+                <p>&copy;2020 CharityFund</p>
+            </div>
+        </footer>
+        <!-- Bootstrap 4 -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+            integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"></script>
+        <!-- FontAwesome -->
+        <script src="https://kit.fontawesome.com/f94840c9b2.js"></script>
+        <!-- Moment -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/js/tempusdominus-bootstrap-4.min.js"
+            integrity="sha256-z0oKYg6xiLq3yJGsp/LsY9XykbweQlHl42jHv2XTBz4=" crossorigin="anonymous"></script>
+    </body>
+
 </html>

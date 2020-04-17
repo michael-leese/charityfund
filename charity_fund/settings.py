@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'accounts',
     'appeals',
     'mathfilters',
+    'taggit',
+    'search',
 ]
 
 MIDDLEWARE = [
@@ -143,3 +145,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
+
+#This handles sessions and logs you out on closing browser(and all tabs) or after 10mins
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_COOKIE_AGE = 60 # set just 10 seconds to test
+SESSION_SAVE_EVERY_REQUEST = True
