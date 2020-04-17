@@ -11,7 +11,7 @@
     important things that charities/community projects really need to spend their moeny on.</p>
     {% if user.is_authenticated %}
         {% if hasOrg %}
-            <p>If you would like to create your own appeal, please <a href="{% url 'createappeal' %}">create appeal here</a>.</p>
+            <p>If you would like to create an appeal, please <a href="{% url 'createappeal' %}">create appeal here</a>.</p>
         {% else %}
             <p>To create an appeal you must have a registered charity or community project.</p>
             <p>If you havent registered an charity or community project, please <a href="{% url 'registerorg' %}">register here</a>.</p>
