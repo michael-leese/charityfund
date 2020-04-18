@@ -1,9 +1,98 @@
+/*---------- Nav bar and Menu items -------------------*/
+
+.nav-img {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    background-image: url("/static/img/charity-fund-logo.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+.navbar {
+    padding: 0.5em;
+}
+
+.navbar-nav {
+    padding-left: 30px;
+}
+
+.nav-link {
+    padding: 0.25em, 1em;
+}
+
+button.navbar-toggler {
+    border: 1px solid rgba(40, 167, 69, 0.5) !important;
+    border-radius: .25rem;
+    outline: transparent;
+    outline: 0px auto -webkit-focus-ring-color !important;
+}
+
+.navbar-toggler:hover {
+    border: 2px solid rgb(40, 167, 69) !important;
+    border-radius: .25rem;
+    background-color: rgba(233, 30, 99, 0.8);
+    font-weight: bolder;
+}
+
+button.navbar-toggler:focus {
+    border: 2px solid rgb(40, 167, 69) !important;
+    border-radius: .25rem;
+    outline: unset;
+    outline: 0px auto -webkit-focus-ring-color !important;
+}
+
+button.navbar-toggler.collapsed {
+    border: 1px solid rgba(40, 167, 69, 0.5) !important;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    text-decoration: none !important;
+    color: rgb(0, 139, 139);
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+    text-decoration: none !important;
+    color: rgb(233, 30, 99);
+    font-weight: bolder;
+}
+
+.navbar-light .navbar-nav .nav-link.active {
+    border-radius: 5px;
+    background-color: rgba(40, 167, 69, 0.56);
+    color: rgba(233, 30, 99, 0.67);
+}
+
+.navbar-light .navbar-nav .nav-link.active:hover {
+    text-decoration: none !important;
+    color: rgb(233, 30, 99);
+}
+
+.nav-search {
+    border-color: rgb(40, 167, 69);
+}
+
+.nav-search::placeholder {
+    color: rgb(0, 139, 139);
+}
+
+.nav-btn-search {
+    color: rgb(0, 139, 139) !important;
+}
+
+.nav-btn-search:hover {
+    color: rgb(233, 30, 99) !important;
+    font-weight: bolder;
+}
+
 /*---------- Copyright Symbol --------------------------*/
+
 .sml-copyright {
     font-size: 0.75em;
 }
 
 /*---------- Progress Bars -----------------------------*/
+
 .progress {
     position: relative;
     height: 25px;
@@ -27,4 +116,84 @@
 
 .progress-section {
     margin: 5px 5px;
+}
+
+/*------------ animation ------------------------------*/
+
+.spin {
+    animation: rotation 50s infinite linear;
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(359deg);
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .nav-img {
+        width: 50px;
+        height: 50px;
+    }
+    .navbar-light .navbar-nav .nav-link.active {
+        background-color: unset;
+        color: rgba(233, 30, 99, 0.67);
+    }
+}
+
+@media (max-width: 991px) {
+    #mainSearch {
+        display: none;
+        visibility: hidden;
+    }
+    #listSearch {
+        display: block;
+        visibility: visible;
+    }
+    #listSearch .form-inline {
+        display: inline-flex;
+        flex-flow: unset;
+        align-items: unset;
+    }
+}
+
+@media (min-width: 992px) {
+    #bottomNav {
+        position: relative;
+        padding-bottom: 0.5em;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+    .navbar-expand-lg .navbar-nav {
+        width: 60%;
+        margin-left: auto;
+        margin-right: auto;
+        justify-content: space-between;
+    }
+    #mainSearch {
+        display: flex;
+        visibility: visible;
+        justify-content: flex-end;
+    }
+    #listSearch {
+        display: none;
+        visibility: hidden;
+    }
+}
+
+.inner-nav {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: .5rem 1rem;
 }
