@@ -133,6 +133,58 @@ button.navbar-toggler.collapsed {
     }
 }
 
+/*------------ footer ------------------------------*/
+footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0px;
+    padding: 0 5px 0 5px;
+}
+
+footer .row {
+    margin-right: 0; 
+    margin-left: 0;
+}
+
+p.fawes-lg {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.fawes-lg {
+	font-size: 2em;
+}
+
+.fawes-link-dec {
+	color: rgb(0, 139, 139);
+	text-decoration: none !important;
+}
+.fawes-link-dec:hover {
+	color: rgb(3, 179, 0);
+	font-size: larger;
+	text-decoration: none !important;
+}
+
+.fl-rt {
+	float: right;
+}
+
+.copyright {
+	display: flex;
+    align-items: center;
+}
+
+.copyright-link {
+    color: rgb(0, 139, 139);
+    text-decoration: none;
+}
+
+/*--------------------------------------------Map*/
+
+div#map {
+    min-height: 360px;
+}
+
 @media screen and (max-width: 991px) {
     .nav-img {
         width: 50px;
