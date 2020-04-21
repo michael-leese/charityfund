@@ -85,10 +85,43 @@ button.navbar-toggler.collapsed {
     font-weight: bolder;
 }
 
+
+.main-container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-bottom: 70px;
+}
+
 /*---------- Copyright Symbol --------------------------*/
 
 .sml-copyright {
     font-size: 0.75em;
+}
+
+/*---------- Appeal Cards -----------------------------*/
+
+h3.appeal-title {
+    text-align: center;
+}
+
+.appeals-container-fluid {
+    display: flex;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.card {
+    height: 400px;
+}
+
+.card-footer {
+    text-align: center;
 }
 
 /*---------- Progress Bars -----------------------------*/
@@ -182,7 +215,7 @@ p.fawes-lg {
 /*--------------------------------------------Map*/
 
 div#map {
-    min-height: 360px;
+    min-height: 100%;
 }
 
 @media screen and (max-width: 991px) {
