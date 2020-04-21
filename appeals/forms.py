@@ -13,4 +13,4 @@ class AppealForm(forms.ModelForm):
 
     class Meta:
         model = Appeal
-        fields = ['title', 'text', 'tags', 'target_date', 'money_target']
+        fields = ['title', 'bio', 'tags', 'target_date', 'money_target', 'latitude', 'longitude']

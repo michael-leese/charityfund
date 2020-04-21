@@ -1,10 +1,13 @@
 from django.shortcuts import render, HttpResponse, redirect, reverse, get_object_or_404
+from rest_framework.renderers import JSONRenderer
+from rest_framework.parsers import JSONParser
 from django.contrib import messages
 from accounts.models import User, Org
 from appeals.models import Appeal
 from taggit.models import Tag
 from appeals.forms import AppealForm
 from django.utils import timezone
+from appeals.serializers import AppealsSerializer
 
 # Create an appeal
 def create_appeal(request):
@@ -42,10 +45,10 @@ def show_all_appeals(request):
     """
     Gets the appeals
     """
+    all_appeals = Appeal.objects.filter(created_date__lte=timezone.now()).order_by('-money_target')
     active = "active"
     if request.user.is_authenticated:
         org = Org.objects.filter(user=request.user)
-        all_appeals = Appeal.objects.filter(created_date__lte=timezone.now()).order_by('-money_target')
         if org:
             hasOrg = True
             return render(request, 'all_appeals.html', {'all_appeals': all_appeals, 'hasOrg': hasOrg, 'active6': active}) 
@@ -53,7 +56,6 @@ def show_all_appeals(request):
             hasOrg = False
             return render(request, 'all_appeals.html', {'all_appeals': all_appeals, 'hasOrg': hasOrg, 'active6': active})
     else:
-        all_appeals = Appeal.objects.filter(created_date__lte=timezone.now()).order_by('-money_target')
         hasOrg = False
         return render(request, 'all_appeals.html', {'all_appeals': all_appeals, 'hasOrg': hasOrg, 'active6': active})
 
@@ -83,3 +85,20 @@ def progress_perc(raised, target):
         raised = 0    
     percentage = int((raised/target)*100)
     return percentage
+
+class JSONResponse(HttpResponse):
+    
+    def __init__(self, data, **kwargs):
+        content = JSONRenderer().render(data)
+        kwargs['content_type'] = 'application/json'
+        super(JSONResponse, self).__init__(content, **kwargs)
+
+def all_appeal_map_data(request):
+    """
+    returns all the appeals data for maps api
+    """
+    if request.method == 'GET':
+        all_appeals = Appeal.objects.all()
+        serializer = AppealsSerializer(all_appeals, many=True)
+        return JSONResponse(serializer.data)
+        

@@ -26,6 +26,7 @@
     <div class="row">
         <div class="col-4">
           <h3>Appeal Locations</h3>
+          <div id="map_data" hidden></div>
           <div id="map"></div>
         </div>
         <div class="col-8">
@@ -59,4 +60,10 @@
     </div>
 </div>
 
+{% endblock %}
+{% block script %}
+<!-- Google Maps -->
+<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMSBI47x89t6fo3jmYZYfFuxJPfXCb5eM&callback=getAppealsMapData"></script>
+<script type="text/javascript" src="/static/js/maps.js"></script>
 {% endblock %}

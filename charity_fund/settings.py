@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'mathfilters',
     'taggit',
     'search',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
