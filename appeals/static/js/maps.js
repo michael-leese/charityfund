@@ -12,19 +12,19 @@ function geoLocation(){
     waiting = true;
     navigator.permissions.query({name:'geolocation'}).then(function(result) {
     if (result.state === 'granted') {
+        //if granted then only need the success callback
         navigator.geolocation.getCurrentPosition(showPosition);
     } else if (result.state === 'prompt') {
         if (navigator.geolocation) {
+            //if prompt then we need success and deny callbacks
             navigator.geolocation.getCurrentPosition(showPosition, showDefaultMap);
           } else {
             alert("Geolocation is not supported by this browser.");
           }
-    } else if (result.state === 'denied') {
+    } else  {
+        //if denied or undefined then show default map view only
         showDefaultMap();
-    } else {
-        alert("Geolocation is not supported by this browser.");
     }
-    // Don't do anything if the permission was denied.
   });
 }
 //if permission is granted mapSetup is populated with the users position and zooms in slightly to their area
