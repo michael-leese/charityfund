@@ -218,6 +218,7 @@ div#map {
     min-height: 100%;
 }
 
+
 @media screen and (max-width: 991px) {
     .nav-img {
         width: 50px;

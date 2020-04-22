@@ -2,11 +2,13 @@
 
 {% block page_title %}All Appeals{% endblock %}
 
-{% block page_header %}All our Appeals{% endblock %}
+{% block page_header %}<h2>All our Appeals</h2>{% endblock %}
 
 {% block page_contents %}
 
-<p>Please view our appeals and donate to one that you identify the most with, you will be helping a small charity or
+<p>Search our appeals by tags words, by viewing the map and clicking on one locally or further afield to read more about the
+  project. </p>
+  <p>Please view our appeals and donate to one that you identify the most with, you will be helping a small charity or
   community project. We help them save money on marketing campaigns, ensuring that all the money raised goes to the
   important things that charities/community projects really need to spend their moeny on.</p>
 {% if user.is_authenticated %}
@@ -22,7 +24,7 @@
 <p>If you havent registered already, please <a href="{% url 'register' %}">register here</a> to donate.</p>
 {% endif %}
 <p>Thank you for your generosity.</p>
-
+</div>
 <div class="container-fluid">
   <div class="row">
     <div class="col-4">

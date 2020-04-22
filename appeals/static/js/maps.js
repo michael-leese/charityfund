@@ -1,25 +1,9 @@
 var map;
 var basepath = window.location.protocol + "//" + window.location.host;
-var thisPosition = {};
-
-function getCurrentLocation() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition);
-    } else { 
-      alert("Geolocation is not supported by this browser.");
-    }
-  }
-  function showPosition(position) {
-      if (thisPosition === null || thisPosition === undefined){
-        thisPosition = {lat: 53.579461, lng: -3.539079};
-      } else {
-        thisPosition = {lat: position.coords.latitude, lng: position.coords.longitude};
-      }
-  }
+var thisPosition = {lat: 54.546580, lng: -4.188547};
+var mapZoom = 5;
 
 function getAppealsMapData(){
-
-    getCurrentLocation();
 
     $.ajax({
         type: "get",
@@ -56,7 +40,7 @@ function setMarkers(map, allLocations) {
 
 function initMap(data) {
     map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 6,
+        zoom: mapZoom,
         center: thisPosition
     });
     
