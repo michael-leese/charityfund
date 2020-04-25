@@ -85,7 +85,6 @@ button.navbar-toggler.collapsed {
     font-weight: bolder;
 }
 
-
 .main-container {
     width: 100%;
     padding-right: 15px;
@@ -122,6 +121,14 @@ h3.appeal-title {
 
 .card-footer {
     text-align: center;
+}
+
+div.scroll {
+    margin: 4px, 4px;
+    padding: 4px;
+    height: 110px;
+    overflow-x: hidden;
+    overflow-x: auto;
 }
 
 /*---------- Progress Bars -----------------------------*/
@@ -167,6 +174,7 @@ h3.appeal-title {
 }
 
 /*------------ footer ------------------------------*/
+
 footer {
     width: 100%;
     position: fixed;
@@ -175,7 +183,7 @@ footer {
 }
 
 footer .row {
-    margin-right: 0; 
+    margin-right: 0;
     margin-left: 0;
 }
 
@@ -185,25 +193,26 @@ p.fawes-lg {
 }
 
 .fawes-lg {
-	font-size: 2em;
+    font-size: 2em;
 }
 
 .fawes-link-dec {
-	color: rgb(0, 139, 139);
-	text-decoration: none !important;
+    color: rgb(0, 139, 139);
+    text-decoration: none !important;
 }
+
 .fawes-link-dec:hover {
-	color: rgb(3, 179, 0);
-	font-size: larger;
-	text-decoration: none !important;
+    color: rgb(3, 179, 0);
+    font-size: larger;
+    text-decoration: none !important;
 }
 
 .fl-rt {
-	float: right;
+    float: right;
 }
 
 .copyright {
-	display: flex;
+    display: flex;
     align-items: center;
 }
 
@@ -217,7 +226,6 @@ p.fawes-lg {
 div#map {
     min-height: 100%;
 }
-
 
 @media screen and (max-width: 991px) {
     .nav-img {

@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import dj_database_url
 import os
-from charity_fund.env import SECRET_KEY_STR, DATABASE_URL
+from charity_fund.env import SECRET_KEY_STR, DATABASE_URL, STRIPE_SECRET_KEY, STRIPE_PUB_KEY
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -24,6 +24,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = os.environ.get('SECRET_KEY')
 SECRET_KEY = SECRET_KEY_STR
+STRIPE_SECRET_KEY = STRIPE_SECRET_KEY
+STRIPE_PUB_KEY = STRIPE_PUB_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -49,6 +51,7 @@ INSTALLED_APPS = [
     'taggit',
     'search',
     'rest_framework',
+    'payments',
 ]
 
 MIDDLEWARE = [
@@ -151,3 +154,4 @@ MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SESSION_COOKIE_AGE = 600 # set just 10 seconds to test
 SESSION_SAVE_EVERY_REQUEST = True
+

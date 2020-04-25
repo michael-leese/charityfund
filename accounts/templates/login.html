@@ -5,6 +5,7 @@
 {% block page_header %}Login Page{% endblock %}
 
 {% block page_contents %}
+    <p>If you haven't already registered please do so <a href="{% url 'register' %}?next={{ previous }}">register here</a>.</p>
     <form method="POST">
         {% csrf_token %}
         {{ login_form }}

@@ -4,6 +4,7 @@ from rest_framework.parsers import JSONParser
 from django.contrib import messages
 from accounts.models import User, Org
 from appeals.models import Appeal
+from payments.models import Order
 from taggit.models import Tag
 from appeals.forms import AppealForm
 from django.utils import timezone
@@ -67,13 +68,14 @@ def single_appeal(request):
         active = "active"
         org = Org.objects.filter(user=request.user)
         appeal = Appeal.objects.get(id=request.GET.get('id'))
+        orders = Order.objects.filter(appeal=appeal.id).order_by('-created_date')
         calcPercent = progress_perc(appeal.money_raised, appeal.money_target)
         if org:
             hasOrg = True
-            return render(request, 'single_appeal.html', {'appeal': appeal, 'hasOrg': hasOrg, 'calcPercent': calcPercent}) 
+            return render(request, 'single_appeal.html', {'appeal': appeal, 'orders': orders, 'hasOrg': hasOrg, 'calcPercent': calcPercent}) 
         else:
             hasOrg = False
-            return render(request, 'single_appeal.html', {'appeal': appeal, 'hasOrg': hasOrg, 'calcPercent': calcPercent}) 
+            return render(request, 'single_appeal.html', {'appeal': appeal, 'orders': orders,  'hasOrg': hasOrg, 'calcPercent': calcPercent}) 
     else:
         return redirect(reverse('index'))
 
@@ -87,7 +89,9 @@ def progress_perc(raised, target):
     return percentage
 
 class JSONResponse(HttpResponse):
-    
+    """
+    returns the json object to the ajax call
+    """
     def __init__(self, data, **kwargs):
         content = JSONRenderer().render(data)
         kwargs['content_type'] = 'application/json'
@@ -101,4 +105,3 @@ def all_appeal_map_data(request):
         all_appeals = Appeal.objects.all()
         serializer = AppealsSerializer(all_appeals, many=True)
         return JSONResponse(serializer.data)
-        
