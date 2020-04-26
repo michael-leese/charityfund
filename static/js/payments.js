@@ -1,4 +1,11 @@
+$(document).ready(function(){
+    $("#payment-form").find('#id_amount').prop('placeholder', '£0.00');
+    $("#payment-form").find('#id_credit_card_number').prop('placeholder', 'Test using 4242 4242 4242 4242');
+    $("#payment-form").find('#id_cvv').prop('placeholder', 'Test using 111');
+});
+
 $(function() {
+    
     $("#payment-form").submit(function() {
         var form = this;
         var card = {

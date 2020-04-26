@@ -1,13 +1,14 @@
 from django import forms
 from payments.models import Order
 
-
 class MakePaymentForm(forms.Form):
     """
     Creates a form to capture the payment details of the card being used
     """
-    MONTH_CHOICES = [(i, i) for i in range(1, 12)]
-    YEAR_CHOICES = [(i, i) for i in range(20, 36)]
+    MONTH_CHOICES = [(i, i) for i in range(1, 13)]
+    MONTH_CHOICES.insert(0, ('', 'Please select...'))
+    YEAR_CHOICES = [(i, i) for i in range(20, 37)]
+    YEAR_CHOICES.insert(0, ('', 'Please select...'))
 
     credit_card_number = forms.CharField(label='Credit card number', required=False)
     cvv = forms.CharField(label='Security code (CVV)', required=False)

@@ -31,7 +31,7 @@ STRIPE_PUB_KEY = STRIPE_PUB_KEY
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'https://charityfunding.herokuapp.com/ ',
+    'https://charityfunding.herokuapp.com/',
     '127.0.0.1'
 ]
 
@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_forms_bootstrap',
     'accounts',
     'appeals',
     'mathfilters',
@@ -152,6 +153,5 @@ MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
 
 #This handles sessions and logs you out on closing browser(and all tabs) or after 10mins
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-SESSION_COOKIE_AGE = 600 # set just 10 seconds to test
+SESSION_COOKIE_AGE = 600 # set just 10 minutes to test
 SESSION_SAVE_EVERY_REQUEST = True
-

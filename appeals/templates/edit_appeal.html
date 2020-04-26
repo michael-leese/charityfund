@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load mathfilters %}
+{% load bootstrap_tags %}
 {% block page_title %}{{appeal.title}}{% endblock %}
 
 {% block page_header %}Appeal for {{appeal.org}}{% endblock %}
@@ -19,13 +20,13 @@
                             <form method="POST" action="{% url 'editappeal' %}?id={{ instance.id }}&next={{ previous }}">
                                 {% csrf_token %}
                                 <br>
-                                {{ form.as_p }}
+                                {{ form | as_bootstrap }}
                                 <br>
                                 <p>If you are unsure of your Latitude and Longitude, put your address/postcode in on <a
                                         href="https://www.latlong.net/" target="_blank">this site</a>.</p>
                                 <br>
-                                <button type="submit" class="btn btn-success">SAVE</button>
-                                <a href="{{ previous }}" class="btn btn-warning">CANCEL</a>
+                                <button type="submit" class="btn btn-success">Save</button>
+                                <a href="{{ previous }}" class="btn btn-danger">Cancel</a>
                             </form>
                         </div>
                     </div>

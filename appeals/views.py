@@ -98,7 +98,7 @@ def single_appeal(request):
     Gets the single appeal clicked on by a user
     """
     if request.user.is_authenticated:
-        active = "active"
+        previous = request.GET.get('next', '/')
         owner = False
         org = Org.objects.filter(user=request.user)
         appeal = Appeal.objects.get(id=request.GET.get('id'))
@@ -110,10 +110,10 @@ def single_appeal(request):
         calcPercent = progress_perc(appeal.money_raised, appeal.money_target)
         if org:
             hasOrg = True
-            return render(request, 'single_appeal.html', {'appeal': appeal, 'orders': orders, 'hasOrg': hasOrg, 'calcPercent': calcPercent, 'owner': owner}) 
+            return render(request, 'single_appeal.html', {'appeal': appeal, 'orders': orders, 'hasOrg': hasOrg, 'calcPercent': calcPercent, 'owner': owner, 'previous': previous}) 
         else:
             hasOrg = False
-            return render(request, 'single_appeal.html', {'appeal': appeal, 'orders': orders,  'hasOrg': hasOrg, 'calcPercent': calcPercent, 'owner': owner}) 
+            return render(request, 'single_appeal.html', {'appeal': appeal, 'orders': orders,  'hasOrg': hasOrg, 'calcPercent': calcPercent, 'owner': owner, 'previous': previous}) 
     else:
         return redirect(reverse('index'))
 
