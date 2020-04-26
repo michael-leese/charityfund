@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = os.environ.get('SECRET_KEY')
-SECRET_KEY = SECRET_KEY_STR
-STRIPE_SECRET_KEY = STRIPE_SECRET_KEY
-STRIPE_PUB_KEY = STRIPE_PUB_KEY
+SECRET_KEY = os.environ.get('SECRET_KEY_STR')
+STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
+STRIPE_PUB_KEY = os.environ.get('STRIPE_PUB_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -102,7 +102,7 @@ WSGI_APPLICATION = 'charity_fund.wsgi.application'
 # }
 
 DATABASES = {
-    'default': dj_database_url.parse(DATABASE_URL)
+    'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
 }
 
 # Password validation
