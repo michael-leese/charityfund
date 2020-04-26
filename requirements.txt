@@ -15,6 +15,7 @@ djangorestframework==3.11.0
 dnspython==1.16.0
 gunicorn==20.0.4
 heroku==0.1.4
+heroku3==4.2.1
 idna==2.9
 itsdangerous==1.1.0
 Jinja2==2.10.3
