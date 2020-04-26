@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import dj_database_url
 import os
-from charity_fund.env import SECRET_KEY_STR, DATABASE_URL, STRIPE_SECRET_KEY, STRIPE_PUB_KEY
+# from charity_fund.env import SECRET_KEY_STR, DATABASE_URL, STRIPE_SECRET_KEY, STRIPE_PUB_KEY
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
