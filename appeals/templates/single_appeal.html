@@ -66,6 +66,9 @@
               {% if user.is_authenticated %}
               <a href="{% url 'makepayment' %}?id={{ appeal.id }}&next={{ request.path|urlencode }}?id={{ appeal.id }}" class="btn btn-info">DONATE</a>
               {% endif %}
+              {% if owner %}
+              <a href="{% url 'editappeal' %}?id={{ appeal.id }}&next={{ request.path|urlencode }}?id={{ appeal.id }}" class="btn btn-warning">EDIT</a>
+              {% endif %}
             </div>
           </div>
         </div>
