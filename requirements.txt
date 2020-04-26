@@ -1,6 +1,6 @@
 asgiref==3.2.7
 bcrypt==3.1.7
-bson==0.5.8
+bson==0.5.9
 certifi==2020.4.5.1
 cffi==1.12.3
 chardet==3.0.4
@@ -13,6 +13,9 @@ django-mathfilters==1.0.0
 django-taggit==1.2.0
 djangorestframework==3.11.0
 dnspython==1.16.0
+Flask==1.1.1
+Flask-PyMongo==2.3.0
+Flask-WTF==0.14.2
 gunicorn==20.0.4
 heroku==0.1.4
 idna==2.9
@@ -22,11 +25,10 @@ MarkupSafe==1.1.1
 psycopg2-binary==2.8.4
 pycparser==2.19
 pymongo==3.9.0
-python-dateutil==1.5
-python-dateutil==2.4.0
+python-dateutil==2.8.1
 pytz==2019.3
 requests==2.23.0
-six==1.12.0
+six==1.14.0
 sqlparse==0.3.1
 stripe==2.46.0
 urllib3==1.25.9
