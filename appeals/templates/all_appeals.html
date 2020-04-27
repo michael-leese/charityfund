@@ -1,3 +1,4 @@
+{% load static from staticfiles %}
 {% extends 'base.html' %}
 
 {% block page_title %}All Appeals{% endblock %}
@@ -74,5 +75,5 @@
   src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
 <script async defer
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMSBI47x89t6fo3jmYZYfFuxJPfXCb5eM&callback=getAppealsMapData"></script>
-<script type="text/javascript" src="/static/js/maps.js"></script>
+<script type="text/javascript" src="{% static 'js/maps.js' %}"></script>
 {% endblock %}

@@ -1,3 +1,4 @@
+{% load static from staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Charity Fund - {% block page_title %}{% endblock %}</title>
-        <link rel="shortcut icon" type="image/png" href="/static/img/favicon.png"/>
+        <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.png' %}"/>
         <!-- Bootstrap 4 -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
             integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
@@ -14,7 +15,7 @@
         <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/css/tempusdominus-bootstrap-4.min.css"
             integrity="sha256-XPTBwC3SBoWHSmKasAk01c08M6sIA5gF5+sRxqak2Qs=" crossorigin="anonymous" />
-        <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
         <!-- FontAwesome -->
         <script src="https://kit.fontawesome.com/886dec4cab.js" crossorigin="anonymous"></script>
         <!-- JQuery -->
@@ -127,7 +128,7 @@
 
         {% block script %}
         {% endblock %}
-        <script src="/static/js/scripts.js"></script>
+        <script src="{% static 'js/scripts.js' %}"></script>
     </body>
 
 </html>
