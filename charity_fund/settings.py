@@ -34,7 +34,7 @@ STRIPE_PUB_KEY = os.environ.get('STRIPE_PUB_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'https://charityfunding.herokuapp.com/',
+    'charityfunding.herokuapp.com',
     '127.0.0.1'
 ]
 
