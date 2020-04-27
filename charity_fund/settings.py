@@ -31,7 +31,7 @@ STRIPE_PUB_KEY = os.environ.get('STRIPE_PUB_KEY')
 # STRIPE_PUB_KEY = STRIPE_PUB_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'charityfunding.herokuapp.com',
@@ -149,9 +149,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'), )
-
-STATICFILES_LOCATION = 'static'
-STATICFILES_STORAGE = 'custom_storages.StaticStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
