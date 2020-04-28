@@ -23,13 +23,7 @@ def make_payment(request):
         if order_form.is_valid() and payment_form.is_valid():
             total = 0
             order = order_form.save(commit=False)
-            order.user = request.user
-            order.appeal = Appeal.objects.get(id=request.GET.get('id'))
-            order.org = Org.objects.get(id=appeal.org.id)
-            order.created_date = timezone.now()
             total = order.amount
-            order.save()
-            
             try:
                 customer = stripe.Charge.create(
                     amount=int(total * 100),
@@ -41,9 +35,14 @@ def make_payment(request):
                 messages.error(request, "Your card was declined!")
             
             if customer.paid:
-                messages.error(request, "You have successfully paid")
+                order.user = request.user
+                order.appeal = Appeal.objects.get(id=request.GET.get('id'))
+                order.org = Org.objects.get(id=appeal.org.id)
+                order.created_date = timezone.now()
+                order.save()
                 appeal.money_raised += total
                 appeal.save()
+                messages.error(request, "Congratulations, you have successfully donated!")
                 return HttpResponseRedirect(previous)
             else:
                 messages.error(request, "Unable to take payment")
