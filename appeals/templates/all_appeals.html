@@ -106,7 +106,10 @@
     <h5 class="appeal-title">Recent Donor Messages</h5>
     {% for order in orders %}
     <div class="col-12">
-      <p><strong>{{order.org.organisation}}</strong> received <strong>£{{order.amount}}</strong>, on {{order.created_date|date:'d/M/Y'}}
+      <p>{% if order.org.image %}
+        <img class="sml-img-circle" src="{{ MEDIA_URL }}{{order.org.image}}" class="img-circle">
+        {% endif %}
+        <strong>{{order.org.organisation}}</strong> received <strong>£{{order.amount}}</strong>, on {{order.created_date|date:'d/M/Y'}}
         from
         {% if order.anonymous %}
         <strong>Anonymous</strong></p>

@@ -282,6 +282,18 @@ a.btn.btn-danger:hover {
     display: block;
 }
 
+.img-circle {
+    border-radius: 50%;
+    height:70px;
+    width:70px;
+}
+
+.sml-img-circle{
+    border-radius: 50%;
+    height:35px;
+    width:35px;
+}
+
 .donate-img {
     width: 50%;
 }

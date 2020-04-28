@@ -20,10 +20,12 @@
         <div class="single-card card-style">
           <div class="card-body">
             <div class="col-12">
-              <h4 class="appeal-title">{{appeal.title}} for {{ appeal.org }}</h4>
-              {% if appeal.org.image %}
-              <img src="/media/{{appeal.org.image}}" class="img-circle">
-              {% endif %}
+              <div class="center-txt">
+                <h4 class="appeal-title">{{appeal.title}} for {{ appeal.org }}</h4>
+                {% if appeal.org.image %}
+                <img src="{{ MEDIA_URL }}{{appeal.org.image}}" class="img-circle">
+                {% endif %}
+              </div>
               <h5>Target: £{{ appeal.money_target }} by {{ appeal.target_date| date:"d/m/Y" }}</h5>
               <p class="scroll">Bio: {{ appeal.bio }}</p>
               <p>To search for our appeal use one of these tags:
