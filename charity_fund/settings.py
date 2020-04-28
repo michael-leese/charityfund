@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import dj_database_url
 import os
-# from charity_fund.env import SECRET_KEY, DATABASE_URL, STRIPE_SECRET_KEY, STRIPE_PUB_KEY
+from charity_fund.env import SECRET_KEY, DATABASE_URL, STRIPE_SECRET_KEY, STRIPE_PUB_KEY
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -22,13 +22,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
-STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
-STRIPE_PUB_KEY = os.environ.get('STRIPE_PUB_KEY')
+# SECRET_KEY = os.environ.get('SECRET_KEY')
+# STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
+# STRIPE_PUB_KEY = os.environ.get('STRIPE_PUB_KEY')
 
-# SECRET_KEY = SECRET_KEY
-# STRIPE_SECRET_KEY = STRIPE_SECRET_KEY
-# STRIPE_PUB_KEY = STRIPE_PUB_KEY
+SECRET_KEY = SECRET_KEY
+STRIPE_SECRET_KEY = STRIPE_SECRET_KEY
+STRIPE_PUB_KEY = STRIPE_PUB_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -101,13 +101,13 @@ WSGI_APPLICATION = 'charity_fund.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
-}
-
 # DATABASES = {
-#     'default': dj_database_url.parse(DATABASE_URL)
+#     'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
 # }
+
+DATABASES = {
+    'default': dj_database_url.parse(DATABASE_URL)
+}
 
 
 # Password validation
@@ -149,7 +149,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'), )
 
 MEDIA_URL = '/media/'

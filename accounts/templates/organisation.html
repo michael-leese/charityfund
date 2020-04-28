@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load bootstrap_tags %}
 
 {% block page_title %}Organisation{% endblock %}
 
@@ -10,7 +11,7 @@
     <form method="POST" action="{% url 'registerorg' %}">
         {% csrf_token %}
         <br>
-        {{ register_form.as_p }}
+        {{ register_form | as_bootstrap }}
         <br>
         <br>
         <button type="submit">Register</button>

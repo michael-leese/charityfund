@@ -29,11 +29,17 @@ function geoLocation(){
 }
 //if permission is granted mapSetup is populated with the users position and zooms in slightly to their area
 function showPosition(position){
-    mapSetup.position.lat = position.coords.latitude; 
-    mapSetup.position.lng = position.coords.longitude; 
-    mapSetup.zoom = 7;
-    //Once mapSetup is populated call the initMap()
-    initMap();
+    //only show zoomed in position if user is logged in
+    var authUser = $('#map').attr('name');
+    if (authUser == "Auth-User-Map") {
+        mapSetup.position.lat = position.coords.latitude; 
+        mapSetup.position.lng = position.coords.longitude; 
+        mapSetup.zoom = 9;
+        //Once mapSetup is populated call the initMap()
+        initMap();
+    } else {
+        showDefaultMap();
+    }
 }
 //if permission is denied mapSetup is populated with the default position(center of UK & Ireland) zoom set out to see all of mainland UK and Ireland
 function showDefaultMap(){

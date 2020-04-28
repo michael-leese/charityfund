@@ -123,12 +123,75 @@ h3.appeal-title {
     text-align: center;
 }
 
+.tag {
+    border: 1px solid rgba(40, 167, 69, 0.5);
+    border-radius: .25rem; 
+}
+
 div.scroll {
     margin: 4px, 4px;
     padding: 4px;
     height: 110px;
     overflow-x: hidden;
     overflow-x: auto;
+}
+p.scroll {
+    margin: 4px, 4px;
+    padding: 4px;
+    height: 25%;
+    overflow-x: hidden;
+    overflow-x: auto;
+}
+
+.title-filter {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 5% 0 5%;
+}
+
+.center-txt {
+    text-align: center;
+}
+
+/*-----------Buttons------------------------------------*/
+button.btn:hover {
+    color: rgb(233, 30, 99);
+    font-weight: bolder;
+}
+
+.show #filter.btn {
+    color: rgb(233, 30, 99) !important;
+    font-weight: bolder;
+}
+
+.dropdown-item {
+    text-decoration: none !important;
+    color: rgb(0, 139, 139); 
+}
+
+.dropdown-item:focus, 
+.dropdown-item:hover {
+    color: rgb(233, 30, 99) !important;
+    text-decoration: none;
+    background-color: rgba(40, 167, 69, 0.56) !important;
+}
+
+.dropdown-item.active, 
+.dropdown-item:active {
+    color: rgb(233, 30, 99) !important;
+    text-decoration: none;
+    background-color: rgba(40, 167, 69, 0.56) !important;
+}
+
+a.btn:hover {
+    color: rgb(233, 30, 99);
+    font-weight: bolder;
+}
+
+a:hover {
+    color: rgb(233, 30, 99);
+    font-weight: bolder;
+    text-decoration: none;
 }
 
 /*---------- Progress Bars -----------------------------*/
@@ -239,6 +302,9 @@ div#map {
 }
 
 @media (max-width: 991px) {
+    .appeals-container-fluid {
+        display: block;
+    }
     #mainSearch {
         display: none;
         visibility: hidden;

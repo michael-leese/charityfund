@@ -19,11 +19,11 @@
               <h3 class="appeal-title">{{appeal.title}} for {{ appeal.org }}</h3>
               <h5>Target: £{{ appeal.money_target }} by {{ appeal.target_date| date:"d/m/Y" }}</h5>
               <p>{{ appeal.text }}</p>
-              <ul>
+              <p>
                 {% for tag in appeal.tags.all %}
-                <li>{{ tag }}</li>
+                <span class="tag">{{ tag }}</span>
                 {% endfor %}
-              </ul>
+              </p>
               <p>Started on: {{ appeal.created_date| date:"d/m/Y" }}</p>
               <h5>Total Raised: £{{ appeal.money_raised }}</h5>
             </div>

@@ -78,19 +78,25 @@ def show_all_appeals(request):
     """
     Gets the appeals
     """
-    all_appeals = Appeal.objects.filter(created_date__lte=timezone.now()).order_by('-money_target')
+    filterType = request.GET.get('filter')
+    if filterType is None:
+        filterType = '-created_date'
+    orders = Order.objects.all().order_by('-created_date')[:5] 
     active = "active"
     if request.user.is_authenticated:
+        logged_in = True
+        all_appeals = Appeal.objects.filter(created_date__lte=timezone.now()).order_by(filterType)
         org = Org.objects.filter(user=request.user)
         if org:
             hasOrg = True
-            return render(request, 'all_appeals.html', {'all_appeals': all_appeals, 'hasOrg': hasOrg, 'active6': active}) 
+            return render(request, 'all_appeals.html', {'all_appeals': all_appeals, 'orders': orders, 'hasOrg': hasOrg, 'active6': active, 'logged_in': logged_in}) 
         else:
             hasOrg = False
-            return render(request, 'all_appeals.html', {'all_appeals': all_appeals, 'hasOrg': hasOrg, 'active6': active})
+            return render(request, 'all_appeals.html', {'all_appeals': all_appeals, 'orders': orders, 'hasOrg': hasOrg, 'active6': active, 'logged_in': logged_in})
     else:
+        all_appeals = Appeal.objects.filter(created_date__lte=timezone.now()).order_by('-created_date')[:5]
         hasOrg = False
-        return render(request, 'all_appeals.html', {'all_appeals': all_appeals, 'hasOrg': hasOrg, 'active6': active})
+        return render(request, 'all_appeals.html', {'all_appeals': all_appeals, 'orders': orders, 'hasOrg': hasOrg, 'active6': active})
 
 @login_required
 def single_appeal(request):
@@ -103,7 +109,6 @@ def single_appeal(request):
         org = Org.objects.filter(user=request.user)
         appeal = Appeal.objects.get(id=request.GET.get('id'))
         creator = appeal.author.id
-        print(creator)
         if creator is request.user.id:
             owner = True
         orders = Order.objects.filter(appeal=appeal.id).order_by('-created_date')
