@@ -8,13 +8,14 @@
 {% block page_contents %}
 <p>Creat your charitable/community organisation here.</p>
 
-    <form method="POST" action="{% url 'registerorg' %}">
-        {% csrf_token %}
-        <br>
-        {{ register_form | as_bootstrap }}
-        <br>
-        <br>
-        <button type="submit">Register</button>
-    </form>
+<form method="POST" action="{% url 'registerorg' %}">
+    {% csrf_token %}
+    <br>
+    {{ register_form | as_bootstrap }}
+    <br>
+    <br>
+    <button class="btn btn-success" type="submit">Register</button>
+    <a href="{% url 'index' %}" class="btn btn-danger">Cancel</a>
+</form>
 
 {% endblock %}

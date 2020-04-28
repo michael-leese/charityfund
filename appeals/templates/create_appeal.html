@@ -1,26 +1,44 @@
 {% extends 'base.html' %}
-
+{% load bootstrap_tags %}
 {% block page_title %}Create Appeal{% endblock %}
 
 {% block page_header %}Create Appeal Page{% endblock %}
 
 {% block page_contents %}
-{% if hasOrg %}
-<p>Create an appeal her for your charity or community project.</p>
-<p>Good luck fund raising, dont forget to share you appeal so people know and can make donations.</p>
-{% else %}
-<p>Only Charitable organisations and community projects may fund raise.</p>
-<p>You haven't registered an organisationwith us, please <a href="{% url 'registerorg' %}">register one here</a>.</p>
-{% endif %}
-
-    <form method="POST" action="{% url 'createappeal' %}">
-        {% csrf_token %}
-        <br>
-        {{ form.as_p }}
-        <br>
-        <p>If you are unsure of your Latitude and Longitude, put your address/postcode in on <a href="https://www.latlong.net/" target="_blank">this site</a>.</p>
-        <br>
-        <button type="submit">Create Appeal</button>
-    </form>
+<div class="center-txt">
+    {% if hasOrg %}
+    <p>Create an appeal her for your charity or community project.</p>
+    <p>Good luck fund raising, dont forget to share you appeal so people know and can make donations.</p>
+    {% else %}
+    <p>Only Charitable organisations and community projects may fund raise.</p>
+    <p>You haven't registered an organisationwith us, please <a href="{% url 'registerorg' %}">register one here</a>.
+    </p>
+    {% endif %}
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="main-area col-12">
+            <div class="col-offset-1 col-10">
+                <div class="single-card card-style">
+                    <div class="card-body">
+                        <div class="col-12">
+                            <form method="POST" action="{% url 'createappeal' %}">
+                                {% csrf_token %}
+                                <br>
+                                {{ form | as_bootstrap }}
+                                <br>
+                                <p>If you are unsure of your Latitude and Longitude, put your address/postcode in on <a
+                                        href="https://www.latlong.net/" target="_blank">this site</a>.</p>
+                                <br>
+                                <button class="btn btn-success" type="submit">Create Appeal</button>
+                                <a href="{% url 'index' %}" class="btn btn-danger">Cancel</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

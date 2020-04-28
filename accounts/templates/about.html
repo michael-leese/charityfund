@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block page_title %}About{% endblock %}
 
 {% block page_header %}About Charity Funding{% endblock %}
@@ -23,5 +23,9 @@
     your organisation and then get started creating an appeal.
 </p>
 <p>Thank you for your generosity.</p>
+
+<div class="center-txt col-12">
+    <a href="{% url 'showallappeals' %}"><img class="donate-img" src="{% static 'img/donate-now.png' %}" alt="Donate Now Image" ></a>
+</div>
 
 {% endblock %}

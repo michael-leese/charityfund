@@ -97,7 +97,7 @@ def register_org(request):
     active = "active"
     if request.user.is_authenticated:
         if request.method == "POST":
-            register_form = OrgRegistrationForm(request.POST)
+            register_form = OrgRegistrationForm(request.POST, request.FILES)
             if register_form.is_valid():
                 org = register_form.save(commit=False)
                 org.user = request.user

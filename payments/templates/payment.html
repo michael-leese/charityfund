@@ -20,6 +20,9 @@
             <div class="caption">
                 <h3>{{ appeal.title }}</h3>
                 <p>{{ appeal.org.organisation }}</p>
+                {% if appeal.org.image %}
+                <img src="/media/{{appeal.org.image}}" class="img-circle">
+                {% endif %}
                 <p>About: {{ appeal.bio }}</p>
                 <p>Money raised so far £{{ appeal.money_raised }}</p>
             </div>

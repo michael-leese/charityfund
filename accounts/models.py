@@ -20,6 +20,7 @@ class Org(models.Model):
     org_type = models.CharField(max_length=25, choices=ORG_TYPE_CHOICES, default=REG_CHARITY)
     bio = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
+    image = models.ImageField(upload_to="img", blank=True, null=True)
 
     def __str__(self):
         return self.organisation

@@ -43,5 +43,5 @@ class UserRegistrationForm(UserCreationForm):
 class OrgRegistrationForm(forms.ModelForm):
     class Meta:
         model = Org
-        fields = ['organisation', 'org_type', 'bio']
+        fields = ['organisation', 'org_type', 'bio', 'image']
 

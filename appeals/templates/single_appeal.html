@@ -5,26 +5,33 @@
 {% block page_header %}Appeal for {{appeal.org}}{% endblock %}
 
 {% block page_contents %}
-
-<p>Please read about our appeal below and donate what you can afford helping the beneficaries of {{appeal.org}}.</p>
-<p>Thank you for your generosity.</p>
-
+<div class="center-txt">
+  {% if appeal.org.image %}
+  <img src="/media/{{appeal.org.image}}" class="img-circle">
+  {% endif %}
+  <p class="center-txt">Please read about our appeal below and donate what you can afford, helping the beneficaries of
+    <strong>{{appeal.org}}</strong>.</p>
+  <p class="center-txt">Thank you for your generosity.</p>
+</div>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-12">
+    <div class="main-area col-12">
       <div class="col-offset-1 col-10">
-        <div class="card card-style">
+        <div class="single-card card-style">
           <div class="card-body">
             <div class="col-12">
-              <h3 class="appeal-title">{{appeal.title}} for {{ appeal.org }}</h3>
+              <h4 class="appeal-title">{{appeal.title}} for {{ appeal.org }}</h4>
+              {% if appeal.org.image %}
+              <img src="/media/{{appeal.org.image}}" class="img-circle">
+              {% endif %}
               <h5>Target: £{{ appeal.money_target }} by {{ appeal.target_date| date:"d/m/Y" }}</h5>
-              <p>{{ appeal.text }}</p>
-              <p>
+              <p class="scroll">Bio: {{ appeal.bio }}</p>
+              <p>To search for our appeal use one of these tags:
                 {% for tag in appeal.tags.all %}
                 <span class="tag">{{ tag }}</span>
                 {% endfor %}
               </p>
-              <p>Started on: {{ appeal.created_date| date:"d/m/Y" }}</p>
+              <p>Started on: <strong>{{ appeal.created_date| date:"d/m/Y" }}</strong></p>
               <h5>Total Raised: £{{ appeal.money_raised }}</h5>
             </div>
             <div class="col-12">
@@ -32,7 +39,8 @@
                 <div class="progress">
                   {% if calcPercent <= 100 %}
                   <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="90" aria-valuemin="0"
-                    aria-valuemax="100" style="background-image: linear-gradient(to right, rgb(255, 0, 0) {{calcPercent}}%, rgb(233, 236, 239) {{calcPercent|add:1}}%);">
+                    aria-valuemax="100"
+                    style="background-image: linear-gradient(to right, rgb(255, 0, 0) {{calcPercent}}%, rgb(233, 236, 239) {{calcPercent|add:1}}%);">
                     <span class="sr-only"> {{calcPercent}}% complete</span>
                   </div>
                   <span class="progress-type">{{calcPercent}}% Raised</span>
@@ -46,31 +54,33 @@
                 </div>
               </div>
               <div class="col-12 scroll">
-                <h6>Donations:</h6>
+                <h6 class="appeal-title">Donor Messages</h6>
                 {% for order in orders %}
                 <div class="col-12">
-                  {% if order.anonymous %}
-                  <p><strong>Anonymous</strong></p>
+                  <p><strong>{{order.org.organisation}}</strong> received <strong>£{{order.amount}}</strong>, on
+                    {{order.created_date|date:'d/M/Y'}} from
+                    {% if order.anonymous %}
+                    <strong>Anonymous</strong></p>
                   {% else %}
-                  <p><strong>{{order.full_name}}</strong></p>
+                  <strong>{{order.full_name}}</strong></p>
                   {% endif %}
-                  <p>Donated: £{{order.amount}}</p>
                   <p>{{order.comment}}</p>
-                  <p>Donated on {{order.created_date|date:'d/M/Y'}}</p>
                 </div>
                 <hr>
                 {% endfor %}
               </div>
             </div>
-            <div class="card-footer">
-              {% if user.is_authenticated %}
-              <a href="{% url 'makepayment' %}?id={{ appeal.id }}&next={{ request.path|urlencode }}?id={{ appeal.id }}" class="btn btn-info">Donate</a>
-              {% endif %}
-              {% if owner %}
-              <a href="{% url 'editappeal' %}?id={{ appeal.id }}&next={{ request.path|urlencode }}?id={{ appeal.id }}" class="btn btn-warning">Edit</a>
-              {% endif %}
-              <a href="{{ previous }}" class="btn btn-danger">Go Back</a>
-            </div>
+          </div>
+          <div class="card-footer">
+            {% if user.is_authenticated %}
+            <a href="{% url 'makepayment' %}?id={{ appeal.id }}&next={{ request.path|urlencode }}?id={{ appeal.id }}"
+              class="btn btn-info">Donate</a>
+            {% endif %}
+            {% if owner %}
+            <a href="{% url 'editappeal' %}?id={{ appeal.id }}&next={{ request.path|urlencode }}?id={{ appeal.id }}"
+              class="btn btn-warning">Edit</a>
+            {% endif %}
+            <a href="{{ previous }}" class="btn btn-danger">Go Back</a>
           </div>
         </div>
       </div>

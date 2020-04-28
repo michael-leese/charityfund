@@ -17,6 +17,19 @@
     padding-left: 30px;
 }
 
+.inner-nav {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: .5rem 1rem;
+}
+
 .nav-link {
     padding: 0.25em, 1em;
 }
@@ -94,6 +107,11 @@ button.navbar-toggler.collapsed {
     padding-bottom: 70px;
 }
 
+.main-area {
+    justify-content: center;
+    display: flex;
+}
+
 /*---------- Copyright Symbol --------------------------*/
 
 .sml-copyright {
@@ -102,7 +120,8 @@ button.navbar-toggler.collapsed {
 
 /*---------- Appeal Cards -----------------------------*/
 
-h3.appeal-title {
+.appeal-title {
+    color: rgb(0, 139, 139);
     text-align: center;
 }
 
@@ -113,10 +132,31 @@ h3.appeal-title {
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
+    flex-wrap: wrap;
+}
+
+.single-card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
 }
 
 .card {
-    height: 400px;
+    height: 500px;
+}
+
+.card-body {
+    background-color: aliceblue;
+    overflow: auto;
+    padding: 0.5rem 1rem 0.5rem 1rem;
 }
 
 .card-footer {
@@ -194,6 +234,20 @@ a:hover {
     text-decoration: none;
 }
 
+a.btn.btn-warning {
+    color: white;
+}
+a.btn-warning:hover {
+    color: rgb(233, 30, 99);
+    font-weight: bolder;
+}
+
+a.btn.btn-danger:hover {
+    color: rgb(233, 30, 99);
+    font-weight: bolder;
+    background: rgba(220, 53, 69, 0.6);
+}
+
 /*---------- Progress Bars -----------------------------*/
 
 .progress {
@@ -219,6 +273,17 @@ a:hover {
 
 .progress-section {
     margin: 5px 5px;
+}
+
+/*-------------images---------------------------------*/
+
+.story-img {
+    margin-top: 25%;
+    display: block;
+}
+
+.donate-img {
+    width: 50%;
 }
 
 /*------------ animation ------------------------------*/
@@ -343,17 +408,4 @@ div#map {
         display: none;
         visibility: hidden;
     }
-}
-
-.inner-nav {
-    position: relative;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    -ms-flex-align: center;
-    align-items: center;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    padding: .5rem 1rem;
 }
