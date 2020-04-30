@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django.contrib.auth.models import User
 from accounts.models import Org
-from accounts.forms import UserLoginForm, UserRegistrationForm, OrgRegistrationForm
+from accounts.forms import UserLoginForm, UserRegistrationForm, UserProfileForm, OrgRegistrationForm
 
 #Return the index page
 def index(request):
@@ -72,9 +72,10 @@ def register_user(request):
 
     if request.method == "POST":
         register_form = UserRegistrationForm(request.POST)
-        
-        if register_form.is_valid():
+        profile_form = UserProfileForm(request.POST)     
+        if register_form.is_valid() and profile_form.is_valid():
             register_form.save()
+            profile_form.save()
             user = auth.authenticate(username=request.POST['username'],
                                     password=request.POST['password1'])
             if user:
@@ -86,7 +87,8 @@ def register_user(request):
                 messages.error(request, "Unable to register at this time.")
     else:
         register_form = UserRegistrationForm()
-        return render(request, 'registration.html', {"register_form": register_form, 'active5': active})
+        profile_form = UserProfileForm()
+        return render(request, 'registration.html', {"register_form": register_form, 'profile_form': profile_form, 'active5': active})
 
 #return the registration page
 @login_required

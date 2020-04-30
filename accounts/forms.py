@@ -1,7 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.utils import timezone
-from accounts.models import User, Org
+from accounts.models import User, UserProfile, Org
 from django.contrib.auth.forms import UserCreationForm
 
 
@@ -9,6 +9,11 @@ from django.contrib.auth.forms import UserCreationForm
 class UserLoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['nickname', 'profile_picture']
 
 #User Registration Form
 class UserRegistrationForm(UserCreationForm):

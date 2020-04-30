@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
 {% load mathfilters %}
 {% load bootstrap_tags %}
-{% block page_title %}{{appeal.title}}{% endblock %}
+{% block page_title %}{{instance.title}}{% endblock %}
 
-{% block page_header %}Appeal for {{appeal.org}}{% endblock %}
+{% block page_header %}Appeal for {{instance.org}}{% endblock %}
 
 {% block page_contents %}
 <div class="center-txt">
-    {% if appeal.org.image %}
-    <img src="/media/{{appeal.org.image}}" class="img-circle">
+    {% if instance.org.image %}
+    <img src="{{ MEDIA_URL }}{{instance.org.image}}" class="img-circle">
     {% endif %}
-    <p>Please read about our appeal below and donate what you can afford helping the beneficaries of {{appeal.org}}.</p>
-    <p>Thank you for your generosity.</p>
+    <p>Here you can edit the appeal information either change or add more content for the appeal from {{instance.org}}.
+    </p>
 </div>
 <div class="container-fluid">
     <div class="row">
@@ -23,6 +23,9 @@
                             <form method="POST"
                                 action="{% url 'editappeal' %}?id={{ instance.id }}&next={{ previous }}">
                                 {% csrf_token %}
+                                {% if instance.image %}
+                                <img src="{{ MEDIA_URL }}{{instance.image}}" class="img-circle">
+                                {% endif %}
                                 <br>
                                 {{ form | as_bootstrap }}
                                 <br>

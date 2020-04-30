@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Charity Fund - {% block page_title %}{% endblock %}</title>
-        <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.png' %}"/>
+        <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.png' %}" />
         <!-- Bootstrap 4 -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
             integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
@@ -35,6 +35,12 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
+                    <div>
+                        {% if user.userprofile.image %}
+                        <img src="{{ MEDIA_URL }}{{user.userprofile.image}}" class="img-circle">
+                        <span>{{user.userprofile.nickname}}</span>
+                        {% endif %}
+                    </div>
                     <form id="mainSearch" class="form-inline my-lg-0 mr-auto"
                         action="{% url 'search' %}?next={{ request.path|urlencode }}" method="GET">
                         <input class="form-control mr-sm-2 nav-search" type="text" name="search"

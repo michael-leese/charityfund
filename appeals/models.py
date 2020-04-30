@@ -18,6 +18,7 @@ class Appeal(models.Model):
     tags = TaggableManager()
     latitude = models.DecimalField(max_digits=9, decimal_places=6, default=0.000000)
     longitude = models.DecimalField(max_digits=9, decimal_places=6, default=0.000000)
+    image = models.ImageField(upload_to="img", blank=True, null=True)
 
     def __str__(self):
         return self.title

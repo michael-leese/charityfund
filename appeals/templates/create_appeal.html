@@ -7,14 +7,18 @@
 {% block page_contents %}
 <div class="center-txt">
     {% if hasOrg %}
+    {% if appeal.org.image %}
+    <img src="{{ MEDIA_URL }}{{appeal.image}}" class="img-circle">
+    {% endif %}
     <p>Create an appeal her for your charity or community project.</p>
     <p>Good luck fund raising, dont forget to share you appeal so people know and can make donations.</p>
     {% else %}
     <p>Only Charitable organisations and community projects may fund raise.</p>
-    <p>You haven't registered an organisationwith us, please <a href="{% url 'registerorg' %}">register one here</a>.
+    <p>You haven't registered an organisation with us, please <a href="{% url 'registerorg' %}">register one here</a>.
     </p>
     {% endif %}
 </div>
+{% if hasOrg %}
 <div class="container-fluid">
     <div class="row">
         <div class="main-area col-12">
@@ -40,5 +44,5 @@
         </div>
     </div>
 </div>
-
+{% endif %}
 {% endblock %}
