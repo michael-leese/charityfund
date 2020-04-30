@@ -12,6 +12,7 @@ Django==3.0.5
 django-bootstrap-form==3.4
 django-forms-bootstrap==3.1.0
 django-mathfilters==1.0.0
+django-storages==1.9.1
 django-taggit==1.2.0
 djangorestframework==3.11.0
 dnspython==1.16.0
@@ -27,7 +28,7 @@ psycopg2-binary==2.8.4
 pycparser==2.19
 pymongo==3.9.0
 python-dateutil==2.8.1
-pytz==2019.3
+pytz==2020.1
 requests==2.23.0
 s3transfer==0.1.13
 six==1.14.0
