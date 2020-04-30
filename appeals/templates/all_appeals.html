@@ -104,6 +104,7 @@
   <div class="col-12 scroll">
     <h5 class="appeal-title">Recent Donor Messages</h5>
     {% for order in orders %}
+    {% if order.successful %}
     <div class="col-12">
       <p>{% if order.org.image %}
         <img class="sml-img-circle" src="{{ MEDIA_URL }}{{order.org.image}}" class="img-circle">
@@ -112,12 +113,13 @@
         from
         {% if order.anonymous %}
         <strong>Anonymous</strong></p>
-      {% else %}
-      <strong>{{order.full_name}}</strong></p>
-      {% endif %}
+        {% else %}
+        <strong>{{order.full_name}}</strong></p>
+        {% endif %}
       <p>{{order.comment}}</p>
     </div>
     <hr>
+    {% endif %}
     {% endfor %}
   </div>
 </div>

@@ -39,12 +39,19 @@ def make_payment(request):
                 order.appeal = Appeal.objects.get(id=request.GET.get('id'))
                 order.org = Org.objects.get(id=appeal.org.id)
                 order.created_date = timezone.now()
+                order.successful = True
                 order.save()
                 appeal.money_raised += total
                 appeal.save()
                 messages.error(request, "Congratulations, you have successfully donated!")
                 return HttpResponseRedirect(previous)
             else:
+                order.user = request.user
+                order.appeal = Appeal.objects.get(id=request.GET.get('id'))
+                order.org = Org.objects.get(id=appeal.org.id)
+                order.created_date = timezone.now()
+                order.successful = False
+                order.save()
                 messages.error(request, "Unable to take payment")
                 return render(request, "payment.html", {"appeal": appeal, "order_form": order_form, "payment_form": payment_form, "publishable": settings.STRIPE_PUB_KEY, "previous": previous})
 

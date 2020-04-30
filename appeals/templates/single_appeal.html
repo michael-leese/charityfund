@@ -58,17 +58,19 @@
               <div class="col-12 scroll">
                 <h6 class="appeal-title">Donor Messages</h6>
                 {% for order in orders %}
+                {% if order.successful %}
                 <div class="col-12">
                   <p><strong>{{order.org.organisation}}</strong> received <strong>£{{order.amount}}</strong>, on
                     {{order.created_date|date:'d/M/Y'}} from
                     {% if order.anonymous %}
                     <strong>Anonymous</strong></p>
-                  {% else %}
-                  <strong>{{order.full_name}}</strong></p>
-                  {% endif %}
+                    {% else %}
+                    <strong>{{order.full_name}}</strong></p>
+                    {% endif %}
                   <p>{{order.comment}}</p>
                 </div>
                 <hr>
+                {% endif %}
                 {% endfor %}
               </div>
             </div>

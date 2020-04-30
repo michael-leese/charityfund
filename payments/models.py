@@ -18,6 +18,7 @@ class Order(models.Model):
     created_date = models.DateTimeField(default=timezone.now)
     amount = models.IntegerField(null=True, blank=True)
     anonymous = models.BooleanField(default=False)
+    successful = models.BooleanField(default=False)
 
     def __str__(self):
         return "{0}-{1}-{2}".format(self.id, self.created_date, self.full_name)
