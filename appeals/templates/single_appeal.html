@@ -7,7 +7,7 @@
 {% block page_contents %}
 <div class="center-txt">
   {% if appeal.org.image %}
-  <img src="/media/{{appeal.org.image}}" class="img-circle">
+  <img src="{{ MEDIA_URL }}{{appeal.org.image}}" class="img-circle">
   {% endif %}
   <p class="center-txt">Please read about our appeal below and donate what you can afford, helping the beneficaries of
     <strong>{{appeal.org}}</strong>.</p>
