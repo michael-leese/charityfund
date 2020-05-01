@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load bootstrap_tags %}
 
+{% block page_title %}Payment{% endblock %}
+
 {% block head_js %}
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 <script type="text/javascript">
@@ -10,6 +12,15 @@
 </script>
 <script type="text/javascript" src="/static/js/payments.js"></script>
 {% endblock head_js %}
+
+{% block profile_image %}
+<div class="mr-sm-2">
+    {% if userprofile.profile_picture %}
+    <img src="{{ MEDIA_URL }}{{userprofile.profile_picture}}" class="img-circle">
+    {% endif %}
+    <span>{{userprofile.nickname}}</span>
+</div>
+{% endblock %}
 
 {% block page_header %}<h2>Make a Donation</h2>{% endblock %}
 

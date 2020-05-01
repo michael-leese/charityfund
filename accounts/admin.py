@@ -1,4 +1,6 @@
 from django.contrib import admin
-from accounts.models import Org
+from accounts.models import Org, UserProfile
 
-admin.site.register(Org)
+
+allModels = [Org, UserProfile]  # iterable list
+admin.site.register(allModels)

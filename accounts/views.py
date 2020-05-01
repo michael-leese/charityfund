@@ -3,7 +3,7 @@ from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django.contrib.auth.models import User
-from accounts.models import Org
+from accounts.models import Org, UserProfile
 from accounts.forms import UserLoginForm, UserRegistrationForm, UserProfileForm, OrgRegistrationForm
 
 #Return the index page
@@ -18,7 +18,8 @@ def index(request):
             hasOrg = True
         else:
             hasOrg = False
-        return render(request, "index.html", {'hasOrg': hasOrg, 'active1': active})
+        userprofile = UserProfile.objects.get(user=request.user)
+        return render(request, "index.html", {'hasOrg': hasOrg, 'active1': active, 'userprofile': userprofile})
     else:
         return render(request, "index.html", {'active1': active})
 
@@ -81,8 +82,9 @@ def register_user(request):
             if user:
                 auth.login(user=user, request=request)
                 messages.success(request, "You have successfully registered")
-                hasOrg = False         
-                return render(request, 'index.html', {"hasOrg": hasOrg, 'active1': active})
+                hasOrg = False
+                userprofile = UserProfile.objects.get(user=request.user)
+                return render(request, 'index.html', {"hasOrg": hasOrg, 'active1': active, 'userprofile': userprofile})
             else:
                 messages.error(request, "Unable to register at this time.")
     else:
@@ -98,6 +100,7 @@ def register_org(request):
     """
     active = "active"
     if request.user.is_authenticated:
+        userprofile = UserProfile.objects.get(user=request.user)
         if request.method == "POST":
             register_form = OrgRegistrationForm(request.POST, request.FILES)
             if register_form.is_valid():
@@ -107,12 +110,12 @@ def register_org(request):
                 org.save()
                 messages.success(request, "You have successfully registered an organisation")
                 hasOrg = True
-                return render(request, 'index.html', {'hasOrg': hasOrg, 'active1': active})
+                return render(request, 'index.html', {'hasOrg': hasOrg, 'active1': active, 'userprofile': userprofile})
             else:
                 messages.error(request, "Unable to register at this time.")
         else:
             register_form = OrgRegistrationForm()
-            return render(request, 'organisation.html', {"register_form": register_form, 'active3': active})
+            return render(request, 'organisation.html', {"register_form": register_form, 'active3': active, 'userprofile': userprofile})
     else:
         return redirect(reverse('index'))
         
@@ -122,13 +125,14 @@ def about(request):
     """
     active = "active"
     if request.user.is_authenticated:
+        userprofile = UserProfile.objects.get(user=request.user)
         org = Org.objects.filter(user=request.user)
         if org:
             hasOrg = True
-            return render(request, 'about.html', {'hasOrg': hasOrg, 'active7': active}) 
+            return render(request, 'about.html', {'hasOrg': hasOrg, 'active7': active, 'userprofile': userprofile}) 
         else:
             hasOrg = False
-            return render(request, 'about.html', {'hasOrg': hasOrg, 'active7': active})
+            return render(request, 'about.html', {'hasOrg': hasOrg, 'active7': active, 'userprofile': userprofile})
     else:
         hasOrg = False
         return render(request, 'about.html', {'hasOrg': hasOrg, 'active7': active})

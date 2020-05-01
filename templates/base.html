@@ -29,19 +29,15 @@
                 <div class="col-2">
                     <a class="navbar-brand nav-img spin" href="{% url 'index' %}"></a>
                 </div>
-                <div class="col-10">
+                <div class="col-10 top-inner-nav">
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <div>
-                        {% if user.userprofile.image %}
-                        <img src="{{ MEDIA_URL }}{{user.userprofile.image}}" class="img-circle">
-                        <span>{{user.userprofile.nickname}}</span>
-                        {% endif %}
-                    </div>
-                    <form id="mainSearch" class="form-inline my-lg-0 mr-auto"
+                    {% block profile_image %}
+                    {% endblock %}
+                    <form id="mainSearch" class="form-inline my-lg-0"
                         action="{% url 'search' %}?next={{ request.path|urlencode }}" method="GET">
                         <input class="form-control mr-sm-2 nav-search" type="text" name="search"
                             placeholder="Search all Appeals" aria-label="Search" title="Search Appeals">

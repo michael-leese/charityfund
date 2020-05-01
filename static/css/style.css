@@ -17,6 +17,11 @@
     padding-left: 30px;
 }
 
+.top-inner-nav {
+    display: flex;
+    justify-content: flex-end;
+}
+
 .inner-nav {
     position: relative;
     display: -ms-flexbox;

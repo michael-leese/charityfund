@@ -3,7 +3,7 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from accounts.models import User, Org
+from accounts.models import User, Org, UserProfile
 from appeals.models import Appeal
 from payments.models import Order
 from taggit.models import Tag
@@ -20,7 +20,9 @@ def create_appeal(request):
     if request.user.is_authenticated:
         active = "active"
         org = Org.objects.filter(user=request.user)
+        userprofile = UserProfile.objects.get(user=request.user)
         if org:
+            org = Org.objects.get(user=request.user)
             hasOrg = True
             if request.method == "POST":
                 form = AppealForm(request.POST)
@@ -32,14 +34,14 @@ def create_appeal(request):
                     appeal.save()
                     form.save_m2m()
                     messages.success(request, "Congratulations you have added an appeal")
-                    return render(request, 'all_appeals.html', {'hasOrg': hasOrg, 'active6': active})
+                    return render(request, 'all_appeals.html', {'hasOrg': hasOrg, 'org': org, 'active6': active, 'userprofile': userprofile})
             else:
                 form = AppealForm()
-            return render(request, 'create_appeal.html', {'form': form,'hasOrg': hasOrg, 'active2': active})
+            return render(request, 'create_appeal.html', {'form': form,'hasOrg': hasOrg, 'org': org, 'active2': active, 'userprofile': userprofile})
         else:
             hasOrg = False
             messages.success(request, "You must create an organisation before setting up an appeal")
-            return render(request, 'index.html', {'hasOrg': hasOrg, 'active1': active})
+            return render(request, 'index.html', {'hasOrg': hasOrg, 'active1': active, 'userprofile': userprofile})
     else:
         return redirect(reverse('index'))
 
@@ -54,6 +56,7 @@ def edit_appeal(request):
         previous = request.GET.get('next', '/')
         instance = get_object_or_404(Appeal, id=request.GET.get('id'))
         org = Org.objects.filter(user=request.user)
+        userprofile = UserProfile.objects.get(user=request.user)
         form = AppealForm(request.POST or None, instance=instance)
         if request.method == "POST":
             if form.is_valid():
@@ -67,9 +70,9 @@ def edit_appeal(request):
                 return HttpResponseRedirect(previous)
             else:
                 messages.error(request, "Unable to edit at this time.")
-                return render(request, 'edit_appeal.html', {'form': form, 'previous': previous, 'instance': instance})
+                return render(request, 'edit_appeal.html', {'form': form, 'previous': previous, 'instance': instance, 'userprofile': userprofile})
         else:
-            return render(request, 'edit_appeal.html', {'form': form, 'previous': previous, 'instance': instance})
+            return render(request, 'edit_appeal.html', {'form': form, 'previous': previous, 'instance': instance, 'userprofile': userprofile})
     else:
         active = "active"
         return render(request, 'index.html', {'active1': active})
@@ -85,14 +88,17 @@ def show_all_appeals(request):
     active = "active"
     if request.user.is_authenticated:
         logged_in = True
+        userprofile = UserProfile.objects.get(user=request.user)
         all_appeals = Appeal.objects.filter(created_date__lte=timezone.now()).order_by(filterType)
         org = Org.objects.filter(user=request.user)
         if org:
             hasOrg = True
-            return render(request, 'all_appeals.html', {'all_appeals': all_appeals, 'orders': orders, 'hasOrg': hasOrg, 'active6': active, 'logged_in': logged_in}) 
+            return render(request, 'all_appeals.html', {'all_appeals': all_appeals, 'orders': orders, 'hasOrg': hasOrg, 
+                                                        'active6': active, 'logged_in': logged_in, 'userprofile': userprofile}) 
         else:
             hasOrg = False
-            return render(request, 'all_appeals.html', {'all_appeals': all_appeals, 'orders': orders, 'hasOrg': hasOrg, 'active6': active, 'logged_in': logged_in})
+            return render(request, 'all_appeals.html', {'all_appeals': all_appeals, 'orders': orders, 'hasOrg': hasOrg, 
+                                                        'active6': active, 'logged_in': logged_in, 'userprofile': userprofile})
     else:
         all_appeals = Appeal.objects.filter(created_date__lte=timezone.now()).order_by('-created_date')[:5]
         hasOrg = False
@@ -106,6 +112,7 @@ def single_appeal(request):
     if request.user.is_authenticated:
         previous = request.GET.get('next', '/')
         owner = False
+        userprofile = UserProfile.objects.get(user=request.user)
         org = Org.objects.filter(user=request.user)
         appeal = Appeal.objects.get(id=request.GET.get('id'))
         creator = appeal.author.id
@@ -115,10 +122,14 @@ def single_appeal(request):
         calcPercent = progress_perc(appeal.money_raised, appeal.money_target)
         if org:
             hasOrg = True
-            return render(request, 'single_appeal.html', {'appeal': appeal, 'orders': orders, 'hasOrg': hasOrg, 'calcPercent': calcPercent, 'owner': owner, 'previous': previous}) 
+            return render(request, 'single_appeal.html', {'appeal': appeal, 'orders': orders, 'hasOrg': hasOrg, 
+                                                          'calcPercent': calcPercent, 'owner': owner, 'previous': previous, 
+                                                          'userprofile': userprofile}) 
         else:
             hasOrg = False
-            return render(request, 'single_appeal.html', {'appeal': appeal, 'orders': orders,  'hasOrg': hasOrg, 'calcPercent': calcPercent, 'owner': owner, 'previous': previous}) 
+            return render(request, 'single_appeal.html', {'appeal': appeal, 'orders': orders,  'hasOrg': hasOrg, 
+                                                          'calcPercent': calcPercent, 'owner': owner, 'previous': previous, 
+                                                          'userprofile': userprofile}) 
     else:
         return redirect(reverse('index'))
 
