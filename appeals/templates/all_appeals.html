@@ -7,7 +7,7 @@
     {% if userprofile.profile_picture %}
     <img src="{{ MEDIA_URL }}{{userprofile.profile_picture}}" class="img-circle">
     {% endif %}
-    <span>{{userprofile.nickname}}</span>
+    <span>Hi, {{userprofile.nickname}}</span>
 </div>
 {% endblock %}
 
@@ -101,10 +101,21 @@
         </div>
         {% endfor %}
       </div>
-      {% if not user.is_authenticated %}
-      <p class="center-txt">These are our most recent appeals, <a href="{% url 'register' %}">register here</a>, to view
-        all our appeals.</p>
+      {% if search %}
+      <p class="center-txt">Your search returned <strong>{{ all_appeals|length }}</strong> results.</p>
       {% endif %}
+      {% if no_search_back is True %}
+      <p class="center-txt">There are no search results with your search: {{ search }}</p>
+      <p class="center-txt">Please try another search.</p>
+      {% endif %}
+
+      {% if not user.is_authenticated %}
+        {% if not search %}
+        <p class="center-txt">These are our most recent appeals, <a href="{% url 'register' %}">register here</a>, to view
+          all our appeals.</p>
+        {% endif %}
+      {% endif %}
+
     </div>
   </div>
 </div>

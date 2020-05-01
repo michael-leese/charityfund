@@ -7,7 +7,7 @@
     {% if userprofile.profile_picture %}
     <img src="{{ MEDIA_URL }}{{userprofile.profile_picture}}" class="img-circle">
     {% endif %}
-    <span>{{userprofile.nickname}}</span>
+    <span>Hi, {{userprofile.nickname}}</span>
 </div>
 {% endblock %}
 
@@ -31,7 +31,14 @@
     All you have to do is register with our site to make a donation, if you would like to start an appeal, once logged in you can register
     your organisation and then get started creating an appeal.
 </p>
-<p>Thank you for your generosity.</p>
+<p>As a registered user you are able to make donations,if you are running or are part of a registered charity or a community group you are 
+   able to register an organisation. In turn ince you have registered an organisation you are able to register appeals for the organisation.
+   Only one organisation may be created per user as we are determined to provide a service to the small and local charities that do not 
+   normally get a voice in an overly crowded and chaotic market, by acting in this way we are able to provide bespoke marketing of appeals by
+   charities and community groups so they can serve there beneficiraies in the best way possible, rather than agents creating multiple 
+   organisations and appeals underneath them.</p>
+<p>Please use our search facility to find the appeals that interest you the most and give as generously as possible.</p>
+<p>Thank you for your support.</p>
 
 <div class="center-txt col-12">
     <a href="{% url 'showallappeals' %}"><img class="donate-img" src="{% static 'img/donate-now.png' %}" alt="Donate Now Image" ></a>
