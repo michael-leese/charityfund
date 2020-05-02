@@ -48,8 +48,7 @@ def create_appeal(request):
 @login_required
 def edit_appeal(request):
     """
-    Ensures create appeal form is valid and pushes data into
-    a new appeal, then redirects to appeals list page
+    Edit an appeal if you are the owner of the appeal
     """
     if request.user.is_authenticated:
         owner = False

@@ -136,3 +136,29 @@ def about(request):
     else:
         hasOrg = False
         return render(request, 'about.html', {'hasOrg': hasOrg, 'active7': active})
+
+@login_required
+def edit_org(request):
+    """
+    Edit the organisation that belongs to the user if any
+    """
+    active = "active"
+    if request.user.is_authenticated:
+        hasOrg = True
+        instance = get_object_or_404(Org, user=request.user)
+        org = Org.objects.filter(user=request.user)
+        userprofile = UserProfile.objects.get(user=request.user)
+        form = OrgRegistrationForm(request.POST or None, instance=instance)
+        if request.method == "POST":
+            if form.is_valid():
+                org = form.save(commit=False)
+                org.save()
+                messages.success(request, "Congratulations you have edited organisation called " + instance.organisation)
+                return render(request, 'index.html', {'active1': active, 'userprofile': userprofile, 'hasOrg': hasOrg})
+            else:
+                messages.error(request, "Unable to edit at this time.")
+                return render(request, 'editorg.html', {'form': form, 'instance': instance, 'userprofile': userprofile, 'active8': active, 'hasOrg': hasOrg})
+        else:
+            return render(request, 'editorg.html', {'form': form, 'instance': instance, 'userprofile': userprofile, 'active8': active, 'hasOrg': hasOrg})
+    else:
+        return render(request, 'index.html', {'active1': active})
