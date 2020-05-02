@@ -4,6 +4,8 @@ from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django.contrib.auth.models import User
 from accounts.models import Org, UserProfile
+from appeals.models import Appeal
+from payments.models import Order
 from accounts.forms import UserLoginForm, UserRegistrationForm, UserProfileForm, OrgRegistrationForm
 
 #Return the index page
@@ -160,5 +162,29 @@ def edit_org(request):
                 return render(request, 'editorg.html', {'form': form, 'instance': instance, 'userprofile': userprofile, 'active8': active, 'hasOrg': hasOrg})
         else:
             return render(request, 'editorg.html', {'form': form, 'instance': instance, 'userprofile': userprofile, 'active8': active, 'hasOrg': hasOrg})
+    else:
+        return render(request, 'index.html', {'active1': active})
+
+def view_my_orgs_appeals(request):
+    """
+    Get the org and appeals for the user
+    """
+    filterType = request.GET.get('filter')
+    if filterType is None:
+        filterType = '-created_date'
+    orders = Order.objects.filter(user=request.user).order_by('-created_date')[:5] 
+    active = "active"
+    if request.user.is_authenticated:
+        logged_in = True
+        userprofile = UserProfile.objects.get(user=request.user)
+        all_appeals = Appeal.objects.filter(author=request.user).order_by(filterType)
+        org = Org.objects.get(user=request.user)
+        if org:
+            hasOrg = True
+            return render(request, 'all_orgs_appeals.html', {'all_appeals': all_appeals, 'orders': orders, 'hasOrg': hasOrg, 
+                                                        'active9': active, 'logged_in': logged_in, 'userprofile': userprofile, 'org': org}) 
+        else:
+            hasOrg = False
+            return render(request, 'index.html', {'hasOrg': hasOrg, 'active1': active, 'userprofile': userprofile})
     else:
         return render(request, 'index.html', {'active1': active})

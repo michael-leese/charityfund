@@ -6,6 +6,7 @@ var mapSetup = {position: {lat: undefined, lng: undefined}, zoom: undefined}
 var defaultLat = 54.546580;
 var defaultLng = -4.188547;
 var defaultZoom = 5;
+var $authUser = $('#map').attr('name');
 
 //checks the geolocation permission status
 function geoLocation(){
@@ -30,8 +31,7 @@ function geoLocation(){
 //if permission is granted mapSetup is populated with the users position and zooms in slightly to their area
 function showPosition(position){
     //only show zoomed in position if user is logged in
-    var authUser = $('#map').attr('name');
-    if (authUser == "Auth-User-Map") {
+    if ($authUser == "Auth-User-Map" || $authUser == "Org-User-Map") {
         mapSetup.position.lat = position.coords.latitude; 
         mapSetup.position.lng = position.coords.longitude; 
         mapSetup.zoom = 9;
@@ -52,22 +52,41 @@ function showDefaultMap(){
 
 //Initial function to retrieve appeals data from DB
 function getAppealsMapData(){
-    
-    $.ajax({
-        type: "get",
-        url: basepath + "/appeals/all_appeal_map_data",
-        dataType: "json",
-        success: function(data){
-            //set global appealsData to returned data object
-            appealsData = data;
-        },
-        error: function(){
-            alert("ERROR: Cannot retrieve map data at this time.");
-        }
-    }).done(function(){
-        //when done with Ajax call get geolocation setup data
-        geoLocation();
-    });  
+
+    if ($authUser == "Org-User-Map"){
+        $.ajax({
+            type: "get",
+            url: basepath + "/appeals/my_appeal_map_data",
+            dataType: "json",
+            success: function(data){
+                //set global appealsData to returned data object
+                appealsData = data;
+            },
+            error: function(){
+                alert("ERROR: Cannot retrieve map data at this time.");
+            }
+        }).done(function(){
+            //when done with Ajax call get geolocation setup data
+            geoLocation();
+        }); 
+    } else {
+        $.ajax({
+            type: "get",
+            url: basepath + "/appeals/all_appeal_map_data",
+            dataType: "json",
+            success: function(data){
+                //set global appealsData to returned data object
+                appealsData = data;
+            },
+            error: function(){
+                alert("ERROR: Cannot retrieve map data at this time.");
+            }
+        }).done(function(){
+            //when done with Ajax call get geolocation setup data
+            geoLocation();
+        }); 
+    }
+     
 }
 
 //Sets up the markers for the map using the map object created and the appealsData from DB

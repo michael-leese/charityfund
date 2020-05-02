@@ -158,3 +158,12 @@ def all_appeal_map_data(request):
         all_appeals = Appeal.objects.all()
         serializer = AppealsSerializer(all_appeals, many=True)
         return JSONResponse(serializer.data)
+
+def my_appeal_map_data(request):
+    """
+    returns all your own appeals data for maps api
+    """
+    if request.method == 'GET':
+        all_appeals = Appeal.objects.filter(author=request.user)
+        serializer = AppealsSerializer(all_appeals, many=True)
+        return JSONResponse(serializer.data)
