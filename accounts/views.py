@@ -1,5 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect, reverse, get_object_or_404, HttpResponseRedirect
 from django.contrib import auth, messages
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django.contrib.auth.models import User
@@ -186,5 +188,31 @@ def view_my_orgs_appeals(request):
         else:
             hasOrg = False
             return render(request, 'index.html', {'hasOrg': hasOrg, 'active1': active, 'userprofile': userprofile})
+    else:
+        return render(request, 'index.html', {'active1': active})
+
+def change_password(request):
+    '''
+    Change the users password.
+    '''
+    active = "active"
+    org = False
+    if request.user.is_authenticated:
+        userprofile = UserProfile.objects.get(user=request.user)
+        org = Org.objects.get(user=request.user)
+        if org:
+            hasOrg = True
+        if request.method == "POST":
+            password_form = PasswordChangeForm(request.user, request.POST)
+            if password_form.is_valid():
+                user = password_form.save()
+                update_session_auth_hash(request, user)
+                messages.success(request, "You have successfully changed your password.")
+                return render(request, 'index.html', {"hasOrg": hasOrg, 'active1': active, 'userprofile': userprofile})
+            else:
+                messages.error(request, "Unable to change password at this time.")
+        else:
+            password_form = PasswordChangeForm(request.user)
+            return render(request, 'changepassword.html', {"password_form": password_form, 'active10': active,})
     else:
         return render(request, 'index.html', {'active1': active})
