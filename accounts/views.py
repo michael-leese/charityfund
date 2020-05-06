@@ -191,6 +191,7 @@ def view_my_orgs_appeals(request):
     else:
         return render(request, 'index.html', {'active1': active})
 
+@login_required
 def change_password(request):
     '''
     Change the users password.
