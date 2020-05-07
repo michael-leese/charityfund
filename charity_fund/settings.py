@@ -12,8 +12,8 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import dj_database_url
 import os
-# if os.path.exists('charity_fund/env.py'):
-from .env import SECRET_KEY, DATABASE_URL, STRIPE_SECRET_KEY, STRIPE_PUB_KEY, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY
+if os.path.exists('charity_fund/env.py'):
+    from .env import SECRET_KEY, DATABASE_URL, STRIPE_SECRET_KEY, STRIPE_PUB_KEY, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -22,16 +22,16 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
-# if "RUN_PRODUCTION" in os.environ:
-#     # SECURITY WARNING: keep the secret key used in production secret!
-#     SECRET_KEY = os.environ.get('SECRET_KEY')
-#     STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
-#     STRIPE_PUB_KEY = os.environ.get('STRIPE_PUB_KEY')
-# else:
-print("Running locally use env.py for keys")
-SECRET_KEY = SECRET_KEY
-STRIPE_SECRET_KEY = STRIPE_SECRET_KEY
-STRIPE_PUB_KEY = STRIPE_PUB_KEY
+if "RUN_PRODUCTION" in os.environ:
+    # SECURITY WARNING: keep the secret key used in production secret!
+    SECRET_KEY = os.environ.get('SECRET_KEY')
+    STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
+    STRIPE_PUB_KEY = os.environ.get('STRIPE_PUB_KEY')
+else:
+    print("Running locally use env.py for keys")
+    SECRET_KEY = SECRET_KEY
+    STRIPE_SECRET_KEY = STRIPE_SECRET_KEY
+    STRIPE_PUB_KEY = STRIPE_PUB_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -60,7 +60,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'payments',
     'storages',
-    # 'email_send',
+    'email_send',
 ]
 
 MIDDLEWARE = [
@@ -99,21 +99,21 @@ WSGI_APPLICATION = 'charity_fund.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-# if "RUN_PRODUCTION" in os.environ:
-#     DATABASES = {
-#         'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
-#     }
-# else:
-#     print("Running locally, use env.py to retrieve URL")
-DATABASES = {
-    'default': dj_database_url.parse(DATABASE_URL)
-}
+if "RUN_PRODUCTION" in os.environ:
+    DATABASES = {
+        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+    }
+else:
+    print("Running locally, use env.py to retrieve URL")
     # DATABASES = {
-    #     'default': {
-    #         'ENGINE': 'django.db.backends.sqlite3',
-    #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    #     }
+    #     'default': dj_database_url.parse(DATABASE_URL)
     # }
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
 
 
 # Password validation

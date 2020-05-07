@@ -34,5 +34,5 @@ urlpatterns = [
     url(r'^accounts/edit_org/$', edit_org, name="editorg"),
     url(r'^accounts/viewmyorgs_appeals/$', view_my_orgs_appeals, name="viewmyorgs_appeals"),
     url(r'^accounts/change_password/$', change_password, name="changepassword"),
-    # url(r'^email_send/', include('email_send.urls')),
+    url(r'^email_send/', include('email_send.urls')),
 ]
