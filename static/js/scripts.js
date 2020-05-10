@@ -9,6 +9,10 @@ $(document).ready(function(){
             $("#messages").hide();
         }, 2000);
     }
+    //ensure that multiple errors for same field are displayed one per line
+    if ($(".error-msg").show()){
+        $(".error-msg").append("<br>")
+    }
     
     //get searchParameters functionality from https://stackoverflow.com/questions/5448545/how-to-retrieve-get-parameters-from-javascript
     function getSearchParameters() {

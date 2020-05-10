@@ -13,7 +13,7 @@ class UserProfile(models.Model):
     profile_picture = models.ImageField(upload_to="img", blank=True, null=True)
 
     def __str__(self):
-        return self.nickname
+        return self.nickname + ":" + self.profile_picture.name
 
 class Org(models.Model):
     REG_CHARITY = 'Registered Charity'

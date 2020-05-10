@@ -18,13 +18,15 @@ class UserProfileForm(forms.ModelForm):
 #User Registration Form
 class UserRegistrationForm(UserCreationForm):
     username = forms.CharField(label='Username', required=True)
+    first_name = forms.CharField(label='First Name', required=True)
+    last_name = forms.CharField(label='Last Name', required=True)
     email = forms.EmailField(label='Email', required=True)
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput)
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'password1', 'password2']
+        fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
@@ -38,10 +40,10 @@ class UserRegistrationForm(UserCreationForm):
         password2 = self.cleaned_data.get('password2')
 
         if not password1 or not password2:
-            raise ValidationError("Please confirm your password")
+            raise forms.ValidationError("Please confirm your password")
         
         if password1 != password2:
-            raise ValidationError("Passwords do not match!")
+            raise forms.ValidationError("Passwords do not match!")
         return password2
 
 #Org Registration Form

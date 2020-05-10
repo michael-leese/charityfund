@@ -35,7 +35,7 @@
                 <div class="single-card card-style">
                     <div class="card-body">
                         <div class="col-12">
-                            <form method="POST" action="{% url 'createappeal' %}">
+                            <form method="POST" enctype="multipart/form-data" action="{% url 'createappeal' %}">
                                 {% csrf_token %}
                                 <br>
                                 {{ form | as_bootstrap }}

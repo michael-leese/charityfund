@@ -3,6 +3,7 @@ from django.contrib import auth, messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
 from django.utils import timezone
 from django.contrib.auth.models import User
 from accounts.models import Org, UserProfile
@@ -77,20 +78,26 @@ def register_user(request):
 
     if request.method == "POST":
         register_form = UserRegistrationForm(request.POST)
-        profile_form = UserProfileForm(request.POST)     
+        profile_form = UserProfileForm(request.POST, request.FILES)     
         if register_form.is_valid() and profile_form.is_valid():
+            print("forms valid")
             register_form.save()
-            profile_form.save()
             user = auth.authenticate(username=request.POST['username'],
                                     password=request.POST['password1'])
+            hasOrg = False
             if user:
+                print(user)
+                myuserprofile = profile_form.save(commit=False)
+                myuserprofile.user = user
+                myuserprofile.save()
                 auth.login(user=user, request=request)
                 messages.success(request, "You have successfully registered")
-                hasOrg = False
-                userprofile = UserProfile.objects.get(user=request.user)
+                userprofile = UserProfile.objects.get(user=user)
                 return render(request, 'index.html', {"hasOrg": hasOrg, 'active1': active, 'userprofile': userprofile})
             else:
                 messages.error(request, "Unable to register at this time.")
+        else:
+            return render(request, 'registration.html', {"register_form": register_form, 'profile_form': profile_form, 'active5': active})
     else:
         register_form = UserRegistrationForm()
         profile_form = UserProfileForm()
@@ -152,8 +159,8 @@ def edit_org(request):
         instance = get_object_or_404(Org, user=request.user)
         org = Org.objects.filter(user=request.user)
         userprofile = UserProfile.objects.get(user=request.user)
-        form = OrgRegistrationForm(request.POST or None, instance=instance)
         if request.method == "POST":
+            form = OrgRegistrationForm(request.POST, request.FILES)
             if form.is_valid():
                 org = form.save(commit=False)
                 org.save()
@@ -163,6 +170,7 @@ def edit_org(request):
                 messages.error(request, "Unable to edit at this time.")
                 return render(request, 'editorg.html', {'form': form, 'instance': instance, 'userprofile': userprofile, 'active9': active, 'hasOrg': hasOrg})
         else:
+            form = OrgRegistrationForm(instance=instance)
             return render(request, 'editorg.html', {'form': form, 'instance': instance, 'userprofile': userprofile, 'active9': active, 'hasOrg': hasOrg})
     else:
         return render(request, 'index.html', {'active1': active})

@@ -30,11 +30,6 @@
                     <a class="navbar-brand nav-img spin" href="{% url 'index' %}"></a>
                 </div>
                 <div class="col-10 top-inner-nav">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse"
-                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
                     {% block profile_image %}
                     {% endblock %}
                     <form id="mainSearch" class="form-inline my-lg-0"
@@ -44,6 +39,11 @@
                         <button class="btn btn-outline-success my-2 my-sm-0 nav-btn-search"
                             type="submit">Search</button>
                     </form>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
                 </div>
             </div>
             <div id="bottomNav" class=" row mr-auto">

@@ -17,7 +17,7 @@
 {% block page_contents %}
 <p>Creat your charitable/community organisation here.</p>
 
-<form method="POST" action="{% url 'registerorg' %}">
+<form method="POST" enctype="multipart/form-data" action="{% url 'registerorg' %}">
     {% csrf_token %}
     <br>
     {{ register_form | as_bootstrap }}

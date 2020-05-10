@@ -56,8 +56,8 @@ def edit_appeal(request):
         instance = get_object_or_404(Appeal, id=request.GET.get('id'))
         org = Org.objects.filter(user=request.user)
         userprofile = UserProfile.objects.get(user=request.user)
-        form = AppealForm(request.POST or None, instance=instance)
         if request.method == "POST":
+            form = AppealForm(request.Post, request.FILES)
             if form.is_valid():
                 appeal = form.save(commit=False)
                 appeal.author = request.user
@@ -71,6 +71,7 @@ def edit_appeal(request):
                 messages.error(request, "Unable to edit at this time.")
                 return render(request, 'edit_appeal.html', {'form': form, 'previous': previous, 'instance': instance, 'userprofile': userprofile})
         else:
+            form = AppealForm(instance=instance)
             return render(request, 'edit_appeal.html', {'form': form, 'previous': previous, 'instance': instance, 'userprofile': userprofile})
     else:
         active = "active"
