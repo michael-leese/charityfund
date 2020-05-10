@@ -6,8 +6,8 @@
 <div class="mr-sm-2">
     {% if userprofile.profile_picture %}
     <img src="{{ MEDIA_URL }}{{userprofile.profile_picture}}" class="img-circle">
-    {% endif %}
     <span>Hi, {{userprofile.nickname}}</span>
+    {% endif %}
 </div>
 {% endblock %}
 
@@ -27,6 +27,7 @@
                         {% endif %}
                     </div>
                     <p class="scroll">Bio: {{ org.bio }}</p>
+                    <a class="btn btn-info" href="{% url 'editorg' %}">Edit Organisation</a>
                 </div>
             </div>
         </div>

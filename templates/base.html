@@ -55,8 +55,6 @@
                         {% if hasOrg %}
                         <li class="nav-item"><a class="nav-link {{ active2 }}" href="{% url 'createappeal' %}">Create
                                 Appeal</a></li>
-                        <li class="nav-item"><a class="nav-link {{ active8 }}" href="{% url 'editorg' %}">Edit
-                                Organisation</a></li>
                         <li class="nav-item"><a class="nav-link {{ active9 }}" href="{% url 'viewmyorgs_appeals' %}">My Organisation</a></li>
                         <li class="nav-item"><a class="nav-link {{ active10 }}" href="{% url 'changepassword' %}">Change Password</a></li>
                         {% else %}
@@ -72,9 +70,9 @@
                                 Appeals</a></li>
                         <li class="nav-item"><a class="nav-link {{ active7 }}" href="{% url 'about' %}">About</a></li>
                         <li id="listSearch" class="nav-item">
-                            <form class="form-inline my-2 my-lg-0 ml-auto"
+                            <form class="form-inline my-lg-0 ml-auto"
                                 action="{% url 'search' %}?next={{ request.path|urlencode }}" method="GET">
-                                <button class="btn btn-outline-success my-2 my-sm-0 nav-btn-search"
+                                <button class="btn btn-outline-success my-sm-0 nav-btn-search"
                                     type="submit">Search</button>
                                 <input class="form-control ml-sm-2 nav-search" type="text" name="search"
                                     placeholder="Search all Appeals" aria-label="Search" title="Search Appeals">

@@ -161,9 +161,9 @@ def edit_org(request):
                 return render(request, 'index.html', {'active1': active, 'userprofile': userprofile, 'hasOrg': hasOrg})
             else:
                 messages.error(request, "Unable to edit at this time.")
-                return render(request, 'editorg.html', {'form': form, 'instance': instance, 'userprofile': userprofile, 'active8': active, 'hasOrg': hasOrg})
+                return render(request, 'editorg.html', {'form': form, 'instance': instance, 'userprofile': userprofile, 'active9': active, 'hasOrg': hasOrg})
         else:
-            return render(request, 'editorg.html', {'form': form, 'instance': instance, 'userprofile': userprofile, 'active8': active, 'hasOrg': hasOrg})
+            return render(request, 'editorg.html', {'form': form, 'instance': instance, 'userprofile': userprofile, 'active9': active, 'hasOrg': hasOrg})
     else:
         return render(request, 'index.html', {'active1': active})
 

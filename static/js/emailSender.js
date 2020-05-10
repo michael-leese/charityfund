@@ -10,8 +10,6 @@
      from_email: contactForm.fromEmail.value
  }).then(function(response) {
       alert('SUCCESS!', response.status);
-      $('#submitEmail').hide();
-      $('#contentEmail').empty();
    }, function(error) {
       alert('FAILED! Please try later.', error);
    });

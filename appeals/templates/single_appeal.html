@@ -2,6 +2,15 @@
 {% load mathfilters %}
 {% block page_title %}{{appeal.title}}{% endblock %}
 
+{% block profile_image %}
+<div class="mr-sm-2">
+    {% if userprofile.profile_picture %}
+    <img src="{{ MEDIA_URL }}{{userprofile.profile_picture}}" class="img-circle">
+    <span>Hi, {{userprofile.nickname}}</span>
+    {% endif %}
+</div>
+{% endblock %}
+
 {% block page_header %}Appeal for {{appeal.org}}{% endblock %}
 
 {% block page_contents %}
