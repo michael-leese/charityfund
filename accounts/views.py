@@ -208,7 +208,7 @@ def change_password(request):
     org = False
     if request.user.is_authenticated:
         userprofile = UserProfile.objects.get(user=request.user)
-        org = Org.objects.get(user=request.user)
+        org = Org.objects.filter(user=request.user)
         if org:
             hasOrg = True
         if request.method == "POST":
@@ -220,6 +220,7 @@ def change_password(request):
                 return render(request, 'index.html', {"hasOrg": hasOrg, 'active1': active, 'userprofile': userprofile})
             else:
                 messages.error(request, "Unable to change password at this time.")
+                return render(request, 'changepassword.html', {"password_form": password_form, 'active10': active,})
         else:
             password_form = PasswordChangeForm(request.user)
             return render(request, 'changepassword.html', {"password_form": password_form, 'active10': active,})

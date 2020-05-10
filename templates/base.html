@@ -56,11 +56,11 @@
                         <li class="nav-item"><a class="nav-link {{ active2 }}" href="{% url 'createappeal' %}">Create
                                 Appeal</a></li>
                         <li class="nav-item"><a class="nav-link {{ active9 }}" href="{% url 'viewmyorgs_appeals' %}">My Organisation</a></li>
-                        <li class="nav-item"><a class="nav-link {{ active10 }}" href="{% url 'changepassword' %}">Change Password</a></li>
                         {% else %}
                         <li class="nav-item"><a class="nav-link {{ active3 }}" href="{% url 'registerorg' %}">Register
                                 Org</a></li>
                         {% endif %}
+                        <li class="nav-item"><a class="nav-link {{ active10 }}" href="{% url 'changepassword' %}">Change Password</a></li>
                         {% else %}
                         <li class="nav-item"><a class="nav-link {{ active4 }}" href="{% url 'login' %}">Login</a></li>
                         <li class="nav-item"><a class="nav-link {{ active5 }}" href="{% url 'register' %}">Register</a>
