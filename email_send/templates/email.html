@@ -28,7 +28,7 @@
     {% if owner %}
     <p class="center-txt">You cannot send an email to yourself as the owner of <strong>{{appeal.org}}</strong>.</p>
     {% else %}
-    <p class="center-txt">Whether it be for further information, how to get involved an volunteer or simply send well wishes, please 
+    <p class="center-txt">Whether it be for further information, how to get involved and volunteer or simply send well wishes, please 
         send an email about the {{appeal.title}} to the contact of <strong>{{appeal.org}}</strong>, who would love to hear from you.</p>
     {% endif %}
 </div>
@@ -37,7 +37,8 @@
         <div class="main-area col-12">
             <div class="col-offset-1 col-10">
                 <div class="single-card card-style">
-                    <form onsubmit="return sendEmail(this);" method="POST">
+                    <form id="emailForm" onsubmit="sendEmail(this);" method="POST">
+                    {% csrf_token %}
                         <div class="card-body">
                             <div class="col-12">
                                 <div class="center-txt">
@@ -46,16 +47,15 @@
                                     <img src="{{ MEDIA_URL }}{{appeal.image}}" class="img-circle">
                                     {% endif %}
                                 </div>
-                                <input type="text" name="orgEmail" class="form-control" id="orgEmail" value="{{appeal.org}}" hidden required/>
-                                <input type="text" name="appealEmail" class="form-control" id="appealEmail" value="{{appeal.title}}" hidden required/>
-                                <input type="text" name="toEmail" class="form-control" id="toEmail" value="{{appeal.user.email}}" hidden required/>
-                                <input type="text" name="fromEmail" class="form-control" id="fromEmail" value="{{request.email}}" hidden required/>
-                                <input type="text" name="fromName" class="form-control" id="fromName" value="{{request.user}}" hidden required/>
+                                <input type="text" name="orgEmail" class="form-control" id="orgEmail" value="{{appeal.org}}" disabled hidden/>
+                                <input type="text" name="appealEmail" class="form-control" id="appealEmail" value="{{appeal.title}}" disabled hidden/>
+                                <input type="email" name="toEmail" class="form-control" id="toEmail" value="{{appeal.author.email}}" disabled hidden/>
+                                <input type="email" name="fromEmail" class="form-control" id="fromEmail" value="{{request.user.email}}" disabled hidden/>
+                                <input type="text" name="fromName" class="form-control" id="fromName" value="{{request.user}}" disabled hidden/>
                                 <label for="content">Enter message:</label><br>
                                 <textarea id="contentEmail" class="form-control" placeholder="Your message here..." name="contentEmail" rows="15" cols="50" required></textarea>
                                 <br>
-                                <p>This email will be sent from your registered email address to the registered email of
-                                    {{appeal.org}} owner.</p>
+                                <p>An email will be sent to the registered email of {{appeal.org}} owner, with the message you qrite below and your contact email address.</p>
                             </div>
                         </div>
                         <div class="card-footer">

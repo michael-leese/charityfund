@@ -117,6 +117,13 @@ button.navbar-toggler.collapsed {
     display: flex;
 }
 
+.messages {
+    background-color: yellowgreen;
+    border-radius: 5px;
+    margin-top: 1rem;
+    text-align: center;
+}
+
 /*---------- Copyright Symbol --------------------------*/
 
 .sml-copyright {

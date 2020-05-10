@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from accounts.models import User, Org, UserProfile
 from appeals.models import Appeal
 
@@ -19,7 +20,10 @@ def emailOrg(request):
         owner = False
         if creator is request.user.id:
             owner = True
-            return render(request, 'email.html', {'appeal': appeal, 'owner': owner, 'userprofile': userprofile})
-        return render(request, 'email.html', {'appeal': appeal, 'user':user, 'owner': owner, 'userprofile': userprofile})
+            return render(request, 'email.html', {'appeal': appeal, 'owner': owner, 'userprofile': userprofile, 'previous': previous})
+        if request.method == "POST":
+            messages.success(request, "An email has been sent to " + appeal.title)
+            return HttpResponseRedirect(previous)
+        return render(request, 'email.html', {'appeal': appeal, 'user':user, 'owner': owner, 'userprofile': userprofile, 'previous': previous})
     else:
         return HttpResponseRedirect(previous)

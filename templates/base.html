@@ -87,9 +87,9 @@
         <div class="main-container">
             <div class="container">
                 {% if messages %}
-                <div>
+                <div class="messages">
                     {% for message in messages %}
-                    <p id="messages">{{ message }}</p>
+                    <p id="messages"><strong>{{ message }}</strong></p>
                     {% endfor %}
                 </div>
                 {% endif %}

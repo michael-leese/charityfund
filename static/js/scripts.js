@@ -7,7 +7,7 @@ $(document).ready(function(){
     if ($("#messages").show()) {
         setTimeout(function(){
             $("#messages").hide();
-        }, 1000);
+        }, 2000);
     }
     
     //get searchParameters functionality from https://stackoverflow.com/questions/5448545/how-to-retrieve-get-parameters-from-javascript
