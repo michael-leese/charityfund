@@ -11,10 +11,12 @@
 {% endblock %}
 {% block profile_image %}
 <div class="mr-sm-2">
+{% if userprofile %}
     {% if userprofile.profile_picture %}
     <img src="{{ MEDIA_URL }}{{userprofile.profile_picture}}" class="img-circle">
-    <span>Hi, {{userprofile.nickname}}</span>
     {% endif %}
+    <span>Hi, {{userprofile.nickname}}</span>
+{% endif %}
 </div>
 {% endblock %}
 
