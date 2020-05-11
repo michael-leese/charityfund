@@ -50,24 +50,20 @@
                 <div class="collapse navbar-collapse mr-auto" id="navbarSupportedContent">
                     <ul class="navbar-nav">
                         <li class="nav-item"><a class="nav-link {{ active1 }}" href="{% url 'index' %}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link {{ active6 }}" href="{% url 'showallappeals' %}">View Appeals</a></li>
                         {% if user.is_authenticated %}
                         <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
-                        {% if hasOrg %}
-                        <li class="nav-item"><a class="nav-link {{ active2 }}" href="{% url 'createappeal' %}">Create
-                                Appeal</a></li>
-                        <li class="nav-item"><a class="nav-link {{ active9 }}" href="{% url 'viewmyorgs_appeals' %}">My Organisation</a></li>
+                        {% if not hasOrg %}
+                        <li class="nav-item"><a class="nav-link {{ active3 }}" href="{% url 'registerorg' %}">Register Org</a></li>
                         {% else %}
-                        <li class="nav-item"><a class="nav-link {{ active3 }}" href="{% url 'registerorg' %}">Register
-                                Org</a></li>
+                        <li class="nav-item"><a class="nav-link {{ active2 }}" href="{% url 'createappeal' %}">Create Appeal</a></li>
+                        <li class="nav-item"><a class="nav-link {{ active9 }}" href="{% url 'viewmyorgs_appeals' %}">My Organisation</a></li>
                         {% endif %}
-                        <li class="nav-item"><a class="nav-link {{ active10 }}" href="{% url 'changepassword' %}">Change Password</a></li>
+                        <li class="nav-item"><a class="nav-link {{ active10 }}" href="{% url 'edituserprofile' %}">Edit Profile</a></li>
                         {% else %}
                         <li class="nav-item"><a class="nav-link {{ active4 }}" href="{% url 'login' %}">Login</a></li>
-                        <li class="nav-item"><a class="nav-link {{ active5 }}" href="{% url 'register' %}">Register</a>
-                        </li>
+                        <li class="nav-item"><a class="nav-link {{ active5 }}" href="{% url 'register' %}">Register</a></li>
                         {% endif %}
-                        <li class="nav-item"><a class="nav-link {{ active6 }}" href="{% url 'showallappeals' %}">View
-                                Appeals</a></li>
                         <li class="nav-item"><a class="nav-link {{ active7 }}" href="{% url 'about' %}">About</a></li>
                         <li id="listSearch" class="nav-item">
                             <form class="form-inline my-lg-0 ml-auto"

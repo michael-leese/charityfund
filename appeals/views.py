@@ -63,7 +63,11 @@ def edit_appeal(request):
                 appeal.author = request.user
                 appeal.org = Org.objects.get(user=request.user)
                 appeal.created_date = timezone.now()
-                appeal.save()
+                if appeal.image != instance.image:
+                    instance.image.delete(save=True)
+                appeal.image = request.FILES["image"]
+                appeal.id = instance.id
+                appeal.save(force_update=True)
                 form.save_m2m()
                 messages.success(request, "Congratulations you have edited appeal called " + instance.title)
                 return HttpResponseRedirect(previous)

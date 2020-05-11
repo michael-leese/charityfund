@@ -62,6 +62,7 @@ def login(request):
                     return HttpResponseRedirect(previous)
             else:
                 login_form.add_error(None, "Your username or password is incorrect!")
+                return render(request, "login.html", {"login_form": login_form, 'active4': active})
     else:
         login_form = UserLoginForm()
         return render(request, "login.html", {"login_form": login_form, 'active4': active})
@@ -163,7 +164,12 @@ def edit_org(request):
             form = OrgRegistrationForm(request.POST, request.FILES)
             if form.is_valid():
                 org = form.save(commit=False)
-                org.save()
+                if org.image != instance.image:
+                    instance.image.delete(save=True)
+                org.image = request.FILES["image"]
+                org.user = request.user
+                org.id = instance.id
+                org.save(force_update=True)
                 messages.success(request, "Congratulations you have edited organisation called " + instance.organisation)
                 return render(request, 'index.html', {'active1': active, 'userprofile': userprofile, 'hasOrg': hasOrg})
             else:
@@ -217,12 +223,43 @@ def change_password(request):
                 user = password_form.save()
                 update_session_auth_hash(request, user)
                 messages.success(request, "You have successfully changed your password.")
-                return render(request, 'index.html', {"hasOrg": hasOrg, 'active1': active, 'userprofile': userprofile})
+                return render(request, 'edituserprofile.html', {"hasOrg": hasOrg, 'active1': active, 'userprofile': userprofile})
             else:
                 messages.error(request, "Unable to change password at this time.")
-                return render(request, 'changepassword.html', {"password_form": password_form, 'active10': active,})
+                return render(request, 'changepassword.html', {"password_form": password_form, 'userprofile': userprofile})
         else:
             password_form = PasswordChangeForm(request.user)
-            return render(request, 'changepassword.html', {"password_form": password_form, 'active10': active,})
+            return render(request, 'changepassword.html', {"password_form": password_form, 'userprofile': userprofile})
+    else:
+        return render(request, 'index.html', {'active1': active})
+
+@login_required
+def edit_user_profile(request):
+    '''
+    Edit users profile
+    '''
+    active = "active"
+    if request.user.is_authenticated:
+        hasOrg = False
+        instance = get_object_or_404(UserProfile, user=request.user)
+        org = Org.objects.filter(user=request.user)
+        if request.method == "POST":
+            profile_form = UserProfileForm(request.POST, request.FILES)
+            if profile_form.is_valid():
+                user_profile = profile_form.save(commit=False)
+                if user_profile.profile_picture != instance.profile_picture:
+                    instance.profile_picture.delete(save=True)
+                user_profile.profile_picture = request.FILES["profile_picture"]
+                user_profile.user = request.user
+                user_profile.id = instance.id
+                user_profile.save(force_update=True)
+                messages.success(request, "You have successfully updated your user profile")
+                return render(request, 'index.html', {'active1': active, 'userprofile': user_profile, 'hasOrg': hasOrg})
+            else:
+                messages.error(request, "Unable to edit at this time.")
+                return render(request, 'edituserprofile.html', {'profile_form': profile_form, 'userprofile': instance, 'active10': active, 'hasOrg': hasOrg})
+        else:
+            profile_form = UserProfileForm(instance=instance)
+            return render(request, 'edituserprofile.html', {'profile_form': profile_form, 'userprofile': instance, 'active10': active, 'hasOrg': hasOrg})
     else:
         return render(request, 'index.html', {'active1': active})

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load bootstrap_tags %}
+
+{% block page_title %}Register{% endblock %}
+
+{% block profile_image %}
+<div class="mr-sm-2">
+{% if userprofile %}
+    {% if userprofile.profile_picture %}
+    <img src="{{ MEDIA_URL }}{{userprofile.profile_picture}}" class="img-circle">
+    {% endif %}
+    <span>Hi, {{userprofile.nickname}}</span>
+{% endif %}
+</div>
+{% endblock %}
+
+{% block page_header %}Edit Profile Page{% endblock %}
+
+{% block page_contents %}
+<p>Here you can update your nickname and profile picture or press change password button to change your password.</p>
+
+    <form method="POST" enctype="multipart/form-data" action="{% url 'edituserprofile' %}">
+        {% csrf_token %}
+        <br>
+        {{ profile_form | as_bootstrap }}
+        <br>
+        <br>
+        <button class="btn btn-success" type="submit">Save</button>
+        <a class="btn btn-info" href="{% url 'changepassword' %}">Change Password</a>
+        <a class="btn btn-danger" href="{% url 'changepassword' %}">Go Back</a>
+    </form>
+
+{% endblock %}
