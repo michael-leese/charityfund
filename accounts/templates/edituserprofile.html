@@ -17,8 +17,9 @@
 {% block page_header %}Edit Profile Page{% endblock %}
 
 {% block page_contents %}
-<p>Here you can update your nickname and profile picture or press change password button to change your password.</p>
-
+<div class="center-txt">
+    <p>Here you can update your nickname and profile picture or press change password button to change your password.</p>
+</div>
     <form method="POST" enctype="multipart/form-data" action="{% url 'edituserprofile' %}">
         {% csrf_token %}
         <br>
