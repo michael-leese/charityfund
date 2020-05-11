@@ -80,13 +80,11 @@ def register_user(request):
         register_form = UserRegistrationForm(request.POST)
         profile_form = UserProfileForm(request.POST, request.FILES)     
         if register_form.is_valid() and profile_form.is_valid():
-            print("forms valid")
             register_form.save()
             user = auth.authenticate(username=request.POST['username'],
                                     password=request.POST['password1'])
             hasOrg = False
             if user:
-                print(user)
                 myuserprofile = profile_form.save(commit=False)
                 myuserprofile.user = user
                 myuserprofile.save()
@@ -96,6 +94,7 @@ def register_user(request):
                 return render(request, 'index.html', {"hasOrg": hasOrg, 'active1': active, 'userprofile': userprofile})
             else:
                 messages.error(request, "Unable to register at this time.")
+                return render(request, 'registration.html', {"register_form": register_form, 'profile_form': profile_form, 'active5': active})
         else:
             return render(request, 'registration.html', {"register_form": register_form, 'profile_form': profile_form, 'active5': active})
     else:
@@ -124,6 +123,7 @@ def register_org(request):
                 return render(request, 'index.html', {'hasOrg': hasOrg, 'active1': active, 'userprofile': userprofile})
             else:
                 messages.error(request, "Unable to register at this time.")
+                return render(request, 'organisation.html', {"register_form": register_form, 'active3': active, 'userprofile': userprofile})
         else:
             register_form = OrgRegistrationForm()
             return render(request, 'organisation.html', {"register_form": register_form, 'active3': active, 'userprofile': userprofile})

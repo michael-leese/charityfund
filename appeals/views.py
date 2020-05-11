@@ -37,7 +37,7 @@ def create_appeal(request):
                     return render(request, 'all_appeals.html', {'hasOrg': hasOrg, 'org': org, 'active6': active, 'userprofile': userprofile})
             else:
                 form = AppealForm()
-            return render(request, 'create_appeal.html', {'form': form,'hasOrg': hasOrg, 'org': org, 'active2': active, 'userprofile': userprofile})
+                return render(request, 'create_appeal.html', {'form': form,'hasOrg': hasOrg, 'org': org, 'active2': active, 'userprofile': userprofile})
         else:
             hasOrg = False
             messages.success(request, "You must create an organisation before setting up an appeal")

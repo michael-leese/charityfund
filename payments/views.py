@@ -33,6 +33,7 @@ def make_payment(request):
                 )
             except stripe.error.CardError:
                 messages.error(request, "Your card was declined!")
+                return HttpResponseRedirect(previous)
             
             if customer.paid:
                 order.user = request.user
@@ -56,7 +57,6 @@ def make_payment(request):
                 return render(request, "payment.html", {"appeal": appeal, "order_form": order_form, "payment_form": payment_form, "publishable": settings.STRIPE_PUB_KEY, "previous": previous})
 
         else:
-            print(payment_form.errors)
             messages.error(request, "We were unable to take a payment with that card!")
             return render(request, "payment.html", {"appeal": appeal, "order_form": order_form, "payment_form": payment_form, "publishable": settings.STRIPE_PUB_KEY, "previous": previous})
 
