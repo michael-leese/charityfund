@@ -1,6 +1,7 @@
 from django import forms
 from payments.models import Order
 
+#Donation form
 class MakePaymentForm(forms.Form):
     """
     Creates a form to capture the payment details of the card being used
@@ -16,7 +17,7 @@ class MakePaymentForm(forms.Form):
     expiry_year = forms.ChoiceField(label='Year', choices=YEAR_CHOICES, required=False)
     stripe_id = forms.CharField(widget=forms.HiddenInput)
 
-
+#order form
 class OrderForm(forms.ModelForm):
     """
     Create an order form to store the donation informatioin and details of the donor

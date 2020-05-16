@@ -1,25 +1,25 @@
 $(document).ready(function(){
-    //ensure the bottom nav div for collapsed list is hidden when not showing
+    //Ensure the bottom nav div for collapsed list is hidden when not showing
     if (!$("#bottomNav > .collapse").not(".show")){
         $("#bottomNav").css("visibility", "hidden");
     }
-
+    //Hide messages after a period of time
     if ($("#messages").show()) {
         setTimeout(function(){
             $("#messages").hide();
         }, 2000);
     }
-    //ensure that multiple errors for same field are displayed one per line
+    //Ensure that multiple errors for same field are displayed one per line
     if ($(".error-msg").show()){
         $(".error-msg").append("<br>")
     }
     
-    //get searchParameters functionality from https://stackoverflow.com/questions/5448545/how-to-retrieve-get-parameters-from-javascript
+    //Get searchParameters functionality from https://stackoverflow.com/questions/5448545/how-to-retrieve-get-parameters-from-javascript
+    //Used for the filter functionality to set the filters dropdown active option so users know which filter is active
     function getSearchParameters() {
         var prmstr = window.location.search.substr(1);
         return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {};
-    }
-  
+    } 
     function transformToAssocArray( prmstr ) {
         var params = {};
         var prmarr = prmstr.split("&");
@@ -29,9 +29,8 @@ $(document).ready(function(){
         }
         return params;
     }
-  
     var params = getSearchParameters();
-    //if the url on all appeals page contains a filter param, set the dropdown-item to active
+    //If the url on all appeals page contains a filter param, set the dropdown-item to active
     if (params.filter != undefined){
         switch (params.filter) {
             case '-money_target':

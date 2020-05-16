@@ -10,6 +10,7 @@ class UserLoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
 
+#User Profile Form
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
@@ -46,7 +47,7 @@ class UserRegistrationForm(UserCreationForm):
             raise forms.ValidationError("Passwords do not match!")
         return password2
 
-#Org Registration Form
+#Organisation Registration Form
 class OrgRegistrationForm(forms.ModelForm):
     class Meta:
         model = Org

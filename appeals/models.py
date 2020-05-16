@@ -3,6 +3,7 @@ from django.utils import timezone
 from accounts.models import User, Org
 from taggit.managers import TaggableManager
 
+#Appeal model
 class Appeal(models.Model):
     '''
     Appeals model

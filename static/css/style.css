@@ -130,7 +130,7 @@ button.navbar-toggler.collapsed {
     font-size: 0.75em;
 }
 
-/*---------- Appeal Cards -----------------------------*/
+/*---------- Cards -------------------------------------*/
 
 .appeal-title {
     color: rgb(0, 139, 139);
@@ -372,11 +372,13 @@ p.fawes-lg {
     text-decoration: none;
 }
 
-/*--------------------------------------------Map*/
+/*---------------------Map-------------------------------*/
 
 div#map {
     min-height: 100%;
 }
+
+/*----------------------Media Queries---------------------*/
 
 @media screen and (max-width: 991px) {
     .nav-img {

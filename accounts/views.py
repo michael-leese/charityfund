@@ -67,11 +67,10 @@ def login(request):
         login_form = UserLoginForm()
         return render(request, "login.html", {"login_form": login_form, 'active4': active})
 
-
-#return the registration page
+#return the user registration page
 def register_user(request):
     """
-    Register a user
+    Register a user and log them in
     """
     active = "active"
     if request.user.is_authenticated:
@@ -103,7 +102,7 @@ def register_user(request):
         profile_form = UserProfileForm()
         return render(request, 'registration.html', {"register_form": register_form, 'profile_form': profile_form, 'active5': active})
 
-#return the registration page
+#return the org registration page
 @login_required
 def register_org(request):
     """
@@ -130,7 +129,8 @@ def register_org(request):
             return render(request, 'organisation.html', {"register_form": register_form, 'active3': active, 'userprofile': userprofile})
     else:
         return redirect(reverse('index'))
-        
+
+#Returns the about page
 def about(request):
     """
     Returns the about page to the user regardless of login status
@@ -149,6 +149,7 @@ def about(request):
         hasOrg = False
         return render(request, 'about.html', {'hasOrg': hasOrg, 'active7': active})
 
+#Returns the edit organisation page
 @login_required
 def edit_org(request):
     """
@@ -181,6 +182,7 @@ def edit_org(request):
     else:
         return render(request, 'index.html', {'active1': active})
 
+#Returns the my organisation and appeals page
 def view_my_orgs_appeals(request):
     """
     Get the org and appeals for the user
@@ -205,6 +207,7 @@ def view_my_orgs_appeals(request):
     else:
         return render(request, 'index.html', {'active1': active})
 
+#Returns the change password page
 @login_required
 def change_password(request):
     '''
@@ -233,6 +236,7 @@ def change_password(request):
     else:
         return render(request, 'index.html', {'active1': active})
 
+#Returns edit user profile page
 @login_required
 def edit_user_profile(request):
     '''

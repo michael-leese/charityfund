@@ -38,6 +38,7 @@ function showPosition(position){
         //Once mapSetup is populated call the initMap()
         initMap();
     } else {
+        //Use default map settings
         showDefaultMap();
     }
 }
@@ -46,13 +47,13 @@ function showDefaultMap(){
     mapSetup.position.lat = defaultLat; 
     mapSetup.position.lng = defaultLng; 
     mapSetup.zoom = defaultZoom;
-    //Once mapSetup is populated call the initMap()
+    //Once mapSetup is populated with the defaults and call the initMap()
     initMap();
 }
 
 //Initial function to retrieve appeals data from DB
 function getAppealsMapData(){
-
+    //If the map is for the users org appeals then get specific data otherwise get all appeals data
     if ($authUser == "Org-User-Map"){
         $.ajax({
             type: "get",
@@ -86,7 +87,6 @@ function getAppealsMapData(){
             geoLocation();
         }); 
     }
-     
 }
 
 //Sets up the markers for the map using the map object created and the appealsData from DB
@@ -121,5 +121,4 @@ function initMap() {
 
     var markerCluster = new MarkerClusterer(map, markers, { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
 
-    
 }

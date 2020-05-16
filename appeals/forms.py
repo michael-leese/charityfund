@@ -4,7 +4,7 @@ from django.utils import timezone
 from appeals.models import Appeal
 from .widgets import BootstrapDateTimePickerInput
 
-#Appeal creation Form
+#Appeal Form
 class AppealForm(forms.ModelForm):
     '''
     Appeals form with customised datepicker

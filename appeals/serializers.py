@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from appeals.models import Appeal
 """
-used to serialize our data to pass to API call
+used to serialize our data to pass to Map API call
 """
 class AppealsSerializer(serializers.Serializer):
     id = serializers.ReadOnlyField()

@@ -3,7 +3,7 @@ from django.utils import timezone
 from appeals.models import Appeal
 from accounts.models import User, Org
 
-
+# Order model
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     org = models.ForeignKey(Org, on_delete=models.DO_NOTHING)

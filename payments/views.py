@@ -8,18 +8,19 @@ from appeals.models import Appeal
 from accounts.models import User, Org
 import stripe
 
-# Create your views here.
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
-
+#Return the donations page
 @login_required()
 def make_payment(request):
+    '''
+    Allows users to make a donation for the chosen appeal
+    '''
     appeal = Appeal.objects.get(id=request.GET.get('id'))
     previous = request.GET.get('next', '/')
     if request.method == "POST":
         order_form = OrderForm(request.POST)
         payment_form = MakePaymentForm(request.POST)
-
         if order_form.is_valid() and payment_form.is_valid():
             total = 0
             order = order_form.save(commit=False)
@@ -33,8 +34,7 @@ def make_payment(request):
                 )
             except stripe.error.CardError:
                 messages.error(request, "Your card was declined!")
-                return HttpResponseRedirect(previous)
-            
+                return HttpResponseRedirect(previous)    
             if customer.paid:
                 order.user = request.user
                 order.appeal = Appeal.objects.get(id=request.GET.get('id'))
@@ -55,11 +55,9 @@ def make_payment(request):
                 order.save()
                 messages.error(request, "Unable to take payment")
                 return render(request, "payment.html", {"appeal": appeal, "order_form": order_form, "payment_form": payment_form, "publishable": settings.STRIPE_PUB_KEY, "previous": previous})
-
         else:
             messages.error(request, "We were unable to take a payment with that card!")
             return render(request, "payment.html", {"appeal": appeal, "order_form": order_form, "payment_form": payment_form, "publishable": settings.STRIPE_PUB_KEY, "previous": previous})
-
     else:
         payment_form = MakePaymentForm()
         order_form = OrderForm()

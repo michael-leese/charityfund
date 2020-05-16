@@ -2,11 +2,12 @@ from django.db import models
 from django.contrib.auth.models import User as AuthUser
 from django.utils import timezone
 
-
+#User model
 class User(AuthUser):
     class Meta:
         proxy = True
 
+#Userprofile model
 class UserProfile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     nickname = models.CharField(max_length=200)
@@ -15,6 +16,7 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.nickname + ":" + self.profile_picture.name
 
+#Organisation model
 class Org(models.Model):
     REG_CHARITY = 'Registered Charity'
     COM_PRO = 'Community Project'

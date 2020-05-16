@@ -3,6 +3,7 @@ from accounts.models import Org
 from appeals.models import Appeal
 from taggit.models import Tag
 
+#Returns the search items to the appeals page
 def do_search(request):
     '''
     Search Function

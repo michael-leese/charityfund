@@ -11,6 +11,7 @@ from appeals.forms import AppealForm
 from django.utils import timezone
 from appeals.serializers import AppealsSerializer
 
+#Returns the create appeal page
 @login_required
 def create_appeal(request):
     """
@@ -22,7 +23,6 @@ def create_appeal(request):
         org = Org.objects.filter(user=request.user)
         userprofile = UserProfile.objects.get(user=request.user)
         if org:
-            org = Org.objects.get(user=request.user)
             hasOrg = True
             if request.method == "POST":
                 form = AppealForm(request.POST)
@@ -45,13 +45,13 @@ def create_appeal(request):
     else:
         return redirect(reverse('index'))
 
+#returns the edit appeal page
 @login_required
 def edit_appeal(request):
     """
     Edit an appeal if you are the owner of the appeal
     """
     if request.user.is_authenticated:
-        owner = False
         previous = request.GET.get('next', '/')
         instance = get_object_or_404(Appeal, id=request.GET.get('id'))
         org = Org.objects.filter(user=request.user)
@@ -81,9 +81,10 @@ def edit_appeal(request):
         active = "active"
         return render(request, 'index.html', {'active1': active})
 
+#returns the all appeals page
 def show_all_appeals(request):
     """
-    Gets the appeals
+    Gets all the appeals available
     """
     filterType = request.GET.get('filter')
     if filterType is None:
@@ -108,6 +109,7 @@ def show_all_appeals(request):
         hasOrg = False
         return render(request, 'all_appeals.html', {'all_appeals': all_appeals, 'orders': orders, 'hasOrg': hasOrg, 'active6': active})
 
+#returns the appeal page
 @login_required
 def single_appeal(request):
     """
@@ -137,6 +139,7 @@ def single_appeal(request):
     else:
         return redirect(reverse('index'))
 
+#Return the percentage raised of target figure
 def progress_perc(raised, target):
     """
     Calculates the percentage of the total
@@ -146,6 +149,7 @@ def progress_perc(raised, target):
     percentage = int((raised/target)*100)
     return percentage
 
+#Returns a json object for the ajax call
 class JSONResponse(HttpResponse):
     """
     returns the json object to the ajax call
@@ -155,6 +159,7 @@ class JSONResponse(HttpResponse):
         kwargs['content_type'] = 'application/json'
         super(JSONResponse, self).__init__(content, **kwargs)
 
+#Returns all appeal map data
 def all_appeal_map_data(request):
     """
     returns all the appeals data for maps api
@@ -164,9 +169,10 @@ def all_appeal_map_data(request):
         serializer = AppealsSerializer(all_appeals, many=True)
         return JSONResponse(serializer.data)
 
+#Returns the map data for the users organisation
 def my_appeal_map_data(request):
     """
-    returns all your own appeals data for maps api
+    returns all the users appeals data for maps api
     """
     if request.method == 'GET':
         all_appeals = Appeal.objects.filter(author=request.user)
