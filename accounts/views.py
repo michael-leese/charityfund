@@ -96,6 +96,7 @@ def register_user(request):
                 messages.error(request, "Unable to register at this time.")
                 return render(request, 'registration.html', {"register_form": register_form, 'profile_form': profile_form, 'active5': active})
         else:
+            messages.error(request, "The form is not valid.")
             return render(request, 'registration.html', {"register_form": register_form, 'profile_form': profile_form, 'active5': active})
     else:
         register_form = UserRegistrationForm()
@@ -165,9 +166,12 @@ def edit_org(request):
             form = OrgRegistrationForm(request.POST, request.FILES)
             if form.is_valid():
                 org = form.save(commit=False)
-                if org.image != instance.image:
-                    instance.image.delete(save=True)
-                org.image = request.FILES["image"]
+                if org.image:
+                    if org.image != instance.image:
+                        instance.image.delete(save=True)
+                        org.image = request.FILES["image"]
+                else:
+                    org.image = instance.image
                 org.user = request.user
                 org.id = instance.id
                 org.save(force_update=True)
@@ -251,9 +255,12 @@ def edit_user_profile(request):
             profile_form = UserProfileForm(request.POST, request.FILES)
             if profile_form.is_valid():
                 user_profile = profile_form.save(commit=False)
-                if user_profile.profile_picture != instance.profile_picture:
-                    instance.profile_picture.delete(save=True)
-                user_profile.profile_picture = request.FILES["profile_picture"]
+                if user_profile.profile_picture:
+                    if user_profile.profile_picture != instance.profile_picture:
+                        instance.profile_picture.delete(save=True)
+                        user_profile.profile_picture = request.FILES["profile_picture"]
+                else:
+                    user_profile.profile_picture = instance.profile_picture
                 user_profile.user = request.user
                 user_profile.id = instance.id
                 user_profile.save(force_update=True)

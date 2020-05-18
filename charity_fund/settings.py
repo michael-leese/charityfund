@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'payments',
     'storages',
     'email_send',
+    'tempus_dominus',
 ]
 
 MIDDLEWARE = [

@@ -48,4 +48,7 @@ $(document).ready(function(){
         }
     }
 
+    $('[for=image-clear_id]').hide();
+    $('#image-clear_id').hide();
+
 });

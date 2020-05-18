@@ -34,7 +34,7 @@ def create_appeal(request):
                     appeal.save()
                     form.save_m2m()
                     messages.success(request, "Congratulations you have added an appeal")
-                    return render(request, 'all_appeals.html', {'hasOrg': hasOrg, 'org': org, 'active6': active, 'userprofile': userprofile})
+                    return redirect('showallappeals')
             else:
                 form = AppealForm()
                 return render(request, 'create_appeal.html', {'form': form,'hasOrg': hasOrg, 'org': org, 'active2': active, 'userprofile': userprofile})
@@ -57,20 +57,23 @@ def edit_appeal(request):
         org = Org.objects.filter(user=request.user)
         userprofile = UserProfile.objects.get(user=request.user)
         if request.method == "POST":
-            form = AppealForm(request.Post, request.FILES)
+            form = AppealForm(request.POST, request.FILES)
             if form.is_valid():
                 appeal = form.save(commit=False)
                 appeal.author = request.user
                 appeal.org = Org.objects.get(user=request.user)
                 appeal.created_date = timezone.now()
-                if appeal.image != instance.image:
-                    instance.image.delete(save=True)
-                appeal.image = request.FILES["image"]
+                if appeal.image:
+                    if appeal.image != instance.image:
+                        instance.image.delete(save=True)
+                        appeal.image = request.FILES["image"]
+                else:
+                    appeal.image = instance.image
                 appeal.id = instance.id
                 appeal.save(force_update=True)
                 form.save_m2m()
                 messages.success(request, "Congratulations you have edited appeal called " + instance.title)
-                return HttpResponseRedirect(previous)
+                return HttpResponseRedirect(previous + "&next=/accounts/viewmyorgs_appeals/")
             else:
                 messages.error(request, "Unable to edit at this time.")
                 return render(request, 'edit_appeal.html', {'form': form, 'previous': previous, 'instance': instance, 'userprofile': userprofile})

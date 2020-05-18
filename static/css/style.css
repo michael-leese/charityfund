@@ -110,6 +110,7 @@ button.navbar-toggler.collapsed {
     margin-right: auto;
     margin-left: auto;
     padding-bottom: 70px;
+    background-color: rgba(102, 102, 102, 0.21);
 }
 
 .main-area {
