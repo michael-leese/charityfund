@@ -13,6 +13,7 @@ cffi==1.12.3
 chardet==3.0.4
 Click==7.0
 colorama==0.4.1
+coverage==5.1
 decorator==4.4.0
 defusedxml==0.6.0
 distlib==0.3.0
