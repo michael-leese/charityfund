@@ -65,6 +65,9 @@
                         <li class="nav-item"><a class="nav-link {{ active5 }}" href="{% url 'register' %}">Register</a></li>
                         {% endif %}
                         <li class="nav-item"><a class="nav-link {{ active7 }}" href="{% url 'about' %}">About</a></li>
+                        {% if allowAdmin %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'admintestview' %}">Test Report</a></li>
+                        {% endif %}
                         <li id="listSearch" class="nav-item">
                             <form class="form-inline my-lg-0 ml-auto"
                                 action="{% url 'search' %}?next={{ request.path|urlencode }}" method="GET">

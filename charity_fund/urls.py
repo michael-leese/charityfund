@@ -3,7 +3,7 @@ Gets all the urls form the accounts app and all other apps
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from accounts.views import index, logout, login, register_user, register_org, about, edit_org, view_my_orgs_appeals, change_password, edit_user_profile
+from accounts.views import index, logout, login, register_user, register_org, about, edit_org, view_my_orgs_appeals, change_password, edit_user_profile, admin_test_view
 from django.views import static
 from .settings import MEDIA_ROOT
 
@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^accounts/change_password/$', change_password, name="changepassword"),
     url(r'^accounts/edit_user_profile/$', edit_user_profile, name="edituserprofile"),
     url(r'^email_send/', include('email_send.urls')),
+    url(r'^accounts/admin_test_view/$', admin_test_view, name="admintestview"),
 ]

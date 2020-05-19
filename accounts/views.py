@@ -18,13 +18,17 @@ def index(request):
     """
     active = "active"
     if request.user.is_authenticated:
+        user = User.objects.get(username=request.user)
+        admin = User.objects.get(username='admin')
+        if user == admin:
+            allowAdmin = True
         org = Org.objects.filter(user=request.user)
         if org:
             hasOrg = True
         else:
             hasOrg = False
         userprofile = UserProfile.objects.get(user=request.user)
-        return render(request, "index.html", {'hasOrg': hasOrg, 'active1': active, 'userprofile': userprofile})
+        return render(request, "index.html", {'hasOrg': hasOrg, 'active1': active, 'userprofile': userprofile, 'allowAdmin': allowAdmin})
     else:
         return render(request, "index.html", {'active1': active})
 
@@ -191,12 +195,12 @@ def view_my_orgs_appeals(request):
     """
     Get the org and appeals for the user
     """
-    filterType = request.GET.get('filter')
-    if filterType is None:
-        filterType = '-created_date'
-    orders = Order.objects.filter(user=request.user).order_by('-created_date')[:5] 
-    active = "active"
     if request.user.is_authenticated:
+        filterType = request.GET.get('filter')
+        if filterType is None:
+            filterType = '-created_date'
+        orders = Order.objects.filter(user=request.user).order_by('-created_date')[:5] 
+        active = "active"
         logged_in = True
         userprofile = UserProfile.objects.get(user=request.user)
         all_appeals = Appeal.objects.filter(author=request.user).order_by(filterType)
@@ -274,3 +278,21 @@ def edit_user_profile(request):
             return render(request, 'edituserprofile.html', {'profile_form': profile_form, 'userprofile': instance, 'active10': active, 'hasOrg': hasOrg})
     else:
         return render(request, 'index.html', {'active1': active})
+
+def admin_test_view(request):
+    '''
+    If admin user allow the viewing of htmlcov
+    '''
+    if request.user.is_authenticated:
+        user = User.objects.get(username=request.user)
+        admin = User.objects.get(username='admin')
+        if user == admin:
+            print("I am admin user")
+            return render(request, 'index_test.html')
+        else:
+            print(user)
+            print(admin)
+            print("I am not admin user")
+            return redirect(reverse('index'))
+    else:
+        return redirect(reverse('index'))
