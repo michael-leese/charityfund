@@ -13,13 +13,13 @@ cffi==1.12.3
 chardet==3.0.4
 Click==7.0
 colorama==0.4.1
-coverage==5.1
 decorator==4.4.0
 defusedxml==0.6.0
 distlib==0.3.0
 dj-database-url==0.5.0
 Django==3.0.5
 django-bootstrap-form==3.4
+django-form-utils==1.0.3
 django-forms-bootstrap==3.1.0
 django-mathfilters==1.0.0
 django-storages==1.9.1
@@ -67,8 +67,9 @@ Pygments==2.4.2
 pylint==2.4.2
 pymongo==3.9.0
 pyrsistent==0.15.4
-python-dateutil==2.8.1
+python-dateutil==1.5
 pytz==2020.1
+pywin32==225
 pywinpty==0.5.5
 pyzmq==18.1.0
 qtconsole==4.5.5
