@@ -147,8 +147,10 @@ def progress_perc(raised, target):
     """
     Calculates the percentage of the total
     """
-    if raised is None:
-        raised = 0    
+    if raised is None: 
+        raised = 0
+    if target is None or target == 0:
+        return 0
     percentage = int((raised/target)*100)
     return percentage
 

@@ -28,7 +28,7 @@
     <img src="{{ MEDIA_URL }}{{appeal.org.image}}" class="img-circle">
     {% endif %}
     {% if owner %}
-    <p class="center-txt">You cannot send an email to yourself as the owner of <strong>{{appeal.org}}</strong>.</p>
+    <p class="center-txt"><strong>You cannot send an email to yourself as the owner of {{appeal.org}}</strong>.</p>
     {% else %}
     <p class="center-txt">Whether it be for further information, how to get involved and volunteer or simply send well wishes, please 
         send an email about the {{appeal.title}} to the contact of <strong>{{appeal.org}}</strong>, who would love to hear from you.</p>
@@ -57,7 +57,7 @@
                                 <label for="content">Enter message:</label><br>
                                 <textarea id="contentEmail" class="form-control" placeholder="Your message here..." name="contentEmail" rows="15" cols="50" required></textarea>
                                 <br>
-                                <p>An email will be sent to the registered email of {{appeal.org}} owner, with the message you qrite below and your contact email address.</p>
+                                <p>An email will be sent to the registered email of {{appeal.org}} owner, with the message and your contact email address.</p>
                             </div>
                         </div>
                         <div class="card-footer">

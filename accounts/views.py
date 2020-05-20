@@ -18,17 +18,13 @@ def index(request):
     """
     active = "active"
     if request.user.is_authenticated:
-        user = User.objects.get(username=request.user)
-        admin = User.objects.get(username='admin')
-        if user == admin:
-            allowAdmin = True
         org = Org.objects.filter(user=request.user)
         if org:
             hasOrg = True
         else:
             hasOrg = False
         userprofile = UserProfile.objects.get(user=request.user)
-        return render(request, "index.html", {'hasOrg': hasOrg, 'active1': active, 'userprofile': userprofile, 'allowAdmin': allowAdmin})
+        return render(request, "index.html", {'hasOrg': hasOrg, 'active1': active, 'userprofile': userprofile})
     else:
         return render(request, "index.html", {'active1': active})
 
@@ -141,15 +137,20 @@ def about(request):
     Returns the about page to the user regardless of login status
     """
     active = "active"
+    allowAdmin = False
     if request.user.is_authenticated:
         userprofile = UserProfile.objects.get(user=request.user)
         org = Org.objects.filter(user=request.user)
+        user = User.objects.get(username=request.user)
+        admin = User.objects.get(username='admin')
+        if user == admin:
+            allowAdmin = True
         if org:
             hasOrg = True
-            return render(request, 'about.html', {'hasOrg': hasOrg, 'active7': active, 'userprofile': userprofile}) 
+            return render(request, 'about.html', {'hasOrg': hasOrg, 'active7': active, 'userprofile': userprofile, 'allowAdmin': allowAdmin}) 
         else:
             hasOrg = False
-            return render(request, 'about.html', {'hasOrg': hasOrg, 'active7': active, 'userprofile': userprofile})
+            return render(request, 'about.html', {'hasOrg': hasOrg, 'active7': active, 'userprofile': userprofile, 'allowAdmin': allowAdmin})
     else:
         hasOrg = False
         return render(request, 'about.html', {'hasOrg': hasOrg, 'active7': active})
@@ -222,7 +223,7 @@ def change_password(request):
     Change the users password.
     '''
     active = "active"
-    org = False
+    hasOrg = False
     if request.user.is_authenticated:
         userprofile = UserProfile.objects.get(user=request.user)
         org = Org.objects.filter(user=request.user)
@@ -234,7 +235,8 @@ def change_password(request):
                 user = password_form.save()
                 update_session_auth_hash(request, user)
                 messages.success(request, "You have successfully changed your password.")
-                return render(request, 'edituserprofile.html', {"hasOrg": hasOrg, 'active1': active, 'userprofile': userprofile})
+                profile_form = UserProfileForm(instance=userprofile)
+                return render(request, 'edituserprofile.html', {"hasOrg": hasOrg, 'active1': active, 'userprofile': userprofile, 'profile_form': profile_form})
             else:
                 messages.error(request, "Unable to change password at this time.")
                 return render(request, 'changepassword.html', {"password_form": password_form, 'userprofile': userprofile})

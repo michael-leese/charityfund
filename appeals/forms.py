@@ -16,7 +16,6 @@ class AppealForm(forms.ModelForm):
                                                                                         'append': 'fa fa-calendar',
                                                                                         'icon_toggle': True,
                                                                                     }))
-
     class Meta:
         model = Appeal
         fields = ['title', 'bio', 'tags', 'target_date', 'money_target', 'latitude', 'longitude', 'image']

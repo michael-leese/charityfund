@@ -14,11 +14,11 @@ class Appeal(models.Model):
     bio = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
     target_date = models.DateTimeField(default=timezone.now)
-    money_target = models.IntegerField(null=True, blank=True)
+    money_target = models.IntegerField(default=0)
     money_raised = models.IntegerField(default=0)
     tags = TaggableManager()
-    latitude = models.DecimalField(max_digits=9, decimal_places=6, default=0.000000)
-    longitude = models.DecimalField(max_digits=9, decimal_places=6, default=0.000000)
+    latitude = models.DecimalField(max_digits=9, decimal_places=6)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6)
     image = models.ImageField(upload_to="img", blank=True, null=True)
 
     def __str__(self):
