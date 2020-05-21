@@ -66,11 +66,11 @@
                   {% endif %}
                 </div>
               </div>
-              <div class="col-12 scroll">
-                <h6 class="appeal-title">Donor Messages</h6>
+              <h6 class="appeal-title">Donor Messages</h6>
+              <div class="col-12 scroll-100">
                 {% for order in orders %}
                 {% if order.successful %}
-                <div class="col-12">
+                <div class="col-12 donor-message">
                   <p><strong>{{order.org.organisation}}</strong> received <strong>£{{order.amount}}</strong>, on
                     {{order.created_date|date:'d/M/Y'}} from
                     {% if order.anonymous %}
@@ -80,7 +80,7 @@
                     {% endif %}
                   <p>{{order.comment}}</p>
                 </div>
-                <hr>
+                <br>
                 {% endif %}
                 {% endfor %}
               </div>

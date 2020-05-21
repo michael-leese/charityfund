@@ -10,6 +10,7 @@ from accounts.models import Org, UserProfile
 from appeals.models import Appeal
 from payments.models import Order
 from accounts.forms import UserLoginForm, UserRegistrationForm, UserProfileForm, OrgRegistrationForm
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 #Return the index page
 def index(request):
@@ -200,11 +201,19 @@ def view_my_orgs_appeals(request):
         filterType = request.GET.get('filter')
         if filterType is None:
             filterType = '-created_date'
-        orders = Order.objects.filter(user=request.user).order_by('-created_date')[:5] 
+        orders = Order.objects.filter(user=request.user).order_by('-created_date')
         active = "active"
         logged_in = True
         userprofile = UserProfile.objects.get(user=request.user)
-        all_appeals = Appeal.objects.filter(author=request.user).order_by(filterType)
+        appeals = Appeal.objects.filter(author=request.user).order_by(filterType)
+        page = request.GET.get('page', 1)
+        paginator = Paginator(appeals, 6)
+        try:
+            all_appeals = paginator.page(page)
+        except PageNotAnInteger:
+            all_appeals = paginator.page(1)
+        except EmptyPage:
+            all_appeals = paginator.page(paginator.num_pages)
         org = Org.objects.get(user=request.user)
         if org:
             hasOrg = True

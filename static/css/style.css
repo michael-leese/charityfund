@@ -1,5 +1,5 @@
 body {
-    background-color: rgba(102, 102, 102, 0.21);
+    background-color: rgba(227, 212, 109, 0.21);
 }
 
 /*---------- Nav bar and Menu items -------------------*/
@@ -41,6 +41,7 @@ body {
 
 .nav-link {
     padding: 0.25em, 1em;
+    font-family: 'Chelsea Market', cursive;
 }
 
 button.navbar-toggler {
@@ -140,6 +141,7 @@ button.navbar-toggler.collapsed {
 .appeal-title {
     color: rgb(0, 139, 139);
     text-align: center;
+    font-family: 'Chelsea Market', cursive;
 }
 
 .appeals-container-fluid {
@@ -185,10 +187,18 @@ button.navbar-toggler.collapsed {
     border-radius: .25rem; 
 }
 
-div.scroll {
+div.scroll-100{
     margin: 4px, 4px;
     padding: 4px;
     height: 110px;
+    overflow-x: hidden;
+    overflow-x: auto;
+}
+
+div.scroll {
+    margin: 4px, 4px;
+    padding: 4px;
+    height: 600px;
     overflow-x: hidden;
     overflow-x: auto;
 }
@@ -212,6 +222,37 @@ p.scroll {
 
 .error-msg {
     color: red;
+}
+
+.donor-message { 
+    background-color: rgba(255, 140, 0, 0.56);
+    padding: 5px;
+    border-radius: 5px;
+}
+/*-----------Paginator---------------------------------*/
+
+.paginate-center {
+    display: flex;
+    justify-content: center;
+}
+
+.page-link:hover {
+    color: rgb(233, 30, 99) !important;
+}
+
+.page-link {
+    font-weight: bolder;
+    font-family: 'Chelsea Market', cursive;
+    color: rgba(40, 167, 69) !important;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+}
+
+.page-item.active .page-link {
+    color: rgb(233, 30, 99) !important;
+    text-decoration: none;
+    background-color: rgba(40, 167, 69, 0.56) !important;
+    border-color: #dee2e6;
 }
 
 /*-----------Buttons------------------------------------*/
@@ -298,6 +339,11 @@ a.btn.btn-danger:hover {
 
 /*-------------images---------------------------------*/
 
+.hero-image{
+    margin: 5px auto 5px auto;
+    width: 50%;
+}
+
 .img-circle {
     border-radius: 50%;
     height:70px;
@@ -336,6 +382,7 @@ footer {
     position: fixed;
     bottom: 0px;
     padding: 0 5px 0 5px;
+    font-family: 'Chelsea Market', cursive;
 }
 
 footer .row {

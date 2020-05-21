@@ -10,6 +10,7 @@ from taggit.models import Tag
 from appeals.forms import AppealForm
 from django.utils import timezone
 from appeals.serializers import AppealsSerializer
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 #Returns the create appeal page
 @login_required
@@ -92,12 +93,20 @@ def show_all_appeals(request):
     filterType = request.GET.get('filter')
     if filterType is None:
         filterType = '-created_date'
-    orders = Order.objects.all().order_by('-created_date')[:5] 
+    orders = Order.objects.all().order_by('-created_date') 
     active = "active"
     if request.user.is_authenticated:
         logged_in = True
         userprofile = UserProfile.objects.get(user=request.user)
-        all_appeals = Appeal.objects.filter(created_date__lte=timezone.now()).order_by(filterType)
+        appeals = Appeal.objects.all().order_by(filterType)
+        page = request.GET.get('page', 1)
+        paginator = Paginator(appeals, 6)
+        try:
+            all_appeals = paginator.page(page)
+        except PageNotAnInteger:
+            all_appeals = paginator.page(1)
+        except EmptyPage:
+            all_appeals = paginator.page(paginator.num_pages)
         org = Org.objects.filter(user=request.user)
         if org:
             hasOrg = True
@@ -108,7 +117,7 @@ def show_all_appeals(request):
             return render(request, 'all_appeals.html', {'all_appeals': all_appeals, 'orders': orders, 'hasOrg': hasOrg, 
                                                         'active6': active, 'logged_in': logged_in, 'userprofile': userprofile})
     else:
-        all_appeals = Appeal.objects.filter(created_date__lte=timezone.now()).order_by('-created_date')[:5]
+        all_appeals = Appeal.objects.filter(created_date__lte=timezone.now()).order_by('-created_date')[:6]
         hasOrg = False
         return render(request, 'all_appeals.html', {'all_appeals': all_appeals, 'orders': orders, 'hasOrg': hasOrg, 'active6': active})
 

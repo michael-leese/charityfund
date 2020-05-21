@@ -4,12 +4,12 @@
 
 {% block profile_image %}
 <div class="mr-sm-2">
-{% if userprofile %}
-    {% if userprofile.profile_picture %}
-    <img src="{{ MEDIA_URL }}{{userprofile.profile_picture}}" class="img-circle">
-    {% endif %}
-    <span>Hi, {{userprofile.nickname}}</span>
-{% endif %}
+  {% if userprofile %}
+  {% if userprofile.profile_picture %}
+  <img src="{{ MEDIA_URL }}{{userprofile.profile_picture}}" class="img-circle">
+  {% endif %}
+  <span>Hi, {{userprofile.nickname}}</span>
+  {% endif %}
 </div>
 {% endblock %}
 
@@ -35,8 +35,8 @@
     </p>
     {% endif %}
     {% else %}
-    <p>To donate you must be a registered user.</p>
-    <p>If you havent registered already, please <a href="{% url 'register' %}">register here</a> to donate.</p>
+    <p>To donate you must be a registered user. If you havent registered already, please <a
+        href="{% url 'register' %}">register here</a> to donate.</p>
     {% endif %}
     <p>Thank you for your generosity.</p>
   </div>
@@ -52,6 +52,39 @@
         <div id="map" title="Click on an appeal to view its details"></div>
         {% endif %}
       </div>
+      <br>
+      <div class="container-fluid">
+        <h5 class="appeal-title">Recent Donor Messages</h5>
+        <div class="col-12 scroll">
+          <!-- <h5 class="appeal-title">Recent Donor Messages</h5> -->
+          {% for order in orders %}
+          {% if order.successful %}
+          <div class="col-12 donor-message">
+            <p>{% if order.user.userprofile.profile_picture and not order.anonymous %}
+              <img class="sml-img-circle" src="{{ MEDIA_URL }}{{order.user.userprofile.profile_picture}}"
+                class="img-circle">
+              {% elif order.appeal.image %}
+              <img class="sml-img-circle" src="{{ MEDIA_URL }}{{order.appeal.image}}" class="img-circle">
+              {% elif order.org.image %}
+              <img class="sml-img-circle" src="{{ MEDIA_URL }}{{order.org.image}}" class="img-circle">
+              {% elif order.org.image %}
+              <img class="sml-img-circle" src="{% static 'img/donate640.png' %}" class="img-circle">
+              {% endif %}
+              <strong>{{order.org.organisation}}</strong> received <strong>£{{order.amount}}</strong>, on
+              {{order.created_date|date:'d/M/Y'}}
+              from
+              {% if order.anonymous %}
+              <strong>Anonymous</strong></p>
+            {% else %}
+            <strong>{{order.full_name}}</strong></p>
+            {% endif %}
+            <p>{{order.comment}}</p>
+          </div>
+          <br>
+          {% endif %}
+          {% endfor %}
+        </div>
+      </div>
     </div>
     <div class="col-lg-8 col-md-8 col-sm-12">
       <div class="title-filter">
@@ -62,9 +95,9 @@
             {% if not user.is_authenticated %}
             <a class="dropdown-item" href="{% url 'register' %}">Register first</a>
             {% else %}
-            <a class="dropdown-item" name="low-high" href="{% url 'showallappeals' %}?filter=-money_target">Price
+            <a class="dropdown-item" name="low-high" href="{% url 'showallappeals' %}?filter=money_target">Price
               low-high</a>
-            <a class="dropdown-item" name="high-low" href="{% url 'showallappeals' %}?filter=money_target">Price
+            <a class="dropdown-item" name="high-low" href="{% url 'showallappeals' %}?filter=-money_target">Price
               high-low</a>
             <a class="dropdown-item" name="newest" href="{% url 'showallappeals' %}?filter=-created_date">Date newest
               first</a>
@@ -103,6 +136,31 @@
         </div>
         {% endfor %}
       </div>
+      {% if all_appeals.has_other_pages %}
+      <div class="col-12 paginate-center">
+        <ul class="pagination">
+          {% if all_appeals.has_previous %}
+          <li class="page-item"><a class="page-link" href="?page={{ all_appeals.previous_page_number }}">&laquo;</a>
+          </li>
+          {% else %}
+          <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+          {% endif %}
+          {% for i in all_appeals.paginator.page_range %}
+          {% if all_appeals.number == i %}
+          <li class="page-item active"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span>
+          </li>
+          {% else %}
+          <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+          {% endif %}
+          {% endfor %}
+          {% if all_appeals.has_next %}
+          <li class="page-item"><a class="page-link" href="?page={{ all_appeals.next_page_number }}">&raquo;</a></li>
+          {% else %}
+          <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+          {% endif %}
+        </ul>
+      </div>
+      {% endif %}
       {% if search %}
       <p class="center-txt">Your search returned <strong>{{ all_appeals|length }}</strong> results.</p>
       {% endif %}
@@ -112,46 +170,14 @@
       {% endif %}
 
       {% if not user.is_authenticated %}
-        {% if not search %}
-        <p class="center-txt">These are our most recent appeals, <a href="{% url 'register' %}">register here</a>, to view
-          all our appeals.</p>
-        {% endif %}
+      {% if not search %}
+      <p class="center-txt">These are our most recent appeals, <a href="{% url 'register' %}">register here</a>, to view
+        all our appeals.</p>
       {% endif %}
-
+      {% endif %}
     </div>
   </div>
 </div>
-<hr>
-<div class="container-fluid">
-  <div class="col-12 scroll">
-    <h5 class="appeal-title">Recent Donor Messages</h5>
-    {% for order in orders %}
-    {% if order.successful %}
-    <div class="col-12">
-      <p>{% if order.user.userprofile.profile_picture and not order.anonymous %}
-        <img class="sml-img-circle" src="{{ MEDIA_URL }}{{order.user.userprofile.profile_picture}}" class="img-circle">
-        {% elif order.appeal.image %}
-        <img class="sml-img-circle" src="{{ MEDIA_URL }}{{order.appeal.image}}" class="img-circle">
-        {% elif order.org.image %}
-        <img class="sml-img-circle" src="{{ MEDIA_URL }}{{order.org.image}}" class="img-circle">
-        {% elif order.org.image %}
-        <img class="sml-img-circle" src="{% static 'img/donate640.png' %}" class="img-circle">
-        {% endif %}
-        <strong>{{order.org.organisation}}</strong> received <strong>£{{order.amount}}</strong>, on {{order.created_date|date:'d/M/Y'}}
-        from
-        {% if order.anonymous %}
-        <strong>Anonymous</strong></p>
-        {% else %}
-        <strong>{{order.full_name}}</strong></p>
-        {% endif %}
-      <p>{{order.comment}}</p>
-    </div>
-    <hr>
-    {% endif %}
-    {% endfor %}
-  </div>
-</div>
-
 
 {% endblock %}
 {% block script %}

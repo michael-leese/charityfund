@@ -15,6 +15,8 @@
         <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/css/tempusdominus-bootstrap-4.min.css"
             integrity="sha256-XPTBwC3SBoWHSmKasAk01c08M6sIA5gF5+sRxqak2Qs=" crossorigin="anonymous" />
+        <!-- fonts and custom css -->
+        <link href="https://fonts.googleapis.com/css2?family=Chelsea+Market&display=swap" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
         <!-- FontAwesome -->
         <script src="https://kit.fontawesome.com/886dec4cab.js" crossorigin="anonymous"></script>
@@ -79,7 +81,7 @@
             </div>
         </nav>
         <div class="main-container">
-            <div class="container center-txt">
+            <div class="container">
                 {% if messages %}
                 <div class="messages">
                     {% for message in messages %}

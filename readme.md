@@ -113,6 +113,7 @@ I have utilised some of the code that was on the Full Stack Frameworks with Djan
     * https://stackoverflow.com/questions/16476357/django-ajax-get-request
     * https://remysharp.com/2016/12/23/beginners-guide-to-stripe-integration
     * https://stackoverflow.com/questions/5448545/how-to-retrieve-get-parameters-from-javascript
+    * https://simpleisbetterthancomplex.com/tutorial/2016/08/03/how-to-paginate-with-django.html
 
 #### Media ####
 
@@ -123,6 +124,7 @@ Further images were incorporated to help style the site.
     * https://pixabay.com/illustrations/donate-charity-giving-give-aid-654328/
     * https://simple.wikipedia.org/wiki/Mask
     * https://pixabay.com/photos/the-old-lady-grandma-garden-3503684/
+    * https://www.needpix.com/
     * https://fonts.google.com/
 
 #### Acknowledgements ####
