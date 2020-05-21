@@ -8,26 +8,42 @@ var defaultLng = -4.188547;
 var defaultZoom = 5;
 var $authUser = $('#map').attr('name');
 
+//check if Edge or IE
+function mSBrowserDetection() {
+    //Check if browser is IE
+    if (navigator.userAgent.search("MSIE")) {
+        return True
+    } 
+    return False
+}
+
 //checks the geolocation permission status
 function geoLocation(){
     waiting = true;
-    navigator.permissions.query({name:'geolocation'}).then(function(result) {
-    if (result.state === 'granted') {
-        //if granted then only need the success callback
-        navigator.geolocation.getCurrentPosition(showPosition);
-    } else if (result.state === 'prompt') {
-        if (navigator.geolocation) {
-            //if prompt then we need success and deny callbacks
-            navigator.geolocation.getCurrentPosition(showPosition, showDefaultMap);
-          } else {
-            alert("Geolocation is not supported by this browser.");
-          }
-    } else  {
-        //if denied or undefined then show default map view only
+    isEdgeIE = mSBrowserDetection()
+    
+    if (!isEdgeIE){
+        navigator.permissions.query({name:'geolocation'}).then(function(result) {
+            if (result.state === 'granted') {
+                //if granted then only need the success callback
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else if (result.state === 'prompt') {
+                if (navigator.geolocation) {
+                    //if prompt then we need success and deny callbacks
+                    navigator.geolocation.getCurrentPosition(showPosition, showDefaultMap);
+                  } else {
+                    alert("Geolocation is not supported by this browser.");
+                  }
+            } else  {
+                //if denied or undefined then show default map view only
+                showDefaultMap();
+            }
+          });
+    } else {
         showDefaultMap();
-    }
-  });
+    }   
 }
+
 //if permission is granted mapSetup is populated with the users position and zooms in slightly to their area
 function showPosition(position){
     //only show zoomed in position if user is logged in
