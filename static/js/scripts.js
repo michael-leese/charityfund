@@ -48,7 +48,10 @@ $(document).ready(function(){
         }
     }
 
+    //hide unneccessary checkboxes put in by django
     $('[for=image-clear_id]').hide();
     $('#image-clear_id').hide();
+    $('[for=profile_picture-clear_id]').hide();
+    $('#profile_picture-clear_id').hide();
 
 });
