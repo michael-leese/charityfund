@@ -34,11 +34,11 @@ else:
     STRIPE_PUB_KEY = STRIPE_PUB_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'charityfunding.herokuapp.com',
-    '127.0.0.1'
+    #'127.0.0.1'  #FOR TESTING ONLY!!!
 ]
 
 
@@ -195,7 +195,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
-# MEDIA_URL = '/media/'
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
