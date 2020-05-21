@@ -42,7 +42,7 @@
   </div>
 </div>
 <div class="container-fluid">
-  <div class="row">
+  <div class="row swappable">
     <div class="col-lg-4 col-md-4 col-sm-12">
       <h3 class="appeal-title">Appeal Locations</h3>
       <div class="card">
@@ -53,6 +53,7 @@
         {% endif %}
       </div>
       <br>
+      {% if orders.count > 0 %}
       <div class="container-fluid">
         <h5 class="appeal-title">Recent Donor Messages</h5>
         <div class="col-12 scroll">
@@ -85,6 +86,7 @@
           {% endfor %}
         </div>
       </div>
+      {% endif %}
     </div>
     <div class="col-lg-8 col-md-8 col-sm-12">
       <div class="title-filter">
