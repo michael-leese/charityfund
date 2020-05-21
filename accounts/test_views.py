@@ -1,6 +1,8 @@
 from django.test import TestCase
 from .models import User, UserProfile, Org
 from .forms import OrgRegistrationForm
+from django.contrib import auth
+from django.shortcuts import get_object_or_404
 
 class TestViews(TestCase):
 
@@ -63,3 +65,26 @@ class TestViews(TestCase):
         profile = UserProfile(nickname="changednickname")
         profile.save()
         self.assertEqual(profile.nickname, "changednickname")
+
+    def test_user_authenticated(self):
+        login = self.client.login(username='testuser', password='Test123*')
+        test_user1 = User.objects.get(username='testuser')
+        authorised_user = False
+        if test_user1.is_authenticated:
+            authorised_user = True
+        self.assertTrue(authorised_user)
+
+    def test_has_org(self):
+        login = self.client.login(username='testuser', password='Test123*')
+        test_user1 = User.objects.get(username='testuser')
+        org = Org.objects.filter(user=test_user1)
+        if org:
+            hasOrg = True
+        else:
+            hasOrg = False
+        self.assertTrue(hasOrg)
+    
+    def test_edit_org_where_doesnt_exist(self):
+        page = self.client.get("/accounts/edit_org/2")
+        self.assertEqual(page.status_code, 404)
+

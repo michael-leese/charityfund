@@ -31,8 +31,9 @@
                         <img src="{{ MEDIA_URL }}{{org.image}}" class="img-circle">
                         {% endif %}
                     </div>
-                    <p class="scroll">Bio: {{ org.bio }}</p>
-                    <a class="btn btn-info" href="{% url 'editorg' %}">Edit Organisation</a>
+                    <br>
+                    <p class="scroll"><strong>Bio:</strong> {{ org.bio }}</p>
+                    <a class="btn btn-info edit-org-btn" href="{% url 'editorg' %}">Edit Organisation</a>
                 </div>
             </div>
         </div>

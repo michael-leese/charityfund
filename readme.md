@@ -17,6 +17,13 @@ The deployed website is [CharityFund](https://charityfunding.herokuapp.com/).
 I have considered the different user experiences as they would move through the site, from whether they are registered users to organisation owners.
 New comers who do not wish to register are unable to have access the full benefits of the site such as a registered user would, such as viewing the full appeal information, donating to an appeal or adding one. This is to ensure that there are levels of authentication effectively and collect more data about the users and given projects and organisations, as well as geolocation data as to the where abouts of these appeals.
 
+#### User Stories ####
+1. A user wishes to make a donation after finding a particular type of appeal that they are interested in supporting.
+2. A user wishes to make a donation after finding a particular type of appeal that they are interested in but remain anonymous.
+3. A user has a charity/community group and wishes to set up an appeal to receive donations from the public.
+4. A user wishes to see the appeals that are in there immediate area and contact the one that they are interested in to offer volunteering help.
+5. A user wishes to use the site to keep a track of all there appeals that they have running concurrently, able to see exactly what is being donated and in what amounts.
+
 See the wireframes..........link........... I used as a basis for my construction process.
 
 ### Features ###
@@ -84,7 +91,7 @@ The environment variables on Heroku were used to store the IP, PORT, AWS_ACCESS_
 
 ## Testing ##
 
-I have carried out some automated testing using the [Django Test Framework](https://docs.djangoproject.com/en/3.0/topics/testing/) as well as a structured manual [testing process](https://github.com/michael-leese/charityfund/blob/master/testing.md) was undertaken manually, going through the user stories as well as testing all functionality and logic through the front end. This involved testing while not logged in and paying particular attention to the authorised access and the logic the links and buttons would play given the level of access granted to the site.
+I have carried out some automated testing on the accounts app, testing forms, models and views using the [Django Test Framework](https://docs.djangoproject.com/en/3.0/topics/testing/), as well as a structured manual [regression testing process](https://github.com/michael-leese/charityfund/blob/master/testing.md) was completed and undertaken manually, going through the user stories as well as testing all functionality and logic through the front end. This involved testing while not logged in and paying particular attention to the authorised access and the logic the links and buttons would play given the level of access granted to the site.
 
 Further testing was carried out on the responsivity of the site across different browsers and platforms in order to ensure that the site maintained its stylings. The items that have been tested with are listed below:
 
@@ -113,6 +120,7 @@ I have utilised some of the code that was on the Full Stack Frameworks with Djan
     * https://stackoverflow.com/questions/16476357/django-ajax-get-request
     * https://remysharp.com/2016/12/23/beginners-guide-to-stripe-integration
     * https://stackoverflow.com/questions/5448545/how-to-retrieve-get-parameters-from-javascript
+    * https://getbootstrap.com/docs/4.0/components/pagination/
     * https://simpleisbetterthancomplex.com/tutorial/2016/08/03/how-to-paginate-with-django.html
 
 #### Media ####

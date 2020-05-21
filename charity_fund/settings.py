@@ -107,9 +107,13 @@ if "RUN_PRODUCTION" in os.environ:
     }
 else:
     print("Running locally, use env.py to retrieve URL")
+    ## This is to run the production DB locally 
+    ## If automated testing uncomment and use the sqlite db below this, commenting this setup out
     DATABASES = {
         'default': dj_database_url.parse(DATABASE_URL)
     }
+    ## This is used to run automated tests uncomment to carry out tests using sqlite db
+    ## ensure to comment out production DB above at same time
     # DATABASES = {
     #     'default': {
     #         'ENGINE': 'django.db.backends.sqlite3',
@@ -164,6 +168,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
+
+# Using AWS S3 Buckets to store Static and Media files
 
 AWS_S3_OBJECT_PARAMETERS = {
     'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',

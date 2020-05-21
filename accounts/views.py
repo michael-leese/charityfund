@@ -75,6 +75,7 @@ def register_user(request):
     """
     active = "active"
     if request.user.is_authenticated:
+        messages.error(request, 'You are already registered')
         return redirect(reverse('index'))
 
     if request.method == "POST":
@@ -292,18 +293,16 @@ def edit_user_profile(request):
 
 def admin_test_view(request):
     '''
-    If admin user allow the viewing of htmlcov
+    If admin user allow the viewing of htmlcov testing information
     '''
     if request.user.is_authenticated:
         user = User.objects.get(username=request.user)
         admin = User.objects.get(username='admin')
         if user == admin:
-            print("I am admin user")
             return render(request, 'index_test.html')
         else:
-            print(user)
-            print(admin)
-            print("I am not admin user")
+            messages.error(request, "You must be an admin to access the Test Information.")
             return redirect(reverse('index'))
     else:
+        messages.error(request, "You must be logged in to access this.")
         return redirect(reverse('index'))

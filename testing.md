@@ -55,7 +55,7 @@ This document outlines the test that were carried out in order to prove the func
     * If you populate the form with valid information and save then you are directed back to the Edit Profile page with a success message, cancel redirects you back to Edit Profile page also, without a message.
 10. About:
     * The image takes users to the Home page.
-    * If you are an admin user and logged in with an admin account you can view the Site Test Framework Information, if not then you are redirected back to the same page.
+    * If you are an admin user and logged in with an admin account you can view the Site Test Framework Information, if not then you are redirected back to the index page with a message, depending on if logged in or if logged in and not an admin.
     * About Nav Link is highlighted.
 11. Register Org(must be logged in):
     * You are provided with a form to create an organisation.

@@ -52,5 +52,5 @@ This would be hidden from view normally but has been included to show that an ad
 could view the test data derived from the htmlcov created by the coverage dependency.
  {% endcomment %}
 <span>For admin use only:</span>
-<span><a class="nav-link" href="{% if allowAdmin %}{% url 'admintestview' %}{% else %}#{% endif %}">Site Test Framework Information</a></span>
+<span><a class="nav-link" href="{% url 'admintestview' %}">Site Test Framework Information</a></span>
 {% endblock %}
