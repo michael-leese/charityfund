@@ -11,10 +11,11 @@ var $authUser = $('#map').attr('name');
 //check if Edge or IE
 function mSBrowserDetection() {
     //Check if browser is IE
-    if (navigator.userAgent.search("MSIE")) {
-        return True
-    } 
-    return False
+    if (navigator.userAgent.match(/Edge/i) || navigator.userAgent.match(/Trident.*rv[ :]*11./i)) {
+        return true
+    } else {
+        return false
+    }
 }
 
 //checks the geolocation permission status
