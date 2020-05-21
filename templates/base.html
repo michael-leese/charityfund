@@ -32,8 +32,12 @@
                     <a class="navbar-brand nav-img spin" href="{% url 'index' %}"></a>
                 </div>
                 <div class="col-10 top-inner-nav">
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'edituserprofile' %}">
                     {% block profile_image %}
                     {% endblock %}
+                    </a>
+                    {% endif %}
                     <form id="mainSearch" class="form-inline my-lg-0"
                         action="{% url 'search' %}?next={{ request.path|urlencode }}" method="GET">
                         <input class="form-control mr-sm-2 nav-search" type="text" name="search"
@@ -61,7 +65,7 @@
                         <li class="nav-item"><a class="nav-link {{ active2 }}" href="{% url 'createappeal' %}">Create Appeal</a></li>
                         <li class="nav-item"><a class="nav-link {{ active9 }}" href="{% url 'viewmyorgs_appeals' %}">My Organisation</a></li>
                         {% endif %}
-                        <li class="nav-item"><a class="nav-link {{ active10 }}" href="{% url 'edituserprofile' %}">Edit Profile</a></li>
+                        {% comment %} <li class="nav-item"><a class="nav-link {{ active10 }}" href="{% url 'edituserprofile' %}">Edit Profile</a></li> {% endcomment %}
                         {% else %}
                         <li class="nav-item"><a class="nav-link {{ active4 }}" href="{% url 'login' %}">Login</a></li>
                         <li class="nav-item"><a class="nav-link {{ active5 }}" href="{% url 'register' %}">Register</a></li>
