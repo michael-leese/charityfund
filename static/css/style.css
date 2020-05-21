@@ -486,6 +486,7 @@ div#map {
     }
     .swappable {
         flex-flow: column-reverse;
+        align-items: center;
     }
 }
 
