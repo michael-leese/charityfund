@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block page_title %}Home{% endblock %}
 
 {% block profile_image %}
@@ -12,12 +12,12 @@
 {% endif %}
 </div>
 {% endblock %}
-
-{% block page_header %}Welcome to Charity Funding{% endblock %}
+{% block hero_header %}<h1 class="appeal-title"><strong>WELCOME TO CHARITY FUNDING</strong></h1>{% endblock %}
+{% block page_header %}<h4 class="appeal-title">Helping, to help others...</h4>{% endblock %}
 
 {% block page_contents %}
 <div>
+    <img src="{% static 'img/hero-image.png' %}" alt="Charity funding picture">
     <p>Welcome to the new way to raise or donate funds to charity.</p>
-    <p>We aim to help small charities and local community groups raise funds for their projects.</p>
 </div>
 {% endblock %}
