@@ -74,12 +74,23 @@ button.navbar-toggler.collapsed {
     color: rgb(0, 139, 139);
 }
 
+.editprofile{
+    text-decoration: none !important;
+    color: rgb(0, 139, 139);
+    font-size: larger;
+}
+
 .navbar-light .navbar-nav .nav-link:hover {
     text-decoration: none !important;
     color: rgb(233, 30, 99);
     font-weight: bolder;
 }
 
+.editprofile:hover{
+    text-decoration: none !important;
+    color: rgb(233, 30, 99);
+    font-weight: bolder;text-decoration: none !important;
+}
 .navbar-light .navbar-nav .nav-link.active {
     border-radius: 5px;
     background-color: rgba(40, 167, 69, 0.56);
