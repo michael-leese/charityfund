@@ -6,11 +6,12 @@
 {% block page_header %}<h3 class="appeal-title"><strong>Login Page</strong></h3>{% endblock %}
 
 {% block page_contents %}
-    <p>If you haven't already registered please do so <a href="{% url 'register' %}?next={{ previous }}">register here</a>.</p>
-    <form method="POST">
-        {% csrf_token %}
-        {{ login_form | as_bootstrap }}
-        <button type="submit" class="btn btn-success">Login</button>
-    </form>
+<p>If you haven't already registered please do so <a href="{% url 'register' %}?next={{ previous }}">register here</a>.
+</p>
+<form method="POST">
+    {% csrf_token %}
+    {{ login_form | as_bootstrap }}
+    <button type="submit" class="btn btn-success">Login</button>
+</form>
 
 {% endblock %}

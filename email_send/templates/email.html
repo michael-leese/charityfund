@@ -4,19 +4,20 @@
 {% block head_js %}
 <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
 <script type="text/javascript">
-    (function() {
+    (function () {
         emailjs.init("user_r60kWytnQvPHPppC4sqRT");
     })();
 </script>
 {% endblock %}
 {% block profile_image %}
 <div class="mr-sm-2">
-{% if userprofile %}
+    {% if userprofile %}
     {% if userprofile.profile_picture %}
-    <img src="{{ MEDIA_URL }}{{userprofile.profile_picture}}" class="img-circle" alt="{{userprofile.nickname}} profile picture">
+    <img src="{{ MEDIA_URL }}{{userprofile.profile_picture}}" class="img-circle"
+        alt="{{userprofile.nickname}} profile picture">
     {% endif %}
     <span>Hi, {{userprofile.nickname}}</span>
-{% endif %}
+    {% endif %}
 </div>
 {% endblock %}
 
@@ -30,8 +31,10 @@
     {% if owner %}
     <p class="center-txt"><strong>You cannot send an email to yourself as the owner of {{appeal.org}}</strong>.</p>
     {% else %}
-    <p class="center-txt">Whether it be for further information, how to get involved and volunteer or simply send well wishes, please 
-        send an email about the {{appeal.title}} to the contact of <strong>{{appeal.org}}</strong>, who would love to hear from you.</p>
+    <p class="center-txt">Whether it be for further information, how to get involved and volunteer or simply send well
+        wishes, please
+        send an email about the {{appeal.title}} to the contact of <strong>{{appeal.org}}</strong>, who would love to
+        hear from you.</p>
     {% endif %}
 </div>
 <div class="container-fluid">
@@ -40,24 +43,32 @@
             <div class="col-offset-1 col-10">
                 <div class="single-card card-style">
                     <form id="emailForm" onsubmit="sendEmail(this);" method="POST">
-                    {% csrf_token %}
+                        {% csrf_token %}
                         <div class="card-body">
                             <div class="col-12">
                                 <div class="center-txt">
                                     <h4 class="appeal-title">{{appeal.title}} for {{ appeal.org }}</h4>
                                     {% if appeal.image %}
-                                    <img src="{{ MEDIA_URL }}{{appeal.image}}" class="img-circle" alt="{{order.appeal.title}} appeal picture">
+                                    <img src="{{ MEDIA_URL }}{{appeal.image}}" class="img-circle"
+                                        alt="{{order.appeal.title}} appeal picture">
                                     {% endif %}
                                 </div>
-                                <input type="text" name="orgEmail" class="form-control" id="orgEmail" value="{{appeal.org}}" disabled hidden/>
-                                <input type="text" name="appealEmail" class="form-control" id="appealEmail" value="{{appeal.title}}" disabled hidden/>
-                                <input type="email" name="toEmail" class="form-control" id="toEmail" value="{{appeal.author.email}}" disabled hidden/>
-                                <input type="email" name="fromEmail" class="form-control" id="fromEmail" value="{{request.user.email}}" disabled hidden/>
-                                <input type="text" name="fromName" class="form-control" id="fromName" value="{{request.user}}" disabled hidden/>
+                                <input type="text" name="orgEmail" class="form-control" id="orgEmail"
+                                    value="{{appeal.org}}" disabled hidden />
+                                <input type="text" name="appealEmail" class="form-control" id="appealEmail"
+                                    value="{{appeal.title}}" disabled hidden />
+                                <input type="email" name="toEmail" class="form-control" id="toEmail"
+                                    value="{{appeal.author.email}}" disabled hidden />
+                                <input type="email" name="fromEmail" class="form-control" id="fromEmail"
+                                    value="{{request.user.email}}" disabled hidden />
+                                <input type="text" name="fromName" class="form-control" id="fromName"
+                                    value="{{request.user}}" disabled hidden />
                                 <label for="content">Enter message:</label><br>
-                                <textarea id="contentEmail" class="form-control" placeholder="Your message here..." name="contentEmail" rows="15" cols="50" required></textarea>
+                                <textarea id="contentEmail" class="form-control" placeholder="Your message here..."
+                                    name="contentEmail" rows="15" cols="50" required></textarea>
                                 <br>
-                                <p>An email will be sent to the registered email of {{appeal.org}} owner, with the message and your contact email address.</p>
+                                <p>An email will be sent to the registered email of {{appeal.org}} owner, with the
+                                    message and your contact email address.</p>
                             </div>
                         </div>
                         <div class="card-footer">

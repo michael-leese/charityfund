@@ -4,12 +4,13 @@
 
 {% block profile_image %}
 <div class="mr-sm-2">
-{% if userprofile %}
+    {% if userprofile %}
     {% if userprofile.profile_picture %}
-    <img src="{{ MEDIA_URL }}{{userprofile.profile_picture}}" class="img-circle" alt="{{userprofile.nickname}} profile picture">
+    <img src="{{ MEDIA_URL }}{{userprofile.profile_picture}}" class="img-circle"
+        alt="{{userprofile.nickname}} profile picture">
     {% endif %}
     <span>Hi, {{userprofile.nickname}}</span>
-{% endif %}
+    {% endif %}
 </div>
 {% endblock %}
 
@@ -18,8 +19,10 @@
 {% block page_contents %}
 
 <p>
-    Here at CharityFund<span class="sml-copyright">&copy;</span> we aim to serve as a platform for small and medium sized charities and community projects so
-    they can set up appeals, receive donations from more than there usual base, without the need to spend lots of money on marketing.
+    Here at CharityFund<span class="sml-copyright">&copy;</span> we aim to serve as a platform for small and medium
+    sized charities and community projects so
+    they can set up appeals, receive donations from more than there usual base, without the need to spend lots of money
+    on marketing.
     Simply share the link for the appeal on your social media and let the donations come in.
 </p>
 <p>
@@ -28,29 +31,37 @@
     to the people and projects that deserve them.
 </p>
 <p>
-    If you are just someone who loves to support charity or an individual who wishes to add an appeal for a charity or community project,
+    If you are just someone who loves to support charity or an individual who wishes to add an appeal for a charity or
+    community project,
     then we are the place for you.<br>
-    All you have to do is register with our site to make a donation, if you would like to start an appeal, once logged in you can register
+    All you have to do is register with our site to make a donation, if you would like to start an appeal, once logged
+    in you can register
     your organisation and then get started creating an appeal.
 </p>
-<p>As a registered user you are able to make donations,if you are running or are part of a registered charity or a community group you are 
-   able to register an organisation. In turn ince you have registered an organisation you are able to register appeals for the organisation.
-   Only one organisation may be created per user as we are determined to provide a service to the small and local charities that do not 
-   normally get a voice in an overly crowded and chaotic market, by acting in this way we are able to provide bespoke marketing of appeals by
-   charities and community groups so they can serve there beneficiraies in the best way possible, rather than agents creating multiple 
-   organisations and appeals underneath them.</p>
+<p>As a registered user you are able to make donations,if you are running or are part of a registered charity or a
+    community group you are
+    able to register an organisation. In turn ince you have registered an organisation you are able to register appeals
+    for the organisation.
+    Only one organisation may be created per user as we are determined to provide a service to the small and local
+    charities that do not
+    normally get a voice in an overly crowded and chaotic market, by acting in this way we are able to provide bespoke
+    marketing of appeals by
+    charities and community groups so they can serve there beneficiraies in the best way possible, rather than agents
+    creating multiple
+    organisations and appeals underneath them.</p>
 <p>Please use our search facility to find the appeals that interest you the most and give as generously as possible.</p>
 <p>Thank you for your support.</p>
 <h4 class="appeal-title">In total we have raised <strong>£{{ order_total_string }}</strong> for charity.</h4>
 <div class="center-txt col-12">
-    <a href="{% url 'showallappeals' %}"><img class="donate-img" src="{% static 'img/donate-now.png' %}" alt="Donate Now Image" ></a>
+    <a href="{% url 'showallappeals' %}"><img class="donate-img" src="{% static 'img/donate-now.png' %}"
+            alt="Donate Now Image"></a>
 </div>
 <br>
 <br>
-{% comment %} 
-This would be hidden from view normally with some template logic but has been included to show that an admin 
+{% comment %}
+This would be hidden from view normally with some template logic but has been included to show that an admin
 could view the test data derived from the htmlcov created by the coverage dependency.
- {% endcomment %}
+{% endcomment %}
 <span>For admin use only:</span>
 <span><a class="nav-link" href="{% url 'admintestview' %}">Site Test Framework Reports</a></span>
 {% endblock %}

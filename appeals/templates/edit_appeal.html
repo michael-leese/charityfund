@@ -5,12 +5,13 @@
 
 {% block profile_image %}
 <div class="mr-sm-2">
-{% if userprofile %}
+    {% if userprofile %}
     {% if userprofile.profile_picture %}
-    <img src="{{ MEDIA_URL }}{{userprofile.profile_picture}}" class="img-circle" alt="{{userprofile.nickname}} profile picture">
+    <img src="{{ MEDIA_URL }}{{userprofile.profile_picture}}" class="img-circle"
+        alt="{{userprofile.nickname}} profile picture">
     {% endif %}
     <span>Hi, {{userprofile.nickname}}</span>
-{% endif %}
+    {% endif %}
 </div>
 {% endblock %}
 
@@ -36,7 +37,8 @@
                                 {% csrf_token %}
                                 {% if instance.image %}
                                 <div class="center-txt">
-                                    <img src="{{ MEDIA_URL }}{{instance.image}}" class="img-circle" alt="{{order.appeal.title}} appeal picture">
+                                    <img src="{{ MEDIA_URL }}{{instance.image}}" class="img-circle"
+                                        alt="{{order.appeal.title}} appeal picture">
                                 </div>
                                 {% endif %}
                                 {{ form | as_bootstrap }}
