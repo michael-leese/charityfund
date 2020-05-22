@@ -40,7 +40,7 @@ body {
 }
 
 .nav-link {
-    padding: 0.25em, 1em;
+    padding: 0.25em 1em;
     font-family: 'Chelsea Market', cursive;
 }
 
@@ -199,7 +199,7 @@ button.navbar-toggler.collapsed {
 }
 
 div.scroll-100{
-    margin: 4px, 4px;
+    margin: 4px 4px;
     padding: 4px;
     height: 110px;
     overflow-x: hidden;
@@ -207,14 +207,14 @@ div.scroll-100{
 }
 
 div.scroll {
-    margin: 4px, 4px;
+    margin: 4px 4px;
     padding: 4px;
     height: 500px;
     overflow-x: hidden;
     overflow-x: auto;
 }
 p.scroll {
-    margin: 4px, 4px;
+    margin: 4px 4px;
     padding: 4px;
     height: 25%;
     overflow-x: hidden;

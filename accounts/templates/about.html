@@ -6,7 +6,7 @@
 <div class="mr-sm-2">
 {% if userprofile %}
     {% if userprofile.profile_picture %}
-    <img src="{{ MEDIA_URL }}{{userprofile.profile_picture}}" class="img-circle">
+    <img src="{{ MEDIA_URL }}{{userprofile.profile_picture}}" class="img-circle" alt="{{userprofile.nickname}} profile picture">
     {% endif %}
     <span>Hi, {{userprofile.nickname}}</span>
 {% endif %}
@@ -41,14 +41,14 @@
    organisations and appeals underneath them.</p>
 <p>Please use our search facility to find the appeals that interest you the most and give as generously as possible.</p>
 <p>Thank you for your support.</p>
-
+<h4 class="appeal-title">In total we have raised <strong>£{{ order_total_string }}</strong> for charity.</h4>
 <div class="center-txt col-12">
     <a href="{% url 'showallappeals' %}"><img class="donate-img" src="{% static 'img/donate-now.png' %}" alt="Donate Now Image" ></a>
 </div>
 <br>
 <br>
 {% comment %} 
-This would be hidden from view normally but has been included to show that an admin 
+This would be hidden from view normally with some template logic but has been included to show that an admin 
 could view the test data derived from the htmlcov created by the coverage dependency.
  {% endcomment %}
 <span>For admin use only:</span>

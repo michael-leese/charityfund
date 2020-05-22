@@ -13,7 +13,7 @@
 <div class="mr-sm-2">
 {% if userprofile %}
     {% if userprofile.profile_picture %}
-    <img src="{{ MEDIA_URL }}{{userprofile.profile_picture}}" class="img-circle">
+    <img src="{{ MEDIA_URL }}{{userprofile.profile_picture}}" class="img-circle" alt="{{userprofile.nickname}} profile picture">
     {% endif %}
     <span>Hi, {{userprofile.nickname}}</span>
 {% endif %}
@@ -25,7 +25,7 @@
 {% block page_contents %}
 <div class="center-txt">
     {% if appeal.org.image %}
-    <img src="{{ MEDIA_URL }}{{appeal.org.image}}" class="img-circle">
+    <img src="{{ MEDIA_URL }}{{appeal.org.image}}" class="img-circle" alt="{{org.organisation}} brand picture">
     {% endif %}
     {% if owner %}
     <p class="center-txt"><strong>You cannot send an email to yourself as the owner of {{appeal.org}}</strong>.</p>
@@ -46,7 +46,7 @@
                                 <div class="center-txt">
                                     <h4 class="appeal-title">{{appeal.title}} for {{ appeal.org }}</h4>
                                     {% if appeal.image %}
-                                    <img src="{{ MEDIA_URL }}{{appeal.image}}" class="img-circle">
+                                    <img src="{{ MEDIA_URL }}{{appeal.image}}" class="img-circle" alt="{{order.appeal.title}} appeal picture">
                                     {% endif %}
                                 </div>
                                 <input type="text" name="orgEmail" class="form-control" id="orgEmail" value="{{appeal.org}}" disabled hidden/>

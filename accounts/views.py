@@ -140,6 +140,15 @@ def about(request):
     """
     active = "active"
     allowAdmin = False
+    orders = Order.objects.all()
+    order_totals = 0
+    for order in orders:
+        if (order.successful):
+            order_totals += order.amount
+        else:
+            continue
+    order_total_string = str(order_totals)
+
     if request.user.is_authenticated:
         userprofile = UserProfile.objects.get(user=request.user)
         org = Org.objects.filter(user=request.user)
@@ -149,13 +158,13 @@ def about(request):
             allowAdmin = True
         if org:
             hasOrg = True
-            return render(request, 'about.html', {'hasOrg': hasOrg, 'active7': active, 'userprofile': userprofile, 'allowAdmin': allowAdmin}) 
+            return render(request, 'about.html', {'hasOrg': hasOrg, 'active7': active, 'userprofile': userprofile, 'allowAdmin': allowAdmin, "order_total_string": order_total_string}) 
         else:
             hasOrg = False
-            return render(request, 'about.html', {'hasOrg': hasOrg, 'active7': active, 'userprofile': userprofile, 'allowAdmin': allowAdmin})
+            return render(request, 'about.html', {'hasOrg': hasOrg, 'active7': active, 'userprofile': userprofile, 'allowAdmin': allowAdmin, "order_total_string": order_total_string})
     else:
         hasOrg = False
-        return render(request, 'about.html', {'hasOrg': hasOrg, 'active7': active})
+        return render(request, 'about.html', {'hasOrg': hasOrg, 'active7': active, "order_total_string": order_total_string})
 
 #Returns the edit organisation page
 @login_required
@@ -301,8 +310,8 @@ def admin_test_view(request):
         if user == admin:
             return render(request, 'index_test.html')
         else:
-            messages.error(request, "You must be an admin to access the Test Information.")
+            messages.error(request, "You must be an admin to access the Test Reports.")
             return redirect(reverse('index'))
     else:
-        messages.error(request, "You must be logged in to access this.")
+        messages.error(request, "You must be logged in for authentication.")
         return redirect(reverse('index'))
