@@ -5,7 +5,7 @@ $(document).ready(function(){
 });
 
 $(function() {
-    
+    //get the card information
     $("#payment-form").submit(function() {
         var form = this;
         var card = {
