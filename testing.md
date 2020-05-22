@@ -1,6 +1,24 @@
+## Automated Testing ##
+
+I have used the Django Test Framework to carry out my automated testing and have used [coverage](https://coverage.readthedocs.io/en/coverage-5.1/) to run my tests and produce reports, including the htmlcov folder with indepthe reports. The commands used in the termial were:
+
+* py manage.py test
+* coverage run manage.py test
+* coverage report
+* coverage run --source=accounts manage.py test
+* coverage html
+
+As I was running locally on [Vistual Studio Code](https://code.visualstudio.com/) I had to use [Web Server for Chrome](https://chrome.google.com/webstore/detail/web-server-for-chrome/ofhbbkphhbklhfoeikjpcbhemlocgigb?hl=en) to locally run up the testing report suite, however i couldnt view it from any where, which would be valuable for remomte monitoring, although static at poresent in the future could have more options added to the area.  
+Including the htmlcov in settings.py in the templates dictionary of directories, I then was able to store the js, css and images in the S3 bucket via a 'collectstatic' command, adapt the index.html page to have Django Template, static tags and added some custom Javascript to disable all the links as they arent all added to the urls currently but in the future a more meaningful dive into the testing reports would be available to build on.
+
+You can access the report page via my admin login only and view the report page from the about section, at the bottom of the page in 'Site Test Framework Reports' link. No other user can see this, as obviously this is sensitive to the developer only and not other users, and could serve in the future as an an additional admin area for testers.
+As I could of spent a very long time completeing lots of automated tests across the full package which would be done in the future. I carried out automated testing on the Account App only, for which I completed testing on forms, models, views and apps.py getting 66% completion.
+A screenshot of the testing can be found [here](https://github.com/michael-leese/charityfund/blob/master/static/img/Screenshot-admin-test-information.png).
+
+
 ## Manual Testing ##
 
-This document outlines the test that were carried out in order to prove the functionality of the website.
+This section outlines the manual regression tests that were carried out in order to prove the functionality of the website.
 
 1. Home Page(not logged in):
     * The website says Welcome and the Links are Home, View Appeals, Login, Register, About.
@@ -10,7 +28,8 @@ This document outlines the test that were carried out in order to prove the func
     * On pressing any of the social media icons in the footer you are directed to the corresponding site for the icon.
     * Home Nav Link is highlighted.
 2. Home Page(logged in):
-    * The webiste says welcome and in the navbar it says 'Hi, (nickname)' next to your userprofile image, if one has been uploaded and the navbar is populated with Links to Home, View Appeals, Logout, Register Org, Edit Profile, About. 
+    * The webiste says welcome and in the navbar it says 'Hi, (nickname)' next to your userprofile image, if one has been uploaded and the navbar is populated with Links to Home, View Appeals, Logout, Register Org, About.
+    * The Navbar now says "Hi," followed by the nickname you chose in your registration form, with your profile pic if you chose one, this serves as navigation to your edit profile page. 
     * You can search using the search bar and on pressing search are directed to the View Appeals page with the results.
     * On pressing the Logo you are directed to same page.
     * On pressing the CharityFund name in footer you are taken to About page.
@@ -46,16 +65,16 @@ This document outlines the test that were carried out in order to prove the func
     * Donor message are displayed.
     * View Appeals Nav Link is highlighted.
 8. Edit Profile(must be logged in):
+    * Navigation via the profile image in navbarwith Hi message.
     * Give you the options to update your user profile and save. 
     * There is a button to direct you to change password page if required.
     * Go back button takes you to Home page(logged in).
-    * Edit Profile Nav Link is highlighted.
 9. Change Password(must be logged in):
     * Provides a clear set of instructions of how to construct new password. If you do not fill out the fields correctly you are instructed to do so.
     * If you populate the form with valid information and save then you are directed back to the Edit Profile page with a success message, cancel redirects you back to Edit Profile page also, without a message.
 10. About:
     * The image takes users to the Home page.
-    * If you are an admin user and logged in with an admin account you can view the Site Test Framework Information, if not then you are redirected back to the index page with a message, depending on if logged in or if logged in and not an admin.
+    * If you are an admin user and logged in with an admin account you can view the Site Test Framework remotely, if not then you are redirected back to the index page with a message, depending on if logged in or if logged in and not an admin.
     * About Nav Link is highlighted.
 11. Register Org(must be logged in):
     * You are provided with a form to create an organisation.
@@ -64,7 +83,8 @@ This document outlines the test that were carried out in order to prove the func
     * Cancel takes you to Home Page(logged in and Org Registered).
     * Register Org Nav Link is highlighted.
 12. Home Page(logged in and Org Registered):
-    * The webiste says welcome and in the navbar it says 'Hi, (nickname)' next to your userprofile image, if one has been uploaded and the navbar is populated with Links to Home, View Appeals, Logout, Create Appeal, My Organisation, Edit Profile, About. 
+    * The webiste says welcome and in the navbar it says 'Hi, (nickname)' next to your userprofile image, if one has been uploaded and the navbar is populated with Links to Home, View Appeals, Logout, Create Appeal, My Organisation, About. 
+    * The Navbar says "Hi," followed by the nickname you chose in your registration form, with your profile pic if you chose one, this serves as navigation to your edit profile page. 
     * You can search using the search bar and on pressing search are directed to the View Appeals page with the results.
     * On pressing the Logo you are directed to same page.
     * On pressing the CharityFund name in footer you are taken to About page.

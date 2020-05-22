@@ -33,7 +33,7 @@
                 </div>
                 <div class="col-10 top-inner-nav">
                     {% if user.is_authenticated %}
-                    <a href="{% url 'edituserprofile' %}">
+                    <a href="{% url 'edituserprofile' %}" title="Edit Profile">
                     {% block profile_image %}
                     {% endblock %}
                     </a>
@@ -104,7 +104,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-6 copyright">
-                        <a class="copyright-link" href="{% url 'about' %}"><span>&copy;2020 CharityFund</span></a>
+                        <a class="copyright-link" href="{% url 'about' %}"><span>&copy;2020 Michael Leese</span></a>
                     </div>
                     <div class="offset-1 col-5">
                         <p class="fawes-lg fl-rt">
