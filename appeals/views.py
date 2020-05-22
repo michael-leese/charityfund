@@ -26,12 +26,13 @@ def create_appeal(request):
         if org:
             hasOrg = True
             if request.method == "POST":
-                form = AppealForm(request.POST)
+                form = AppealForm(request.POST, request.FILES)
                 if form.is_valid():
                     appeal = form.save(commit=False)
                     appeal.author = request.user
                     appeal.org = Org.objects.get(user=request.user)
                     appeal.created_date = timezone.now()
+                    appeal.image = request.FILES['image']
                     appeal.save()
                     form.save_m2m()
                     messages.success(request, "Congratulations you have added an appeal")

@@ -38,7 +38,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
     'charityfunding.herokuapp.com',
-    #'127.0.0.1'  #FOR TESTING ONLY!!!
+    '127.0.0.1'  #FOR TESTING ONLY!!!
 ]
 
 
