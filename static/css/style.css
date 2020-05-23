@@ -231,6 +231,11 @@ p.scroll {
     text-align: center;
 }
 
+.even-margin{
+    margin-right: auto;
+    margin-left: auto;
+}
+
 .error-msg {
     color: red;
 }
