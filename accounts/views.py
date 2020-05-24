@@ -123,6 +123,7 @@ def register_org(request):
                 org.save()
                 messages.success(request, "You have successfully registered an organisation")
                 hasOrg = True
+                messages.success(request, "You have successfully created " + org.organisation)
                 return render(request, 'index.html', {'hasOrg': hasOrg, 'active1': active, 'userprofile': userprofile})
             else:
                 messages.error(request, "Unable to register at this time.")

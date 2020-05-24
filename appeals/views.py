@@ -32,10 +32,9 @@ def create_appeal(request):
                     appeal.author = request.user
                     appeal.org = Org.objects.get(user=request.user)
                     appeal.created_date = timezone.now()
-                    appeal.image = request.FILES['image']
                     appeal.save()
                     form.save_m2m()
-                    messages.success(request, "Congratulations you have added an appeal")
+                    messages.success(request, "Congratulations you have added " + appeal.title)
                     return redirect('showallappeals')
             else:
                 form = AppealForm()
