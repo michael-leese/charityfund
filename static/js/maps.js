@@ -29,6 +29,8 @@ function geoLocation(){
                 //if granted then only need the success callback
                 navigator.geolocation.getCurrentPosition(showPosition);
             } else if (result.state === 'prompt') {
+                //run here so map is not left blank until prompt is answered
+                showDefaultMap();
                 if (navigator.geolocation) {
                     //if prompt then we need success and deny callbacks
                     navigator.geolocation.getCurrentPosition(showPosition, showDefaultMap);
