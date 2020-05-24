@@ -82,7 +82,7 @@
                             {% if order.anonymous %}
                             <strong>Anonymous</strong></p>
                         {% else %}
-                        <strong>{{order.full_name}}</strong></p>
+                        <strong>{{order.userprofile.nickname}}</strong></p>
                         {% endif %}
                         <p>{{order.comment}}</p>
                     </div>
