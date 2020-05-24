@@ -352,8 +352,13 @@ a.btn.btn-danger:hover {
     left: 0px;
     font-weight: 700;
     padding: 3px 5px 2px 5px;
-    color: rgb(0, 170, 245);
     border-radius: 5px;
+}
+.progress-incomplete{
+    color: rgb(0, 170, 245);
+}
+.progress-complete {
+    color: rgb(139, 195, 74);
 }
 
 .progress-section {
