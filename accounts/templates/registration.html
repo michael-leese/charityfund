@@ -3,11 +3,20 @@
 
 {% block page_title %}Register{% endblock %}
 
+{% block head_js %}
+<script>
+    //prevent autofocus application
+    window.onload = function() {
+        $('input[type=text]').blur();
+    };
+</script>
+{% endblock %}
+
 {% block page_header %}<h3 class="appeal-title"><strong>Registration Page</strong></h3>{% endblock %}
 
 {% block page_contents %}
 <p>If you already have an account, please <a href="{% url 'login' %}">Login Here</a>.</p>
-
+<span id="caps-warning" class="text-danger sml-copyright" hidden>* Note: Username is case sensitive</span>
 <form method="POST" enctype="multipart/form-data" action="{% url 'register' %}">
     {% csrf_token %}
     <br>

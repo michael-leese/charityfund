@@ -53,5 +53,13 @@ $(document).ready(function(){
     $('#image-clear_id').hide();
     $('[for=profile_picture-clear_id]').hide();
     $('#profile_picture-clear_id').hide();
-
+    
+    //Show a warning that the username field is case sensitive for users, helps especially on mobile
+    //where the caps can be automatically on for the initial alpha character of an input
+    $('#div_id_username').find('.form-control').focusin(function(){
+        $('#caps-warning').removeAttr('hidden');
+    });
+    $('#div_id_username').find('.form-control').focusout(function(){
+        $('#caps-warning').attr('hidden', true);
+    });
 });

@@ -3,11 +3,21 @@
 
 {% block page_title %}Login{% endblock %}
 
+{% block head_js %}
+<script>
+    //prevent autofocus application
+    window.onload = function() {
+        $('input[type=text]').blur();
+    };
+</script>
+{% endblock %}
+
 {% block page_header %}<h3 class="appeal-title"><strong>Login Page</strong></h3>{% endblock %}
 
 {% block page_contents %}
 <p>If you haven't already registered please do so <a href="{% url 'register' %}?next={{ previous }}">register here</a>.
 </p>
+<span id="caps-warning" class="text-danger sml-copyright" hidden>* Note: Username is case sensitive</span>
 <form method="POST">
     {% csrf_token %}
     {{ login_form | as_bootstrap }}
