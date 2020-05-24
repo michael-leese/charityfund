@@ -6,4 +6,4 @@ See the [wireframes](https://github.com/michael-leese/charityfund/tree/master/wi
 
 I have also created a rough relational diagram of the models that will be used in the database.
 
-See the [relational diagram]()
+See the [relational diagram](https://github.com/michael-leese/charityfund/blob/master/wireframes/relationalDiagram.jpg).
