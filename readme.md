@@ -24,7 +24,7 @@ New comers who do not wish to register are unable to have access the full benefi
 4. A user wishes to see the appeals that are in there immediate area and contact the one that they are interested in to offer volunteering help.
 5. A user wishes to use the site to keep a track of all there appeals that they have running concurrently, able to see exactly what is being donated and in what amounts.
 
-See the [wireframes](https://github.com/michael-leese/charityfund/tree/master/wireframes) I used as a basis for my construction process.
+See the [wireframes](https://github.com/michael-leese/charityfund/blob/master/wireframes/wireframes.md) write up explaining the basis for my construction process.
 
 ### Features ###
 
