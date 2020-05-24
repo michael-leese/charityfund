@@ -125,14 +125,18 @@ I have utilised some of the code that was on the Full Stack Frameworks with Djan
 
 #### Media ####
 
-All the appeals are made up and do not reference any actual organisations or appeals, images were foudn using Google Image search and ensuring that the settings for usage rights had been changed to free to use or share, even commercially.
-Further images were incorporated to help style the site.
+All the appeals are made up and do not reference any actual organisations or appeals, images were found using Google Image search and ensuring that the advanced settings for usage rights had been changed to 'free to use or share, even commercially'.
+Images were incorporated to help style the site and make it more visaully appealing.
 * Images and Fonts    
-    * https://www.wallpaperflare.com/human-hands-digital-wallpaper-volunteers-voluntary-wrap-protect-wallpaper-ukhgk
-    * https://pixabay.com/illustrations/donate-charity-giving-give-aid-654328/
-    * https://simple.wikipedia.org/wiki/Mask
-    * https://pixabay.com/photos/the-old-lady-grandma-garden-3503684/
+    * https://www.wallpaperflare.com/
+    * https://pixabay.com/
+    * https://simple.wikipedia.org/
+    * https://commons.wikimedia.org/
+    * https://cs.m.wikipedia.org/
+    * https://www.flickr.com/
     * https://www.needpix.com/
+    * https://pxhere.com/
+    * https://www.pickpik.com/
     * https://fonts.google.com/
 
 #### Acknowledgements ####
