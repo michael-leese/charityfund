@@ -5,7 +5,7 @@ from payments.forms import MakePaymentForm, OrderForm
 from django.conf import settings
 from django.utils import timezone
 from appeals.models import Appeal
-from accounts.models import User, Org
+from accounts.models import User, UserProfile, Org
 import stripe
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -18,6 +18,7 @@ def make_payment(request):
     '''
     appeal = Appeal.objects.get(id=request.GET.get('id'))
     previous = request.GET.get('next', '/')
+    userprofile = UserProfile.objects.get(user=request.user)
     if request.method == "POST":
         order_form = OrderForm(request.POST)
         payment_form = MakePaymentForm(request.POST)
@@ -37,6 +38,7 @@ def make_payment(request):
                 return HttpResponseRedirect(previous)    
             if customer.paid:
                 order.user = request.user
+                order.userprofile = userprofile
                 order.appeal = Appeal.objects.get(id=request.GET.get('id'))
                 order.org = Org.objects.get(id=appeal.org.id)
                 order.created_date = timezone.now()
@@ -54,11 +56,14 @@ def make_payment(request):
                 order.successful = False
                 order.save()
                 messages.error(request, "Unable to take payment")
-                return render(request, "payment.html", {"appeal": appeal, "order_form": order_form, "payment_form": payment_form, "publishable": settings.STRIPE_PUB_KEY, "previous": previous})
+                return render(request, "payment.html", {"appeal": appeal, "order_form": order_form, "payment_form": payment_form, 
+                                                        "publishable": settings.STRIPE_PUB_KEY, "previous": previous, 'userprofile': userprofile})
         else:
             messages.error(request, "We were unable to take a payment with that card!")
-            return render(request, "payment.html", {"appeal": appeal, "order_form": order_form, "payment_form": payment_form, "publishable": settings.STRIPE_PUB_KEY, "previous": previous})
+            return render(request, "payment.html", {"appeal": appeal, "order_form": order_form, "payment_form": payment_form, 
+                                                    "publishable": settings.STRIPE_PUB_KEY, "previous": previous, 'userprofile': userprofile})
     else:
         payment_form = MakePaymentForm()
         order_form = OrderForm()
-        return render(request, "payment.html", {"appeal": appeal, "order_form": order_form, "payment_form": payment_form, "publishable": settings.STRIPE_PUB_KEY, "previous": previous})
+        return render(request, "payment.html", {"appeal": appeal, "order_form": order_form, "payment_form": payment_form, 
+                                                "publishable": settings.STRIPE_PUB_KEY, "previous": previous, 'userprofile': userprofile})

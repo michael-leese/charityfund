@@ -59,18 +59,22 @@
                     {% for order in orders %}
                     {% if order.successful %}
                     <div class="col-12 donor-message">
-                        <p>{% if order.user.userprofile.profile_picture and not order.anonymous %}
-                            <img class="sml-img-circle" src="{{ MEDIA_URL }}{{order.user.userprofile.profile_picture}}"
-                                class="img-circle">
+                        <p>{% if order.userprofile.profile_picture and not order.anonymous %}
+                            <a href="{% url 'singleappeal' %}?id={{ order.appeal.id }}&next={{ request.path|urlencode }}">
+                                <img class="sml-img-circle" src="{{ MEDIA_URL }}{{order.userprofile.profile_picture}}"
+                                    alt="{{userprofile.nickname}} profile picture"></a>
                             {% elif order.appeal.image %}
-                            <img class="sml-img-circle" src="{{ MEDIA_URL }}{{order.appeal.image}}" class="img-circle"
-                                alt="{{order.appeal.title}} appeal picture">
+                            <a href="{% url 'singleappeal' %}?id={{ order.appeal.id }}&next={{ request.path|urlencode }}">
+                                <img class="sml-img-circle" src="{{ MEDIA_URL }}{{order.appeal.image}}"
+                                    class="img-circle" alt="{{order.appeal.title}} appeal picture"></a>
                             {% elif order.org.image %}
-                            <img class="sml-img-circle" src="{{ MEDIA_URL }}{{order.org.image}}" class="img-circle"
-                                alt="{{org.organisation}} brand picture">
-                            {% elif order.org.image %}
-                            <img class="sml-img-circle" src="{% static 'img/donate640.png' %}" class="img-circle"
-                                alt="Donate Now Badge">
+                            <a href="{% url 'singleappeal' %}?id={{ order.appeal.id }}&next={{ request.path|urlencode }}">
+                                <img class="sml-img-circle" src="{{ MEDIA_URL }}{{order.org.image}}" class="img-circle"
+                                    alt="{{org.organisation}} brand picture"></a>
+                            {% else %}
+                            <a href="{% url 'singleappeal' %}?id={{ order.appeal.id }}&next={{ request.path|urlencode }}">
+                                <img class="sml-img-circle" src="{% static 'img/donate640.png' %}" class="img-circle"
+                                    alt="Donate Now Badge"></a>
                             {% endif %}
                             <strong>{{order.org.organisation}}</strong> received <strong>£{{order.amount}}</strong>, on
                             {{order.created_date|date:'d/M/Y'}}

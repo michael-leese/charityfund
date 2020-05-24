@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% load mathfilters %}
 {% block page_title %}{{appeal.title}}{% endblock %}
 
@@ -73,7 +74,17 @@
                 {% for order in orders %}
                 {% if order.successful %}
                 <div class="col-12 donor-message">
-                  <p><strong>{{order.org.organisation}}</strong> received <strong>£{{order.amount}}</strong>, on
+                  <p>
+                    {% if order.userprofile.profile_picture and not order.anonymous %}
+                    <a href="{% url 'singleappeal' %}?id={{ order.appeal.id }}&next={{ request.path|urlencode }}">
+                      <img class="sml-img-circle" src="{{ MEDIA_URL }}{{order.userprofile.profile_picture}}"
+                        alt="{{userprofile.nickname}} profile picture"></a>
+                    {% elif not order.userprofile.profile_picture or order.anonymous %}
+                    <a href="{% url 'singleappeal' %}?id={{ order.appeal.id }}&next={{ request.path|urlencode }}">
+                      <img class="sml-img-circle" src="{% static 'img/donate640.png' %}" class="img-circle"
+                        alt="Donate Now Badge"></a>
+                    {% endif %}
+                    <strong>{{order.org.organisation}}</strong> received <strong>£{{order.amount}}</strong>, on
                     {{order.created_date|date:'d/M/Y'}} from
                     {% if order.anonymous %}
                     <strong>Anonymous</strong></p>

@@ -34,7 +34,7 @@ else:
     STRIPE_PUB_KEY = STRIPE_PUB_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     'charityfunding.herokuapp.com',

@@ -1,11 +1,12 @@
 from django.db import models
 from django.utils import timezone
 from appeals.models import Appeal
-from accounts.models import User, Org
+from accounts.models import User, UserProfile, Org
 
 # Order model
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    userprofile = models.ForeignKey(UserProfile, on_delete=models.DO_NOTHING)
     org = models.ForeignKey(Org, on_delete=models.DO_NOTHING)
     appeal = models.ForeignKey(Appeal, on_delete=models.DO_NOTHING)
     full_name = models.CharField(max_length=100, blank=False)
