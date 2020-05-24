@@ -42,6 +42,7 @@ body {
 .nav-link {
     padding: 0.25em 1em;
     font-family: 'Chelsea Market', cursive;
+    white-space: nowrap;
 }
 
 button.navbar-toggler {
@@ -452,6 +453,10 @@ div#map {
     min-height: 100%;
 }
 
+.hidden-lrg {
+    display: none;
+}
+
 /*----------------------Media Queries---------------------*/
 @media (max-width: 425px) {
     .main-container {
@@ -465,6 +470,9 @@ div#map {
     }
     .copyright-link {
         font-size: smaller;
+    }
+    .editprofile div span {
+        font-size: small;
     }
 }
 
@@ -484,9 +492,6 @@ div#map {
     .hero-image {
         width: 80%;
     }
-    .appeals-container-fluid {
-        display: block;
-    }
     #mainSearch {
         display: none;
         visibility: hidden;
@@ -503,6 +508,9 @@ div#map {
     .swappable {
         flex-flow: column-reverse;
         align-items: center;
+    }
+    .hidden-lrg {
+        display: block;
     }
 }
 

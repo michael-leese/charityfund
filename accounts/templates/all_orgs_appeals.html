@@ -20,6 +20,7 @@
 {% block page_contents %}
 <div class="center-txt">
     <p>Here you can view all your information relating to {{org.organisation}}.</p>
+    <p class="hidden-lrg">See all your appeals on a <a href="#map">map here</a>.</p>
 </div>
 <div class="container">
     <div class="appeals-container-fluid">
@@ -89,7 +90,7 @@
             {% endif %}
         </div>
 
-        <div class="col-lg-8 col-md-8 col-sm-12">
+        <div class="col-lg-8 col-md-12 col-sm-12">
             <div class="title-filter">
                 <h3 class="appeal-title">All Appeals</h3>
                 <div class="dropdown">
@@ -118,7 +119,7 @@
             </div>
             <div class="appeals-container-fluid">
                 {% for appeal in all_appeals %}
-                <div class="col-lg-6 col-md-12 col-sm-12 mb-2">
+                <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
                     <div class="card card-style">
                         <div class="card-body">
                             <h3 class="center-txt">{{appeal.title}} for {{ appeal.org }}</h3>

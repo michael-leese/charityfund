@@ -25,7 +25,8 @@
       project. </p>
     <p>Please view our appeals and donate to one that you identify the most with, you will be helping a small charity or
       community project. We help them save money on marketing campaigns, ensuring that all the money raised goes to the
-      important things that charities/community projects really need to spend their moeny on.</p>
+      important things that charities/community projects really need to spend their money on.</p>
+    <p class="hidden-lrg">See all the appeals on a <a href="#map">map here</a>.</p>
     {% if user.is_authenticated %}
     {% if hasOrg %}
     <p>If you would like to create an appeal, please <a href="{% url 'createappeal' %}">create appeal here</a>.</p>
@@ -58,7 +59,6 @@
       <div class="container-fluid">
         <h5 class="appeal-title">Recent Donor Messages</h5>
         <div class="col-12 scroll">
-          <!-- <h5 class="appeal-title">Recent Donor Messages</h5> -->
           {% for order in orders %}
           {% if order.successful %}
           <div class="col-12 donor-message">
@@ -92,7 +92,7 @@
       </div>
       {% endif %}
     </div>
-    <div class="col-lg-8 col-md-8 col-sm-12">
+    <div class="col-lg-8 col-md-12 col-sm-12">
       <div class="title-filter">
         <h3 class="appeal-title">All Appeals</h3>
         <div class="dropdown">
@@ -116,7 +116,7 @@
       </div>
       <div class="appeals-container-fluid">
         {% for appeal in all_appeals %}
-        <div class="col-lg-6 col-md-12 col-sm-12 mb-2">
+        <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
           <div class="card card-style">
             <div class="card-body">
               <h3 class="center-txt">{{appeal.title}} for {{ appeal.org }}</h3>

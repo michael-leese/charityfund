@@ -59,7 +59,6 @@
                         <li class="nav-item"><a class="nav-link {{ active6 }}" href="{% url 'showallappeals' %}">View
                                 Appeals</a></li>
                         {% if user.is_authenticated %}
-                        <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
                         {% if not hasOrg %}
                         <li class="nav-item"><a class="nav-link {{ active3 }}" href="{% url 'registerorg' %}">Register
                                 Org</a></li>
@@ -69,6 +68,7 @@
                         <li class="nav-item"><a class="nav-link {{ active9 }}" href="{% url 'viewmyorgs_appeals' %}">My
                                 Organisation</a></li>
                         {% endif %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
                         {% else %}
                         <li class="nav-item"><a class="nav-link {{ active4 }}" href="{% url 'login' %}">Login</a></li>
                         <li class="nav-item"><a class="nav-link {{ active5 }}" href="{% url 'register' %}">Register</a>
@@ -110,7 +110,7 @@
                     <div class="col-6 copyright">
                         <a class="copyright-link" href="{% url 'about' %}"><span>&copy;2020 Michael Leese</span></a>
                     </div>
-                    <div class="offset-1 col-5">v
+                    <div class="offset-1 col-5">
                         <p class="fawes-lg fl-rt">
                             <a class="fawes-link-dec" href="https://facebook.com/" target="_blank"><i
                                     class="fab fa-facebook-square"></i></a>
