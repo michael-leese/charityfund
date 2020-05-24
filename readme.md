@@ -125,7 +125,7 @@ I have utilised some of the code that was on the Full Stack Frameworks with Djan
 
 #### Media ####
 
-All the appeals are made up and do not reference any actual organisations or appeals, images were found using Google Image search and ensuring that the advanced settings for usage rights had been changed to 'free to use or share, even commercially'.
+All the appeals are made up and do not reference any actual organisations or appeals, images were found using [Google](https://www.google.com/) Image search and ensuring that the advanced settings for usage rights had been changed to 'free to use or share, even commercially'.
 Images were incorporated to help style the site and make it more visaully appealing.
 * Images and Fonts    
     * https://www.wallpaperflare.com/
