@@ -26,7 +26,7 @@ django-mathfilters==1.0.0
 django-storages==1.9.1
 django-taggit==1.2.0
 django-tempus-dominus==5.1.2.13
-djangorestframework==3.11.0
+djangorestframework==3.11.2
 dnspython==1.16.0
 docformatter==1.3
 docutils==0.15.2
